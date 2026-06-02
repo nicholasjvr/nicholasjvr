@@ -1,0 +1,56 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import SkillMatrix from '../components/SkillMatrix.astro';
+import GitHubPanel from '../components/GitHubPanel.astro';
+
+const featured = (await getCollection('projects'))
+  .filter((p) => p.data.featured)
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout>
+  <Hero />
+
+  <section id="projects" class="section pt-4">
+    <div class="flex items-end justify-between">
+      <div>
+        <p class="eyebrow reveal">Selected work</p>
+        <h2 class="reveal mt-3 text-3xl font-bold tracking-tight text-ink md:text-4xl">
+          Featured projects
+        </h2>
+      </div>
+      <a href="/projects" class="reveal hidden text-sm font-semibold text-accent hover:underline sm:inline">
+        All projects →
+      </a>
+    </div>
+
+    <div class="reveal mt-10 grid gap-6 md:grid-cols-2">
+      {featured.map((project) => <ProjectCard project={project} />)}
+    </div>
+
+    <div class="mt-8 sm:hidden">
+      <a href="/projects" class="text-sm font-semibold text-accent hover:underline">All projects →</a>
+    </div>
+  </section>
+
+  <SkillMatrix />
+  <GitHubPanel />
+
+  <section class="section">
+    <div class="reveal rounded-3xl border border-border bg-surface p-10 text-center shadow-card">
+      <h2 class="text-2xl font-bold text-ink md:text-3xl">Let's build something.</h2>
+      <p class="mx-auto mt-3 max-w-xl text-muted">
+        Open to interesting problems in ML, real-time systems, and AI products.
+      </p>
+      <a
+        href="mailto:nicholas241cut@gmail.com"
+        class="mt-6 inline-block rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-white shadow-card transition hover:shadow-card-hover"
+      >
+        Get in touch
+      </a>
+    </div>
+  </section>
+</BaseLayout>

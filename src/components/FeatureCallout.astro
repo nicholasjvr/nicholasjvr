@@ -1,0 +1,17 @@
+---
+interface Props {
+  title: string;
+  body: string;
+  index: number;
+}
+const { title, body, index } = Astro.props;
+const num = String(index + 1).padStart(2, '0');
+---
+
+<div class="flex gap-4 rounded-xl border border-border bg-surface p-5 shadow-card">
+  <div class="font-mono text-sm font-semibold text-accent">{num}</div>
+  <div>
+    <h3 class="font-semibold text-ink">{title}</h3>
+    <p class="mt-1.5 text-sm leading-relaxed text-muted">{body}</p>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+---
+const githubUrl = `https://github.com/${import.meta.env.PUBLIC_GITHUB_USERNAME || 'nicholasjvr'}`;
+---
+
+<section class="section pt-20 md:pt-28">
+  <p class="eyebrow reveal">Nicholas · Software & ML Builder</p>
+  <h1
+    class="reveal mt-4 max-w-3xl text-4xl font-extrabold leading-[1.1] tracking-tight text-ink md:text-6xl"
+  >
+    I build <span class="text-accent">data-to-decision</span> systems — end to end.
+  </h1>
+  <p class="reveal mt-6 max-w-2xl text-lg leading-relaxed text-muted">
+    Applied machine learning, real-time dashboards, and AI companions. I like
+    owning the whole loop: data pipeline → model → execution logic → an interface
+    you can actually reason about. Here's the work.
+  </p>
+
+  <div class="reveal mt-8 flex flex-wrap items-center gap-3">
+    <a
+      href="#projects"
+      class="rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-white shadow-card transition hover:shadow-card-hover"
+    >
+      View projects
+    </a>
+    <a
+      href={githubUrl}
+      target="_blank"
+      rel="noopener"
+      class="rounded-lg border border-border bg-surface px-5 py-2.5 text-sm font-semibold text-ink transition hover:bg-surface-2"
+    >
+      GitHub profile →
+    </a>
+  </div>
+</section>

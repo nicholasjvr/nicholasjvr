@@ -1,0 +1,18 @@
+---
+const username = import.meta.env.PUBLIC_GITHUB_USERNAME || 'nicholasjvr';
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-border/70 bg-surface">
+  <div
+    class="mx-auto flex max-w-content flex-col items-center justify-between gap-4 px-6 py-10 sm:flex-row"
+  >
+    <p class="text-sm text-muted">© {year} Nicholas. Built with Astro + Tailwind.</p>
+    <div class="flex items-center gap-5 text-sm font-medium text-muted">
+      <a href={`https://github.com/${username}`} target="_blank" rel="noopener" class="hover:text-ink">
+        GitHub
+      </a>
+      <a href="mailto:nicholas241cut@gmail.com" class="hover:text-ink">Email</a>
+    </div>
+  </div>
+</footer>

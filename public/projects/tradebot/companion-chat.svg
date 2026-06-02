@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="Companion chat placeholder">
+  <rect width="1600" height="900" fill="#150f2b"/>
+  <circle cx="800" cy="360" r="60" fill="#ec4899" opacity="0.85"/>
+  <text x="800" y="520" fill="#ede9fe" font-family="Inter, sans-serif" font-size="52" font-weight="700" text-anchor="middle">AI Companion Chat</text>
+  <text x="800" y="600" fill="#a78bfa" font-family="Inter, sans-serif" font-size="26" text-anchor="middle">"How are we doing?" · coach mode</text>
+  <text x="800" y="700" fill="#5b4b85" font-family="JetBrains Mono, monospace" font-size="20" text-anchor="middle">placeholder screenshot</text>
+</svg>

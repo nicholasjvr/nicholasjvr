@@ -1,0 +1,74 @@
+---
+interface GalleryItem {
+  src: string;
+  alt: string;
+  caption?: string;
+}
+interface Props {
+  items: GalleryItem[];
+}
+const { items } = Astro.props;
+---
+
+<div class="grid gap-6 sm:grid-cols-2">
+  {
+    items.map((item) => (
+      <figure class="overflow-hidden rounded-2xl border border-border bg-surface shadow-card">
+        <button
+          type="button"
+          class="block w-full bg-surface-2"
+          data-lightbox-src={item.src}
+          data-lightbox-alt={item.alt}
+          aria-label={`Open ${item.alt} full size`}
+        >
+          <img src={item.src} alt={item.alt} loading="lazy" class="h-full w-full object-cover" />
+        </button>
+        {item.caption && (
+          <figcaption class="border-t border-border px-4 py-3 text-sm text-muted">
+            {item.caption}
+          </figcaption>
+        )}
+      </figure>
+    ))
+  }
+</div>
+
+<!-- Lightbox overlay -->
+<div
+  id="lightbox"
+  class="fixed inset-0 z-50 hidden items-center justify-center bg-ink/80 p-4 backdrop-blur"
+  role="dialog"
+  aria-modal="true"
+>
+  <button id="lightbox-close" class="absolute right-5 top-5 text-3xl text-white/80 hover:text-white" aria-label="Close">×</button>
+  <img id="lightbox-img" src="" alt="" class="max-h-[90vh] max-w-[95vw] rounded-lg shadow-2xl" />
+</div>
+
+<script>
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lightbox-img') as HTMLImageElement | null;
+  const open = (src: string, alt: string) => {
+    if (!lb || !lbImg) return;
+    lbImg.src = src;
+    lbImg.alt = alt;
+    lb.classList.remove('hidden');
+    lb.classList.add('flex');
+  };
+  const close = () => {
+    if (!lb) return;
+    lb.classList.add('hidden');
+    lb.classList.remove('flex');
+  };
+  document.querySelectorAll('[data-lightbox-src]').forEach((btn) => {
+    btn.addEventListener('click', () =>
+      open(btn.getAttribute('data-lightbox-src') || '', btn.getAttribute('data-lightbox-alt') || '')
+    );
+  });
+  document.getElementById('lightbox-close')?.addEventListener('click', close);
+  lb?.addEventListener('click', (e) => {
+    if (e.target === lb) close();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') close();
+  });
+</script>

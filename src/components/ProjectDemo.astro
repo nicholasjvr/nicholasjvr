@@ -1,0 +1,52 @@
+---
+import Gallery from './Gallery.astro';
+
+// The pluggable demo slot. Switches on demo.kind so "berserk mode" (live iframe
+// / canned-data replay) becomes an additive component, not a layout rewrite.
+interface GalleryItem {
+  src: string;
+  alt: string;
+  caption?: string;
+}
+interface Props {
+  demo: { kind: 'screenshots' | 'video' | 'iframe' | 'replay'; src?: string };
+  gallery: GalleryItem[];
+  title: string;
+}
+const { demo, gallery, title } = Astro.props;
+---
+
+{demo.kind === 'screenshots' && <Gallery items={gallery} />}
+
+{
+  demo.kind === 'video' && demo.src && (
+    <video controls playsinline class="w-full rounded-2xl border border-border shadow-card">
+      <source src={demo.src} type="video/mp4" />
+    </video>
+  )
+}
+
+{
+  demo.kind === 'iframe' && demo.src && (
+    <div class="overflow-hidden rounded-2xl border border-border shadow-card">
+      <iframe
+        src={demo.src}
+        title={`${title} live demo`}
+        loading="lazy"
+        class="aspect-[16/10] w-full"
+        sandbox="allow-scripts allow-same-origin"
+      />
+    </div>
+  )
+}
+
+{
+  demo.kind === 'replay' && (
+    <div class="rounded-2xl border border-dashed border-border bg-surface-2 p-10 text-center">
+      <p class="font-semibold text-ink">Interactive replay coming soon</p>
+      <p class="mt-1 text-sm text-muted">
+        A self-contained clone of the cockpit driven by canned data — no live infra.
+      </p>
+    </div>
+  )
+}

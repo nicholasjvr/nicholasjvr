@@ -1,0 +1,59 @@
+---
+import { getCollection } from 'astro:content';
+import { SKILLS, CATEGORY_ORDER, getSkill, type SkillCategory } from '../data/skills';
+
+// Reverse-map: which projects demonstrate each skill. Only show skills that are
+// actually used by at least one project, grouped by category.
+const projects = await getCollection('projects');
+
+const usage = new Map<string, { title: string; slug: string }[]>();
+for (const p of projects) {
+  for (const key of p.data.skills) {
+    const list = usage.get(key) ?? [];
+    list.push({ title: p.data.title, slug: p.slug });
+    usage.set(key, list);
+  }
+}
+
+const byCategory = new Map<SkillCategory, { key: string; label: string; projects: { title: string; slug: string }[] }[]>();
+for (const key of usage.keys()) {
+  const skill = getSkill(key);
+  const list = byCategory.get(skill.category) ?? [];
+  list.push({ key, label: skill.label, projects: usage.get(key)! });
+  byCategory.set(skill.category, list);
+}
+---
+
+<section id="skills" class="section">
+  <p class="eyebrow reveal">Capabilities</p>
+  <h2 class="reveal mt-3 text-3xl font-bold tracking-tight text-ink md:text-4xl">
+    Skills, mapped to real work
+  </h2>
+  <p class="reveal mt-3 max-w-2xl text-muted">
+    Every skill below is pulled from a project that actually uses it — hover a
+    chip to see where.
+  </p>
+
+  <div class="reveal mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    {
+      CATEGORY_ORDER.filter((c) => byCategory.has(c)).map((category) => (
+        <div class="rounded-2xl border border-border bg-surface p-5 shadow-card">
+          <h3 class="text-sm font-semibold uppercase tracking-wide text-muted">{category}</h3>
+          <div class="mt-4 flex flex-wrap gap-2">
+            {byCategory.get(category)!.map((s) => (
+              <span
+                class="group relative inline-flex items-center rounded-full border border-border bg-surface-2 px-3 py-1.5 text-sm font-medium text-ink"
+                title={`Used in: ${s.projects.map((p) => p.title).join(', ')}`}
+              >
+                {s.label}
+                <span class="ml-1.5 rounded-full bg-accent-soft px-1.5 text-xs font-semibold text-accent">
+                  {s.projects.length}
+                </span>
+              </span>
+            ))}
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>

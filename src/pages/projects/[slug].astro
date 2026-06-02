@@ -1,0 +1,165 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import MetricStat from '../../components/MetricStat.astro';
+import FeatureCallout from '../../components/FeatureCallout.astro';
+import SkillBadge from '../../components/SkillBadge.astro';
+import ProjectDemo from '../../components/ProjectDemo.astro';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { data } = project;
+const { Content } = await project.render();
+
+const statusLabel: Record<string, string> = {
+  live: 'Live',
+  wip: 'In progress',
+  archived: 'Archived',
+};
+---
+
+<BaseLayout title={`${data.title} — Nicholas`} description={data.tagline}>
+  <article class="section">
+    <a href="/projects" class="text-sm font-medium text-muted hover:text-ink">← All projects</a>
+
+    <!-- Header -->
+    <header class="mt-6">
+      <div class="flex flex-wrap items-center gap-3">
+        <h1 class="text-4xl font-extrabold tracking-tight text-ink md:text-5xl">{data.title}</h1>
+        <span class="rounded-full border border-border bg-surface-2 px-2.5 py-1 text-xs font-semibold text-muted">
+          {statusLabel[data.status]}
+        </span>
+      </div>
+      <p class="mt-4 max-w-2xl text-lg text-muted">{data.tagline}</p>
+
+      <dl class="mt-6 flex flex-wrap gap-x-8 gap-y-3 text-sm">
+        <div><dt class="font-semibold text-ink">Role</dt><dd class="text-muted">{data.role}</dd></div>
+        <div><dt class="font-semibold text-ink">Timeframe</dt><dd class="text-muted">{data.timeframe}</dd></div>
+      </dl>
+
+      <div class="mt-6 flex flex-wrap gap-3">
+        {
+          data.repo && (
+            <a href={data.repo} target="_blank" rel="noopener" class="rounded-lg bg-ink px-4 py-2 text-sm font-semibold text-bg hover:opacity-90">
+              View on GitHub →
+            </a>
+          )
+        }
+        {
+          data.liveUrl && (
+            <a href={data.liveUrl} target="_blank" rel="noopener" class="rounded-lg border border-border bg-surface px-4 py-2 text-sm font-semibold text-ink hover:bg-surface-2">
+              Live site →
+            </a>
+          )
+        }
+      </div>
+    </header>
+
+    <!-- Metrics -->
+    {
+      data.metrics.length > 0 && (
+        <div class="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+          {data.metrics.map((m) => <MetricStat label={m.label} value={m.value} />)}
+        </div>
+      )
+    }
+
+    <!-- Objective / Outcome -->
+    <div class="mt-12 grid gap-6 md:grid-cols-2">
+      <div class="rounded-2xl border border-border bg-surface p-6 shadow-card">
+        <h2 class="text-sm font-semibold uppercase tracking-wide text-accent">Objective</h2>
+        <p class="mt-3 leading-relaxed text-ink">{data.objective}</p>
+      </div>
+      <div class="rounded-2xl border border-border bg-surface p-6 shadow-card">
+        <h2 class="text-sm font-semibold uppercase tracking-wide text-success">Outcome</h2>
+        <p class="mt-3 leading-relaxed text-ink">{data.outcome}</p>
+      </div>
+    </div>
+
+    <!-- Demo slot (screenshots today; iframe/replay later) -->
+    {
+      data.gallery.length > 0 && (
+        <section class="mt-14">
+          <h2 class="text-2xl font-bold tracking-tight text-ink">A look inside</h2>
+          <div class="mt-6">
+            <ProjectDemo demo={data.demo} gallery={data.gallery} title={data.title} />
+          </div>
+        </section>
+      )
+    }
+
+    <!-- Highlights -->
+    {
+      data.highlights.length > 0 && (
+        <section class="mt-14">
+          <h2 class="text-2xl font-bold tracking-tight text-ink">How it works</h2>
+          <div class="mt-6 grid gap-4 md:grid-cols-2">
+            {data.highlights.map((h, i) => <FeatureCallout title={h.title} body={h.body} index={i} />)}
+          </div>
+        </section>
+      )
+    }
+
+    <!-- Long-form MDX body -->
+    <div class="prose-portfolio mt-14 max-w-none">
+      <Content />
+    </div>
+
+    <!-- Skills + stack -->
+    <section class="mt-14 border-t border-border pt-10">
+      <h2 class="text-sm font-semibold uppercase tracking-wide text-muted">Skills used</h2>
+      <div class="mt-4 flex flex-wrap gap-2">
+        {data.skills.map((s) => <SkillBadge skillKey={s} active />)}
+      </div>
+
+      {
+        data.techStack.length > 0 && (
+          <>
+            <h2 class="mt-8 text-sm font-semibold uppercase tracking-wide text-muted">Tech stack</h2>
+            <div class="mt-4 flex flex-wrap gap-2">
+              {data.techStack.map((t) => (
+                <span class="rounded-md border border-border bg-surface-2 px-3 py-1.5 text-sm font-medium text-ink">
+                  {t}
+                </span>
+              ))}
+            </div>
+          </>
+        )
+      }
+    </section>
+  </article>
+</BaseLayout>
+
+<style is:global>
+  .prose-portfolio h2 {
+    @apply mt-10 mb-3 text-2xl font-bold tracking-tight text-ink;
+  }
+  .prose-portfolio h3 {
+    @apply mt-6 mb-2 text-lg font-semibold text-ink;
+  }
+  .prose-portfolio p {
+    @apply mb-4 leading-relaxed text-muted;
+  }
+  .prose-portfolio ul {
+    @apply mb-4 list-disc space-y-1.5 pl-5 text-muted;
+  }
+  .prose-portfolio li > strong {
+    @apply text-ink;
+  }
+  .prose-portfolio blockquote {
+    @apply my-6 rounded-r-lg border-l-4 border-accent bg-accent-soft/40 px-5 py-3 text-ink;
+  }
+  .prose-portfolio code {
+    @apply rounded bg-surface-2 px-1.5 py-0.5 font-mono text-sm text-ink;
+  }
+  .prose-portfolio a {
+    @apply font-medium text-accent underline underline-offset-2;
+  }
+</style>
