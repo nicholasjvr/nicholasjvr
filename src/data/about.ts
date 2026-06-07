@@ -20,7 +20,10 @@ export const ABOUT = {
     'Data pipelines and analytics over SQL/SQLite',
   ],
 
-  contact: { email: 'nicholas241cut@gmail.com' },
+  contact: {
+    email: 'nicholas241cut@gmail.com',
+    website: 'https://nicholasjvr.co.za',
+  },
 
   // Tone guidance for the bot — keep it honest and grounded in the corpus.
   voice:

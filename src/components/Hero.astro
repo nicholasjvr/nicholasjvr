@@ -1,18 +1,20 @@
 ---
+import { SITE } from '../data/site';
+
 const githubUrl = `https://github.com/${import.meta.env.PUBLIC_GITHUB_USERNAME || 'nicholasjvr'}`;
 ---
 
 <section class="section pt-20 md:pt-28">
-  <p class="eyebrow reveal">Nicholas · Software & ML Builder</p>
+  <p class="eyebrow reveal">{SITE.domain} · Software &amp; ML builder</p>
   <h1
     class="reveal mt-4 max-w-3xl text-4xl font-extrabold leading-[1.1] tracking-tight text-ink md:text-6xl"
   >
     I build <span class="text-accent">data-to-decision</span> systems — end to end.
   </h1>
   <p class="reveal mt-6 max-w-2xl text-lg leading-relaxed text-muted">
-    Applied machine learning, real-time dashboards, and AI companions. I like
-    owning the whole loop: data pipeline → model → execution logic → an interface
-    you can actually reason about. Here's the work.
+    Applied machine learning, real-time dashboards, and AI companions. I own the
+    full loop — data pipeline → model → execution logic → an interface you can
+    reason about (and talk to). Selected case studies below; GitHub stays in sync.
   </p>
 
   <div class="reveal mt-8 flex flex-wrap items-center gap-3">

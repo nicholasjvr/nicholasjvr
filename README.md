@@ -1,8 +1,16 @@
 # nicholasjvr — portfolio
 
-A data-driven portfolio that showcases each project as a **case study**
-(objective → approach → skills used → outcome) and stays **in lockstep with my
-GitHub profile**. Built with Astro + Tailwind, static-first.
+**Live site:** [nicholasjvr.co.za](https://nicholasjvr.co.za)
+
+Software & ML builder — case studies in applied machine learning, real-time
+dashboards, and AI companions. Each project is documented end-to-end (objective →
+approach → skills → outcome) and stays **in lockstep with my GitHub profile**.
+Built with Astro + Tailwind, static-first.
+
+> **GitHub About (paste into repo settings):**  
+> Description: `Software & ML portfolio — case studies synced with GitHub.`  
+> Website: `https://nicholasjvr.co.za`  
+> Topics: `portfolio`, `astro`, `typescript`, `tailwindcss`, `machine-learning`
 
 ## Tech stack
 
@@ -61,9 +69,21 @@ Copy `.env.example` → `.env` for local builds; set the same keys as CI/hosting
 | `PUBLIC_GITHUB_USERNAME` | No (defaults to `nicholasjvr`) | Which GitHub profile to feature |
 | `GITHUB_TOKEN` | No | Raises rate limits; required only if a featured repo is **private** |
 
-### Deployment
+### Deployment (GitHub Pages + Actions)
 
-Static-first — deploy `dist/` to any static host (**Vercel**, **Netlify**, **GitHub Pages**, etc.). No server adapter or runtime required today. GitHub data refreshes automatically on every build/deploy.
+This repo deploys automatically on every push to `main`.
+
+1. **Make the repo public** (required for free GitHub Pages).
+2. **Settings → Pages → Build and deployment → Source:** choose **GitHub Actions** (not “Deploy from a branch”).
+3. Push to `main` — the [Deploy to GitHub Pages](.github/workflows/deploy-pages.yml) workflow builds Astro and publishes `dist/`.
+4. **Settings → Pages → Custom domain:** enter `nicholasjvr.co.za` (also declared in `public/CNAME`).
+5. **DNS at your `.co.za` registrar:**
+   - `@` (apex) → four **A** records: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
+   - `www` → **CNAME** → `nicholasjvr.github.io`
+6. Enable **Enforce HTTPS** once DNS checks pass.
+7. Optional: add repo secret **`GITHUB_PAT`** (fine-grained PAT, read-only Metadata on featured repos) if build-time GitHub fetch needs auth.
+
+Until DNS propagates, the site is also at `https://nicholasjvr.github.io` (after the first successful deploy).
 
 ## Quick start
 
@@ -106,10 +126,10 @@ making the TradeBot interactive later is an **additive component, not a rewrite*
       `src/data/featured-repos.ts`. Add a `GITHUB_TOKEN` only if a featured repo
       is **private** — use a **fine-grained PAT scoped to just those repos,
       read-only Metadata** (not a classic `repo`-scope token). Build-time only.
-- [ ] **Hero copy / contact:** tweak `components/Hero.astro` and the email in
-      `components/Footer.astro` / `pages/index.astro`.
+- [x] **Hero copy / contact:** updated in `Hero.astro`, `Footer.astro`, and `pages/index.astro` (via `src/data/site.ts`).
 - [ ] Replace `public/og-image.svg` and `public/favicon.svg` with branded assets.
-- [ ] Set the real domain in `astro.config.mjs` (`SITE`).
+- [x] Set the real domain in `astro.config.mjs` (`SITE` → `https://nicholasjvr.co.za`).
+- [ ] **DNS / hosting:** point `nicholasjvr.co.za` at GitHub Pages (see Deployment above); set repo **Website** to `https://nicholasjvr.co.za`.
 
 ## Themes
 

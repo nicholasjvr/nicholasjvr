@@ -1,4 +1,6 @@
 ---
+import { SITE } from '../data/site';
+
 const links = [
   { href: '/#projects', label: 'Projects' },
   { href: '/#skills', label: 'Skills' },
@@ -11,8 +13,11 @@ const githubUrl = `https://github.com/${import.meta.env.PUBLIC_GITHUB_USERNAME |
   class="sticky top-0 z-40 border-b border-border/70 bg-bg/80 backdrop-blur supports-[backdrop-filter]:bg-bg/60"
 >
   <nav class="mx-auto flex max-w-content items-center justify-between px-6 py-4">
-    <a href="/" class="font-bold tracking-tight text-ink">
-      nicholas<span class="text-accent">.</span>
+    <a href="/" class="font-bold tracking-tight text-ink" aria-label={`${SITE.name} — home`}>
+      <span class="sm:hidden">nicholasjvr</span>
+      <span class="hidden sm:inline">
+        nicholasjvr<span class="text-accent">.</span>co<span class="text-accent">.</span>za
+      </span>
     </a>
 
     <div class="flex items-center gap-1 sm:gap-2">

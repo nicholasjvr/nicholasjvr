@@ -1,4 +1,6 @@
 ---
+import { SITE } from '../data/site';
+
 const username = import.meta.env.PUBLIC_GITHUB_USERNAME || 'nicholasjvr';
 const year = new Date().getFullYear();
 ---
@@ -7,12 +9,15 @@ const year = new Date().getFullYear();
   <div
     class="mx-auto flex max-w-content flex-col items-center justify-between gap-4 px-6 py-10 sm:flex-row"
   >
-    <p class="text-sm text-muted">© {year} Nicholas. Built with Astro + Tailwind.</p>
+    <p class="text-sm text-muted">
+      © {year} {SITE.name} ·
+      <a href={SITE.url} class="hover:text-ink">{SITE.domain}</a>
+    </p>
     <div class="flex items-center gap-5 text-sm font-medium text-muted">
       <a href={`https://github.com/${username}`} target="_blank" rel="noopener" class="hover:text-ink">
         GitHub
       </a>
-      <a href="mailto:nicholas241cut@gmail.com" class="hover:text-ink">Email</a>
+      <a href={`mailto:${SITE.email}`} class="hover:text-ink">Email</a>
     </div>
   </div>
 </footer>

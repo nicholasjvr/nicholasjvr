@@ -5,6 +5,7 @@ import Hero from '../components/Hero.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import SkillMatrix from '../components/SkillMatrix.astro';
 import GitHubPanel from '../components/GitHubPanel.astro';
+import { SITE } from '../data/site';
 
 const featured = (await getCollection('projects'))
   .filter((p) => p.data.featured)
@@ -44,9 +45,10 @@ const featured = (await getCollection('projects'))
       <h2 class="text-2xl font-bold text-ink md:text-3xl">Let's build something.</h2>
       <p class="mx-auto mt-3 max-w-xl text-muted">
         Open to interesting problems in ML, real-time systems, and AI products.
+        Reach me at {SITE.email} or via {SITE.domain}.
       </p>
       <a
-        href="mailto:nicholas241cut@gmail.com"
+        href={`mailto:${SITE.email}`}
         class="mt-6 inline-block rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-white shadow-card transition hover:shadow-card-hover"
       >
         Get in touch
