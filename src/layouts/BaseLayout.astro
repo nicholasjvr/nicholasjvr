@@ -4,29 +4,38 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import { SITE } from '../data/site';
 import { withBase } from '../lib/paths';
+import type { AccentTheme } from '../data/project-themes';
 
 interface Props {
   title?: string;
   description?: string;
+  accentTheme?: AccentTheme;
 }
 
-const { title = SITE.title, description = SITE.description } = Astro.props;
+const { title = SITE.title, description = SITE.description, accentTheme = 'default' } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
 const ogImage = new URL(withBase('/og-image.svg'), Astro.site).toString();
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-accent-theme={accentTheme}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>
+      (function () {
+        var stored = localStorage.getItem('theme');
+        var prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+        var theme = stored === 'light' || stored === 'dark' ? stored : prefersLight ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
     <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
 
-    <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -45,14 +54,13 @@ const ogImage = new URL(withBase('/og-image.svg'), Astro.site).toString();
       rel="stylesheet"
     />
   </head>
-  <body class="min-h-screen flex flex-col">
+  <body class="flex min-h-screen flex-col">
     <Nav />
     <main class="flex-1">
       <slot />
     </main>
     <Footer />
 
-    <!-- Tiny scroll-reveal island: no framework, respects reduced-motion. -->
     <script>
       const els = document.querySelectorAll('.reveal');
       if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {

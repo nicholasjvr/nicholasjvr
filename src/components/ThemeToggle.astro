@@ -1,0 +1,44 @@
+---
+/** Light / dark toggle. Persists to localStorage; pairs with inline script in BaseLayout. */
+---
+
+<button
+  id="theme-toggle"
+  type="button"
+  class="rounded-md border border-border bg-surface-2/80 p-2 text-muted transition hover:border-accent/30 hover:text-ink"
+  aria-label="Toggle light or dark theme"
+  title="Toggle theme"
+>
+  <svg id="theme-icon-sun" class="hidden h-4 w-4" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+    <circle cx="10" cy="10" r="3.5" stroke="currentColor" stroke-width="1.5" />
+    <path d="M10 2v2M10 16v2M4.22 4.22l1.42 1.42M14.36 14.36l1.42 1.42M2 10h2M16 10h2M4.22 15.78l1.42-1.42M14.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+  </svg>
+  <svg id="theme-icon-moon" class="h-4 w-4" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+    <path d="M15.5 11.2A6.5 6.5 0 018.8 4.5 6.5 6.5 0 1015.5 11.2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+  </svg>
+</button>
+
+<script>
+  const btn = document.getElementById('theme-toggle');
+  const sun = document.getElementById('theme-icon-sun');
+  const moon = document.getElementById('theme-icon-moon');
+
+  function syncIcons() {
+    const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+    sun?.classList.toggle('hidden', !dark);
+    moon?.classList.toggle('hidden', dark);
+  }
+
+  function setTheme(theme: 'light' | 'dark') {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    syncIcons();
+  }
+
+  syncIcons();
+
+  btn?.addEventListener('click', () => {
+    const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    setTheme(next);
+  });
+</script>

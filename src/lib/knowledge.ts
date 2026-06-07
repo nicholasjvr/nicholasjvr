@@ -1,4 +1,4 @@
-// THE knowledge corpus — the single source the future chatbot is grounded on.
+﻿// THE knowledge corpus : the single source the future chatbot is grounded on.
 //
 // It aggregates *curated* context only: project case studies + FAQ + about.
 // The bot reads this string, never raw GitHub repos, so "the app only has
@@ -9,7 +9,7 @@
 //      then create src/pages/api/chat.ts with `export const prerender = false`.
 //   2. Call buildKnowledgeCorpus() once and pass it as the system prompt /
 //      cached context (GitHub Models, Anthropic, etc.). For a handful of
-//      projects this fits in-context — no vector DB needed yet.
+//      projects this fits in-context : no vector DB needed yet.
 //   3. Use prompt caching on the corpus block so every chat turn is cheap.
 
 import { getCollection } from 'astro:content';

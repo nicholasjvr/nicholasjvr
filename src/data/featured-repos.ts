@@ -1,6 +1,6 @@
-// Curated allowlist of the repos to feature on the site, in display order.
+﻿// Curated allowlist of the repos to feature on the site, in display order.
 // Format: "owner/name". This is what makes the GitHub panel show *only* the
-// repos you choose — independent of any token.
+// repos you choose : independent of any token.
 //
 // - Leave the array empty to auto-show your top repos by stars instead.
 // - Private repos here require a fine-grained PAT (GITHUB_TOKEN) scoped to just

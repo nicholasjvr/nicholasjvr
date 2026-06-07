@@ -9,26 +9,23 @@ const githubUrl = `https://github.com/${import.meta.env.PUBLIC_GITHUB_USERNAME |
   <h1
     class="reveal mt-4 max-w-3xl text-4xl font-extrabold leading-[1.1] tracking-tight text-ink md:text-6xl"
   >
-    I build <span class="text-accent">data-to-decision</span> systems — end to end.
+    I build <span class="text-gradient">data-to-decision</span> systems, end to end.
   </h1>
   <p class="reveal mt-6 max-w-2xl text-lg leading-relaxed text-muted">
     Applied machine learning, real-time dashboards, and AI companions. I own the
-    full loop — data pipeline → model → execution logic → an interface you can
+    full loop: data pipeline → model → execution logic → an interface you can
     reason about (and talk to). Selected case studies below; GitHub stays in sync.
   </p>
 
   <div class="reveal mt-8 flex flex-wrap items-center gap-3">
-    <a
-      href="#projects"
-      class="rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-white shadow-card transition hover:shadow-card-hover"
-    >
+    <a href="#projects" class="btn-primary">
       View projects
     </a>
     <a
       href={githubUrl}
       target="_blank"
       rel="noopener"
-      class="rounded-lg border border-border bg-surface px-5 py-2.5 text-sm font-semibold text-ink transition hover:bg-surface-2"
+      class="rounded-lg border border-accent/25 bg-surface/80 px-5 py-2.5 text-sm font-semibold text-ink backdrop-blur transition hover:border-accent/40 hover:bg-surface"
     >
       GitHub profile →
     </a>

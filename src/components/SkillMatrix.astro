@@ -30,14 +30,14 @@ for (const key of usage.keys()) {
     Skills, mapped to real work
   </h2>
   <p class="reveal mt-3 max-w-2xl text-muted">
-    Every skill below is pulled from a project that actually uses it — hover a
+    Every skill below is pulled from a project that actually uses it. Hover a
     chip to see where.
   </p>
 
   <div class="reveal mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
     {
       CATEGORY_ORDER.filter((c) => byCategory.has(c)).map((category) => (
-        <div class="rounded-2xl border border-border bg-surface p-5 shadow-card">
+        <div class="card-surface rounded-2xl p-5">
           <h3 class="text-sm font-semibold uppercase tracking-wide text-muted">{category}</h3>
           <div class="mt-4 flex flex-wrap gap-2">
             {byCategory.get(category)!.map((s) => (

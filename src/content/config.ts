@@ -1,6 +1,6 @@
-import { defineCollection, z } from 'astro:content';
+﻿import { defineCollection, z } from 'astro:content';
 
-// The project schema — a typed frontmatter contract every case study must
+// The project schema : a typed frontmatter contract every case study must
 // satisfy. Adding a project = dropping a new .mdx file that fills this in.
 // A bad value fails `astro build`, which is the point (see plan: schema check).
 const projects = defineCollection({
@@ -44,7 +44,10 @@ const projects = defineCollection({
       .array(z.object({ title: z.string(), body: z.string() }))
       .default([]),
 
-    // Pluggable demo slot — the forward-compat seam for "berserk mode".
+    // Per-project accent palette (see src/data/project-themes.ts).
+    accentTheme: z.enum(['default', 'tradebot', 'meeting-memory']).default('default'),
+
+    // Pluggable demo slot : the forward-compat seam for "berserk mode".
     // v1 ships 'screenshots'; flip to 'iframe' | 'replay' later without
     // touching the page layout ([slug].astro switches on demo.kind).
     demo: z

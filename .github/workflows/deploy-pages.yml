@@ -1,6 +1,6 @@
-# Build Astro and deploy to GitHub Pages on every push to main.
+﻿# Build Astro and deploy to GitHub Pages on every push to main.
 # Repo Settings → Pages → Source: GitHub Actions
-# Custom domain (when ready): nicholasjvr.co.za — see public/CNAME.example
+# Custom domain (when ready): nicholasjvr.co.za : see public/CNAME.example
 
 name: Deploy to GitHub Pages
 

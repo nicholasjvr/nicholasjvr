@@ -1,6 +1,7 @@
 <div align="center">
 
-<img src=".github/assets/readme/banner.svg" alt="Nicholas — Software & ML builder" width="100%" />
+<!-- Use raw.githubusercontent.com so images render on the GitHub profile README -->
+<img src="https://raw.githubusercontent.com/nicholasjvr/nicholasjvr/main/.github/assets/readme/banner.svg" alt="Nicholas, Software and ML builder" width="100%" />
 
 <br /><br />
 
@@ -10,11 +11,11 @@
 
 [![Portfolio](https://img.shields.io/badge/Portfolio-live-6366f1?style=for-the-badge&logo=astro&logoColor=white)](https://nicholasjvr.github.io/nicholasjvr/)
 [![Email](https://img.shields.io/badge/Email-nicholas241cut@gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:nicholas241cut@gmail.com)
-[![LinkedIn](https://img.shields.io/badge/GitHub-nicholasjvr-181717?style=for-the-badge&logo=github)](https://github.com/nicholasjvr)
+[![GitHub](https://img.shields.io/badge/GitHub-nicholasjvr-181717?style=for-the-badge&logo=github)](https://github.com/nicholasjvr)
 
 <br /><br />
 
-**This repo is my pinned portfolio** — case studies synced with GitHub, built with Astro + Tailwind.
+**This repo is my pinned portfolio.** Case studies synced with GitHub, built with Astro + Tailwind.
 
 </div>
 
@@ -22,7 +23,7 @@
 
 ## What I build
 
-Applied machine learning, real-time dashboards, exchange/API integrations, and AI companions. I like owning the **full loop** — data pipeline → model → execution logic → an interface you can reason about (and talk to).
+Applied machine learning, real-time dashboards, exchange/API integrations, and AI companions. I like owning the **full loop**: data pipeline → model → execution logic → an interface you can reason about (and talk to).
 
 | | |
 | :--- | :--- |
@@ -37,13 +38,13 @@ Applied machine learning, real-time dashboards, exchange/API integrations, and A
 
 ### TradeBot Companion
 
-Local crypto trading cockpit — volatility + ML strategies with a natural-language companion.
+Local crypto trading cockpit. Volatility + ML strategies with a natural-language companion.
 
 <table>
 <tr>
 <td width="52%" align="center">
 
-<img src="public/projects/tradebot/live-watch.png" alt="TradeBot Live Watch cockpit" width="100%" />
+<img src="https://raw.githubusercontent.com/nicholasjvr/nicholasjvr/main/.github/assets/readme/tradebot-preview.png" alt="TradeBot Live Watch cockpit" width="100%" />
 
 </td>
 <td width="48%" valign="top">
@@ -65,18 +66,18 @@ Local crypto trading cockpit — volatility + ML strategies with a natural-langu
 
 ### Meeting Me Memory
 
-Record meetings in the browser, tag them, sync to the cloud — [live at meetingmememory.com](https://meetingmememory.com/home).
+Record meetings in the browser, tag them, sync to the cloud. [Live at meetingmememory.com](https://meetingmememory.com/home).
 
 <table>
 <tr>
 <td width="52%" align="center">
 
-<img src="public/projects/meeting-me-memory/record.png" alt="Meeting Me Memory browser recorder" width="100%" />
+<img src="https://raw.githubusercontent.com/nicholasjvr/nicholasjvr/main/.github/assets/readme/mmm-preview.png" alt="Meeting Me Memory browser recorder" width="100%" />
 
 </td>
 <td width="48%" valign="top">
 
-**Production SaaS** — browser screen capture, Firebase cloud library, Google/Microsoft/Zoho calendar sync, and **Mya** (in-app AI + Chrome extension for Meet/Teams/Zoom).
+**Production SaaS.** Browser screen capture, Firebase cloud library, Google/Microsoft/Zoho calendar sync, and **Mya** (in-app AI + Chrome extension for Meet/Teams/Zoom).
 
 `Next.js 16` · `React 19` · `Firebase` · `OAuth` · `Vercel`
 
@@ -100,9 +101,9 @@ Record meetings in the browser, tag them, sync to the cloud — [live at meeting
 
 <br />
 
-<img src="public/projects/tradebot/cover.png" alt="TradeBot" width="32%" />
+<img src="https://raw.githubusercontent.com/nicholasjvr/nicholasjvr/main/.github/assets/readme/tradebot-cover.png" alt="TradeBot" width="32%" />
 &nbsp;
-<img src="public/projects/meeting-me-memory/cover.png" alt="Meeting Me Memory" width="32%" />
+<img src="https://raw.githubusercontent.com/nicholasjvr/nicholasjvr/main/.github/assets/readme/mmm-cover.png" alt="Meeting Me Memory" width="32%" />
 
 </div>
 
@@ -126,7 +127,7 @@ Record meetings in the browser, tag them, sync to the cloud — [live at meeting
 ---
 
 <details>
-<summary><strong>Developer docs</strong> — deployment, env vars, repo layout</summary>
+<summary><strong>Developer docs</strong> (deployment, env vars, repo layout)</summary>
 
 <br />
 

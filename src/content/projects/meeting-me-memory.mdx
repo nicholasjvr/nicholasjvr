@@ -4,18 +4,19 @@ tagline: Record meetings in the browser, tag them, sync to the cloud, and find w
 status: live
 featured: true
 order: 2
-timeframe: May 2026 – present
+accentTheme: meeting-memory
+timeframe: May 2026 to present
 role: Solo build (Next.js app, Firebase backend, OAuth integrations, Chrome extension)
 objective: >-
   Give myself one place to capture meeting recordings, attach them to calendar
-  events, organise them with tags and categories, and retrieve them quickly —
+  events, organise them with tags and categories, and retrieve them quickly,
   without juggling separate tools for recording, storage, and scheduling.
 outcome: >-
   A live production app at meetingmememory.com with browser-based screen
   recording (no account required for local saves), a searchable cloud library
   backed by Firebase, calendar sync across Google/Microsoft/Zoho, task tracking
   linked to meetings, multi-provider storage (Firebase, Google Drive, OneDrive),
-  and Mya — an in-app assistant plus Chrome extension that nudges me to record
+  and Mya, an in-app assistant plus Chrome extension that nudges me to record
   on Meet, Teams, and Zoom.
 skills:
   - typescript
@@ -61,11 +62,11 @@ highlights:
   - title: Meetings + tasks workflow
     body: >-
       A home dashboard ties together upcoming meetings, open tasks, and recent
-      recordings — with one-click conversion from a meeting to a task payload.
+      recordings, with one-click conversion from a meeting to a task payload.
   - title: Multi-provider cloud storage
     body: >-
       Storage policy follows the sign-in provider: Google users upload to Drive,
-      Microsoft users to OneDrive, others to Firebase Storage — with resumable
+      Microsoft users to OneDrive, others to Firebase Storage, with resumable
       uploads and server-side streaming for playback.
   - title: Mya assistant + Chrome extension
     body: >-
@@ -75,22 +76,22 @@ highlights:
 gallery:
   - src: /projects/meeting-me-memory/home.png
     alt: Home dashboard with meetings, tasks, and recordings
-    caption: Home — dashboard tying together meetings, tasks, and recent recordings.
+    caption: "Home: dashboard tying together meetings, tasks, and recent recordings."
   - src: /projects/meeting-me-memory/record.png
     alt: Browser-based screen recorder
-    caption: Recorder — in-browser capture, trim, tag, and cloud upload.
+    caption: "Recorder: in-browser capture, trim, tag, and cloud upload."
   - src: /projects/meeting-me-memory/calendar.png
     alt: Calendar view with synced events
-    caption: Calendar — multi-provider sync so recordings match the right meeting.
+    caption: "Calendar: multi-provider sync so recordings match the right meeting."
   - src: /projects/meeting-me-memory/integrations.png
     alt: Meetings list and calendar integrations settings
-    caption: Integrations — Google, Microsoft, and Zoho calendar connections.
+    caption: "Integrations: Google, Microsoft, and Zoho calendar connections."
   - src: /projects/meeting-me-memory/meeting-view.png
     alt: Single meeting detail with linked recording
-    caption: Meeting view — event detail with attached recording and actions.
+    caption: "Meeting view: event detail with attached recording and actions."
   - src: /projects/meeting-me-memory/storage.png
     alt: Storage usage and tracked quota
-    caption: Storage — usage tracking across cloud backends.
+    caption: "Storage: usage tracking across cloud backends."
 demo:
   kind: screenshots
 ---
@@ -99,7 +100,7 @@ demo:
 
 Meeting Me Memory is a production web app I built to own the full loop from
 **"I'm in a call"** to **"I can find that recording later."** It combines a
-browser recorder, a tagged cloud library, calendar sync, and a tasks layer —
+browser recorder, a tagged cloud library, calendar sync, and a tasks layer,
 plus Mya, a small assistant (in-app chat + Chrome extension) that keeps
 recording top-of-mind when I'm on Google Meet, Teams, or Zoom.
 
@@ -121,7 +122,7 @@ recording top-of-mind when I'm on Google Meet, Teams, or Zoom.
 
 ## Why it matters
 
-It's a end-to-end product build — not just a UI mock. OAuth across three
+It's an end-to-end product build, not just a UI mock. OAuth across three
 calendar providers, resumable multi-backend uploads, Firebase security rules,
 production deploy on Vercel, and a companion extension that bridges the web
 app and the meeting tabs I actually use day to day.

@@ -1,9 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="Live Watch placeholder">
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="Live Watch placeholder">
   <rect width="1600" height="900" fill="#160e2e"/>
   <rect x="120" y="160" width="1360" height="120" rx="14" fill="#241644"/>
   <rect x="120" y="320" width="660" height="420" rx="14" fill="#241644"/>
   <rect x="820" y="320" width="660" height="420" rx="14" fill="#241644"/>
   <circle cx="180" cy="220" r="14" fill="#34d399"/>
-  <text x="800" y="100" fill="#ede9fe" font-family="Inter, sans-serif" font-size="44" font-weight="700" text-anchor="middle">Live Watch — Cockpit</text>
+  <text x="800" y="100" fill="#ede9fe" font-family="Inter, sans-serif" font-size="44" font-weight="700" text-anchor="middle">Live Watch : Cockpit</text>
   <text x="800" y="800" fill="#5b4b85" font-family="JetBrains Mono, monospace" font-size="20" text-anchor="middle">placeholder screenshot</text>
 </svg>

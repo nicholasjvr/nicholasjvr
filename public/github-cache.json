@@ -3,7 +3,7 @@
     "username": "nicholasjvr",
     "name": "Nicholas",
     "avatarUrl": "https://avatars.githubusercontent.com/u/0?v=4",
-    "bio": "Builder of data-to-decision systems — ML, real-time dashboards, and AI companions.",
+    "bio": "Builder of data-to-decision systems: ML, real-time dashboards, and AI companions.",
     "profileUrl": "https://github.com/nicholasjvr",
     "publicRepos": 0,
     "followers": 0
@@ -11,15 +11,25 @@
   "repos": [
     {
       "name": "tradebot",
-      "description": "Local crypto trading cockpit — volatility + ML strategies with a natural-language companion.",
+      "description": "Local crypto trading cockpit. Volatility + ML strategies with a natural-language companion.",
       "url": "https://github.com/nicholasjvr/tradebot",
       "stars": 0,
       "forks": 0,
       "language": "Python",
       "pushedAt": "2026-06-02T00:00:00Z",
-      "topics": ["python", "machine-learning", "trading-bot", "scikit-learn"]
+      "topics": [
+        "python",
+        "machine-learning",
+        "trading-bot",
+        "scikit-learn"
+      ]
     }
   ],
-  "topLanguages": [{ "name": "Python", "count": 1 }],
+  "topLanguages": [
+    {
+      "name": "Python",
+      "count": 1
+    }
+  ],
   "fetchedAt": "2026-06-02T00:00:00Z"
 }

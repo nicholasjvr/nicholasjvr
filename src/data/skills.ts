@@ -1,4 +1,4 @@
-// Central skills taxonomy — the single source of truth for skill chips, the
+﻿// Central skills taxonomy : the single source of truth for skill chips, the
 // home-page skill matrix, and the projects filter. Projects reference skills by
 // `key` (see src/content/config.ts), so labels/categories stay consistent and
 // the site can reverse-map "where have I used X?".

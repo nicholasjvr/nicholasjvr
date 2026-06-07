@@ -1,4 +1,4 @@
-// GitHub data fetch with graceful fallback.
+﻿// GitHub data fetch with graceful fallback.
 //
 // Called at build time from GitHubPanel.astro (and the static /api/github.json
 // endpoint). With a GITHUB_TOKEN set you get live, rate-limit-free data; without
@@ -64,7 +64,7 @@ function mapRepo(r: any): GitHubRepo {
 }
 
 /** Fetch exactly the repos in the allowlist, preserving order, skipping any
- *  that can't be read (404/403 — e.g. private without a scoped token). */
+ *  that can't be read (404/403 : e.g. private without a scoped token). */
 async function fetchFeaturedRepos(names: string[]): Promise<GitHubRepo[]> {
   const results = await Promise.all(
     names.map(async (full) => {

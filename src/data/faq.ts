@@ -1,4 +1,4 @@
-// Curated FAQ — part of the knowledge corpus (src/lib/knowledge.ts) and also
+﻿// Curated FAQ : part of the knowledge corpus (src/lib/knowledge.ts) and also
 // renderable as an on-page FAQ section later. Keep answers short and factual;
 // the chatbot will quote/paraphrase these.
 export interface FaqItem {
@@ -10,7 +10,7 @@ export interface FaqItem {
 export const FAQ: FaqItem[] = [
   {
     q: 'What is the TradeBot Companion?',
-    a: 'A local crypto trading cockpit that runs two strategies — a volatility bot and an ML trader — against a paper account on Luno (ZAR), with a real-time dashboard and an AI companion that answers questions over live trade data.',
+    a: 'A local crypto trading cockpit that runs two strategies (a volatility bot and an ML trader) against a paper account on Luno (ZAR), with a real-time dashboard and an AI companion that answers questions over live trade data.',
     tags: ['tradebot', 'projects'],
   },
   {

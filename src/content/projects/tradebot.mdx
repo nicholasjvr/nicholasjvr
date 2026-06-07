@@ -1,14 +1,15 @@
 ---
 title: TradeBot Companion
-tagline: Local crypto trading cockpit — volatility + ML strategies with a natural-language companion.
+tagline: Local crypto trading cockpit. Volatility + ML strategies with a natural-language companion.
 status: live
 featured: true
 order: 1
-timeframe: May 2026 – present
+accentTheme: tradebot
+timeframe: May 2026 to present
 role: Solo build (backend, ML, dashboard, AI companion)
 objective: >-
-  Paper-trade crypto on Luno (ZAR) with two cooperating strategies — a volatility
-  bot and an ML trader — and give myself a single real-time cockpit to monitor,
+  Paper-trade crypto on Luno (ZAR) with two cooperating strategies: a volatility
+  bot and an ML trader. Give myself a single real-time cockpit to monitor,
   journal, and coach every decision the system makes.
 outcome: >-
   A live, auto-refreshing cockpit running both strategies against a R10,000 paper
@@ -49,8 +50,8 @@ highlights:
   - title: Real-time multi-bot cockpit
     body: >-
       Auto-refreshing dashboard with a heartbeat monitor, combined order/fill
-      activity feed, live log console, and a human-readable decision journal —
-      built to spot stalls early and explain why the bot did (or did not) act.
+      activity feed, live log console, and a human-readable decision journal.
+      Built to spot stalls early and explain why the bot did (or did not) act.
   - title: ML trader on engineered features
     body: >-
       A RandomForestClassifier (100 trees, max depth 12) trained on 15 features
@@ -63,8 +64,8 @@ highlights:
   - title: AI companion chat
     body: >-
       A conversational layer that answers natural-language questions over live
-      trade data — "how are we doing?", "is the model okay?", "what are we
-      holding?" — plus a coach mode that summarises the session.
+      trade data ("how are we doing?", "is the model okay?", "what are we
+      holding?") plus a coach mode that summarises the session.
   - title: Live exchange + paper account
     body: >-
       Pulls live balances and the order/fill timeline from the Luno API, tracks
@@ -73,19 +74,19 @@ highlights:
 gallery:
   - src: /projects/tradebot/live-watch.png
     alt: Live Watch cockpit with bot status, heartbeat, and activity feed
-    caption: Live Watch — bot status, heartbeat monitor, open positions, and activity feed.
+    caption: "Live Watch: bot status, heartbeat monitor, open positions, and activity feed."
   - src: /projects/tradebot/mission-control.png
     alt: Mission Control overview with account journey and risk guard
-    caption: Mission Control — account journey, paper account, risk guard, and price charts.
+    caption: "Mission Control: account journey, paper account, risk guard, and price charts."
   - src: /projects/tradebot/performance.png
     alt: Performance dashboard with PnL history and per-symbol results
-    caption: Performance — cumulative PnL, per-symbol results, and session stats.
+    caption: "Performance: cumulative PnL, per-symbol results, and session stats."
   - src: /projects/tradebot/performance-focus.png
     alt: ML model performance metrics and feature importance
-    caption: ML model — accuracy, precision/recall, and feature-importance view.
+    caption: "ML model: accuracy, precision/recall, and feature-importance view."
   - src: /projects/tradebot/system-health.png
     alt: System health and operational status panel
-    caption: System health — heartbeat, data freshness, and operational checks.
+    caption: "System health: heartbeat, data freshness, and operational checks."
 demo:
   kind: screenshots
 ---
@@ -94,7 +95,7 @@ demo:
 
 TradeBot Companion is a local trading cockpit I built to run two cooperating
 crypto strategies against a paper account and watch them in real time. The point
-wasn't a single clever model — it was owning the **whole loop**: pulling market
+wasn't a single clever model. It was owning the **whole loop**: pulling market
 data, engineering features, training and serving an ML classifier, executing
 against risk/budget guards, and surfacing all of it in a dashboard I can
 actually reason about (and talk to).
@@ -102,8 +103,8 @@ actually reason about (and talk to).
 ## How it works
 
 - **Data + features.** Market candles (OHLCV) are stored locally in SQLite per
-  symbol/timeframe and turned into engineered features — moving averages,
-  volatility, ATR, and multi-window returns — that feed the model.
+  symbol/timeframe and turned into engineered features (moving averages,
+  volatility, ATR, and multi-window returns) that feed the model.
 - **ML trader.** A `RandomForestClassifier` (100 trees, depth 12, 15 features)
   predicts trade direction; the dashboard tracks accuracy, precision/recall, and
   feature importance from the live pickle, with per-symbol realized PnL.
@@ -119,8 +120,8 @@ actually reason about (and talk to).
 
 It's a compact demonstration of the full data-to-decision pipeline I care about:
 applied ML on engineered time-series features, real-time systems design, robust
-guardrails around automated money decisions, and an interface — both visual and
-conversational — that makes the system legible.
+guardrails around automated money decisions, and an interface (visual and
+conversational) that makes the system legible.
 
 > Next: a self-contained **replay demo** of the cockpit (canned data, no live
 > infra) so this case study becomes interactive right here on the site.

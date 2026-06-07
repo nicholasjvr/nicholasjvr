@@ -15,14 +15,14 @@ const filters = skillKeys
   .sort((a, b) => a.label.localeCompare(b.label));
 ---
 
-<BaseLayout title="Projects — Nicholas" description="All project case studies.">
+<BaseLayout title="Projects | Nicholas" description="All project case studies.">
   <section class="section">
     <p class="eyebrow reveal">Case studies</p>
     <h1 class="reveal mt-3 text-4xl font-extrabold tracking-tight text-ink md:text-5xl">
       Projects
     </h1>
     <p class="reveal mt-3 max-w-2xl text-muted">
-      Each project is written up as a case study — the objective, the approach,
+      Each project is written up as a case study: the objective, the approach,
       and the skills used to get there. Filter by skill below.
     </p>
 
@@ -31,7 +31,7 @@ const filters = skillKeys
       <button
         type="button"
         data-filter="all"
-        class="filter-chip is-active rounded-full border border-accent bg-accent-soft px-3 py-1.5 text-sm font-medium text-accent"
+        class="filter-chip is-active rounded-full border border-accent/40 bg-gradient-to-r from-accent-soft to-accent-2/10 px-3 py-1.5 text-sm font-medium text-accent"
       >
         All
       </button>
