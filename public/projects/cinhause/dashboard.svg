@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="CinHaus admin dashboard placeholder">
+  <rect width="1600" height="900" fill="#080808"/>
+  <rect x="0" y="0" width="240" height="900" fill="#0a0a0a" stroke="#222" stroke-width="1"/>
+  <text x="32" y="48" fill="#c8f04a" font-family="Syne, sans-serif" font-size="20" font-weight="800">CinHaus</text>
+  <text x="32" y="120" fill="#f5f4f0" font-family="DM Mono, monospace" font-size="11" letter-spacing="0.1em">OVERVIEW</text>
+  <text x="32" y="160" fill="#666660" font-family="DM Mono, monospace" font-size="11" letter-spacing="0.1em">CLIENTS</text>
+  <text x="32" y="200" fill="#666660" font-family="DM Mono, monospace" font-size="11" letter-spacing="0.1em">CIDS</text>
+  <text x="32" y="240" fill="#666660" font-family="DM Mono, monospace" font-size="11" letter-spacing="0.1em">INVOICES</text>
+  <rect x="280" y="100" width="320" height="140" fill="#0e0e0e" stroke="#222"/>
+  <text x="300" y="140" fill="#888880" font-family="DM Mono, monospace" font-size="10">MRR</text>
+  <text x="300" y="190" fill="#c8f04a" font-family="Syne, sans-serif" font-size="36" font-weight="800">R 42,800</text>
+  <rect x="620" y="100" width="320" height="140" fill="#0e0e0e" stroke="#222"/>
+  <text x="640" y="140" fill="#888880" font-family="DM Mono, monospace" font-size="10">ACTIVE CLIENTS</text>
+  <text x="640" y="190" fill="#f5f4f0" font-family="Syne, sans-serif" font-size="36" font-weight="800">12</text>
+  <rect x="960" y="100" width="320" height="140" fill="#0e0e0e" stroke="#222"/>
+  <text x="980" y="140" fill="#888880" font-family="DM Mono, monospace" font-size="10">OPEN INVOICES</text>
+  <text x="980" y="190" fill="#f5f4f0" font-family="Syne, sans-serif" font-size="36" font-weight="800">7</text>
+  <rect x="280" y="280" width="1000" height="480" fill="#0e0e0e" stroke="#222"/>
+  <text x="300" y="330" fill="#f5f4f0" font-family="DM Mono, monospace" font-size="12">CLIENT ACTIVITY</text>
+  <line x1="320" y1="700" x2="1200" y2="700" stroke="#c8f04a" stroke-opacity="0.4" stroke-width="2"/>
+  <text x="800" y="820" fill="#444440" font-family="DM Mono, monospace" font-size="16" text-anchor="middle">Admin dashboard � placeholder screenshot</text>
+</svg>

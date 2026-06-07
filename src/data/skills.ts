@@ -63,6 +63,8 @@ export const SKILLS = {
 
   firebase: { key: 'firebase', label: 'Firebase', category: 'Backend / APIs' },
   oauth: { key: 'oauth', label: 'OAuth Integrations', category: 'Backend / APIs' },
+  prisma: { key: 'prisma', label: 'Prisma ORM', category: 'Backend / APIs' },
+  azure: { key: 'azure', label: 'Microsoft Azure', category: 'Infra / DevOps' },
 
   'llm-agents': { key: 'llm-agents', label: 'LLM / Agent Integration', category: 'AI / Agents' },
   'risk-logic': { key: 'risk-logic', label: 'Risk-Management Logic', category: 'AI / Agents' },

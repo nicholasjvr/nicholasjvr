@@ -5,7 +5,7 @@
 /* ---------------------------------------------------------------------------
    Theme tokens
    - data-theme: light | dark (toggle + system default)
-   - data-accent-theme: default | tradebot | meeting-memory (project pages/cards)
+   - data-accent-theme: default | tradebot | meeting-memory | cinhaus (project pages/cards)
 --------------------------------------------------------------------------- */
 
 :root,
@@ -66,6 +66,20 @@
 
 [data-theme='light'][data-accent-theme='meeting-memory'] {
   --c-accent-soft: 224 242 254;
+}
+
+[data-accent-theme='cinhaus'] {
+  --c-accent: 200 240 74;
+  --c-accent-2: 245 244 240;
+  --c-glow: 200 240 74;
+}
+
+[data-theme='dark'][data-accent-theme='cinhaus'] {
+  --c-accent-soft: 40 48 12;
+}
+
+[data-theme='light'][data-accent-theme='cinhaus'] {
+  --c-accent-soft: 236 252 203;
 }
 
 html {
@@ -172,6 +186,10 @@ body {
   border-color: rgb(14 165 233 / 0.25);
 }
 
+.project-card[data-accent-theme='cinhaus'] {
+  border-color: rgb(200 240 74 / 0.25);
+}
+
 .project-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 16px 40px -16px rgb(var(--c-glow) / 0.35);
@@ -183,6 +201,10 @@ body {
 
 .project-card[data-accent-theme='meeting-memory']:hover {
   border-color: rgb(14 165 233 / 0.45);
+}
+
+.project-card[data-accent-theme='cinhaus']:hover {
+  border-color: rgb(200 240 74 / 0.45);
 }
 
 .card-accent-top {

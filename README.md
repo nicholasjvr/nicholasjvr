@@ -93,6 +93,34 @@ Record meetings in the browser, tag them, sync to the cloud. [Live at meetingmem
 
 ---
 
+### CinHaus
+
+B2B app-infrastructure billing for Flutter, React Native, and web apps. [Live at cinhaus.co.za](https://cinhaus-co-za.vercel.app/).
+
+<table>
+<tr>
+<td width="52%" align="center">
+
+<img src="https://raw.githubusercontent.com/nicholasjvr/nicholasjvr/main/.github/assets/readme/cinhaus-preview.png" alt="CinHaus marketing landing" width="100%" />
+
+</td>
+<td width="48%" valign="top">
+
+**WIP platform.** Metered API/server usage per Client ID (CID), monthly ZAR invoicing, admin dashboard + client portal, and an **Azure GPT-4o billing agent** over live SQL context.
+
+`Next.js 14` · `Prisma` · `Azure SQL` · `Firebase` · `Azure AI Foundry` · `Vercel`
+
+<br />
+
+[![Case study](https://img.shields.io/badge/Case_study-CinHaus-c8f04a?style=flat-square&labelColor=080808)](https://nicholasjvr.github.io/nicholasjvr/projects/cinhaus/)
+[![Live site](https://img.shields.io/badge/Live-cinhaus.co.za-c8f04a?style=flat-square&logo=googlechrome&logoColor=black&labelColor=080808)](https://cinhaus-co-za.vercel.app/)
+
+</td>
+</tr>
+</table>
+
+---
+
 ## Explore the portfolio
 
 <div align="center">
@@ -104,6 +132,8 @@ Record meetings in the browser, tag them, sync to the cloud. [Live at meetingmem
 <img src="https://raw.githubusercontent.com/nicholasjvr/nicholasjvr/main/.github/assets/readme/tradebot-cover.png" alt="TradeBot" width="32%" />
 &nbsp;
 <img src="https://raw.githubusercontent.com/nicholasjvr/nicholasjvr/main/.github/assets/readme/mmm-cover.png" alt="Meeting Me Memory" width="32%" />
+&nbsp;
+<img src="https://raw.githubusercontent.com/nicholasjvr/nicholasjvr/main/.github/assets/readme/cinhaus-cover.png" alt="CinHaus" width="32%" />
 
 </div>
 

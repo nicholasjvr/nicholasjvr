@@ -45,7 +45,7 @@ const projects = defineCollection({
       .default([]),
 
     // Per-project accent palette (see src/data/project-themes.ts).
-    accentTheme: z.enum(['default', 'tradebot', 'meeting-memory']).default('default'),
+    accentTheme: z.enum(['default', 'tradebot', 'meeting-memory', 'cinhaus']).default('default'),
 
     // Pluggable demo slot : the forward-compat seam for "berserk mode".
     // v1 ships 'screenshots'; flip to 'iframe' | 'replay' later without

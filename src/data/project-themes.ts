@@ -1,5 +1,5 @@
 /** Per-project accent palettes. Applied via `data-accent-theme` on `<html>` or cards. */
-export type AccentTheme = 'default' | 'tradebot' | 'meeting-memory';
+export type AccentTheme = 'default' | 'tradebot' | 'meeting-memory' | 'cinhaus';
 
 export interface AccentThemeTokens {
   label: string;
@@ -26,5 +26,11 @@ export const ACCENT_THEMES: Record<AccentTheme, AccentThemeTokens> = {
     accent: '14 165 233',
     accent2: '6 182 212',
     glow: '56 189 248',
+  },
+  cinhaus: {
+    label: 'CinHaus',
+    accent: '200 240 74',
+    accent2: '245 244 240',
+    glow: '200 240 74',
   },
 };
