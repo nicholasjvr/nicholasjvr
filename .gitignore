@@ -17,3 +17,7 @@ node_modules/
 .DS_Store
 Thumbs.db
 .vscode/
+
+# staging folders — canonical copies live in public/projects/
+tradebot_assets/
+meetingmememory_assets/

@@ -41,7 +41,7 @@ techStack:
   - Chrome Extension (Manifest V3)
 repo: https://github.com/nicholasjvr/meeting_memory_nextjs
 liveUrl: https://meetingmememory.com/home
-cover: /projects/meeting-me-memory/cover.svg
+cover: /projects/meeting-me-memory/cover.png
 metrics:
   - { label: "Calendar providers", value: "Google · Microsoft · Zoho" }
   - { label: "Storage backends", value: "Firebase · Drive · OneDrive" }
@@ -73,18 +73,24 @@ highlights:
       MV3 extension that detects active calls on Meet/Teams/Zoom, shows an
       in-page reminder banner, and deep-links to /record.
 gallery:
-  - src: /projects/meeting-me-memory/home-dashboard.svg
+  - src: /projects/meeting-me-memory/home.png
     alt: Home dashboard with meetings, tasks, and recordings
     caption: Home — dashboard tying together meetings, tasks, and recent recordings.
-  - src: /projects/meeting-me-memory/recorder.svg
-    alt: Browser-based screen recorder with upload progress
+  - src: /projects/meeting-me-memory/record.png
+    alt: Browser-based screen recorder
     caption: Recorder — in-browser capture, trim, tag, and cloud upload.
-  - src: /projects/meeting-me-memory/calendar-sync.svg
-    alt: Calendar sync across Google, Microsoft, and Zoho
+  - src: /projects/meeting-me-memory/calendar.png
+    alt: Calendar view with synced events
     caption: Calendar — multi-provider sync so recordings match the right meeting.
-  - src: /projects/meeting-me-memory/mya-assistant.svg
-    alt: Mya in-app assistant and Chrome extension
-    caption: Mya — scoped AI help in the app plus a Chrome sidekick on call sites.
+  - src: /projects/meeting-me-memory/integrations.png
+    alt: Meetings list and calendar integrations settings
+    caption: Integrations — Google, Microsoft, and Zoho calendar connections.
+  - src: /projects/meeting-me-memory/meeting-view.png
+    alt: Single meeting detail with linked recording
+    caption: Meeting view — event detail with attached recording and actions.
+  - src: /projects/meeting-me-memory/storage.png
+    alt: Storage usage and tracked quota
+    caption: Storage — usage tracking across cloud backends.
 demo:
   kind: screenshots
 ---
@@ -120,6 +126,5 @@ calendar providers, resumable multi-backend uploads, Firebase security rules,
 production deploy on Vercel, and a companion extension that bridges the web
 app and the meeting tabs I actually use day to day.
 
-> Next: replace the placeholder gallery SVGs with real screenshots from
-> [meetingmememory.com](https://meetingmememory.com/home), then optionally flip
-> `demo.kind` to `iframe` for an embedded live preview.
+> Next: optionally flip `demo.kind` to `iframe` for an embedded live preview of
+> [meetingmememory.com](https://meetingmememory.com/home) on this case-study page.

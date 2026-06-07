@@ -119,9 +119,9 @@ making the TradeBot interactive later is an **additive component, not a rewrite*
 
 ## TODO before going live
 
-- [ ] **Screenshots:** replace the placeholder SVGs in
-      `public/projects/tradebot/` with real exports, then (optionally) update the
-      `src:` paths in `src/content/projects/tradebot.mdx` to `.png`.
+- [x] **Screenshots:** real PNGs in `public/projects/tradebot/` and
+      `public/projects/meeting-me-memory/` (sourced from `tradebot_assets/` and
+      `meetingmememory_assets/` at repo root).
 - [ ] **GitHub:** confirm `PUBLIC_GITHUB_USERNAME`; curate which repos show in
       `src/data/featured-repos.ts`. Add a `GITHUB_TOKEN` only if a featured repo
       is **private** — use a **fine-grained PAT scoped to just those repos,

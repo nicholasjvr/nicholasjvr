@@ -43,8 +43,7 @@ Local crypto trading cockpit — volatility + ML strategies with a natural-langu
 <tr>
 <td width="52%" align="center">
 
-<!-- Swap for docs/assets/readme/tradebot-demo.gif when you have a recording -->
-<img src="public/projects/tradebot/live-watch.svg" alt="TradeBot Live Watch cockpit" width="100%" />
+<img src="public/projects/tradebot/live-watch.png" alt="TradeBot Live Watch cockpit" width="100%" />
 
 </td>
 <td width="48%" valign="top">
@@ -72,8 +71,7 @@ Record meetings in the browser, tag them, sync to the cloud — [live at meeting
 <tr>
 <td width="52%" align="center">
 
-<!-- Swap for docs/assets/readme/meeting-me-memory-demo.gif when you have a recording -->
-<img src="public/projects/meeting-me-memory/recorder.svg" alt="Meeting Me Memory browser recorder" width="100%" />
+<img src="public/projects/meeting-me-memory/record.png" alt="Meeting Me Memory browser recorder" width="100%" />
 
 </td>
 <td width="48%" valign="top">
@@ -102,9 +100,9 @@ Record meetings in the browser, tag them, sync to the cloud — [live at meeting
 
 <br />
 
-<img src="public/projects/tradebot/cover.svg" alt="TradeBot" width="32%" />
+<img src="public/projects/tradebot/cover.png" alt="TradeBot" width="32%" />
 &nbsp;
-<img src="public/projects/meeting-me-memory/cover.svg" alt="Meeting Me Memory" width="32%" />
+<img src="public/projects/meeting-me-memory/cover.png" alt="Meeting Me Memory" width="32%" />
 
 </div>
 
