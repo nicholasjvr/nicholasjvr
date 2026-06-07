@@ -1,0 +1,125 @@
+---
+title: Meeting Me Memory
+tagline: Record meetings in the browser, tag them, sync to the cloud, and find what you need instantly.
+status: live
+featured: true
+order: 2
+timeframe: May 2026 – present
+role: Solo build (Next.js app, Firebase backend, OAuth integrations, Chrome extension)
+objective: >-
+  Give myself one place to capture meeting recordings, attach them to calendar
+  events, organise them with tags and categories, and retrieve them quickly —
+  without juggling separate tools for recording, storage, and scheduling.
+outcome: >-
+  A live production app at meetingmememory.com with browser-based screen
+  recording (no account required for local saves), a searchable cloud library
+  backed by Firebase, calendar sync across Google/Microsoft/Zoho, task tracking
+  linked to meetings, multi-provider storage (Firebase, Google Drive, OneDrive),
+  and Mya — an in-app assistant plus Chrome extension that nudges me to record
+  on Meet, Teams, and Zoom.
+skills:
+  - typescript
+  - nextjs
+  - react
+  - tailwind
+  - firebase
+  - oauth
+  - rest-api
+  - dashboards
+  - llm-agents
+  - vercel
+techStack:
+  - Next.js 16
+  - React 19
+  - TypeScript
+  - Tailwind CSS 4
+  - Firebase (Auth, Firestore, Storage)
+  - Google / Microsoft / Zoho OAuth
+  - FFmpeg.wasm (in-browser trim)
+  - Anthropic Claude (Mya assistant)
+  - Vercel
+  - Chrome Extension (Manifest V3)
+repo: https://github.com/nicholasjvr/meeting_memory_nextjs
+liveUrl: https://meetingmememory.com/home
+cover: /projects/meeting-me-memory/cover.svg
+metrics:
+  - { label: "Calendar providers", value: "Google · Microsoft · Zoho" }
+  - { label: "Storage backends", value: "Firebase · Drive · OneDrive" }
+  - { label: "Meeting platforms", value: "Meet · Teams · Zoom" }
+  - { label: "Deploy", value: "Vercel + Firebase rules" }
+highlights:
+  - title: Browser screen recorder
+    body: >-
+      Capture meetings directly in the browser with optional trim (FFmpeg.wasm),
+      categorise on save, and either download locally (no account) or upload to
+      cloud storage with progress tracking and usage quotas.
+  - title: Calendar-linked library
+    body: >-
+      Sync calendars from Google, Microsoft, or Zoho so recordings auto-attach
+      to the right meeting by time. Search and filter the library by title, tag,
+      or category across devices.
+  - title: Meetings + tasks workflow
+    body: >-
+      A home dashboard ties together upcoming meetings, open tasks, and recent
+      recordings — with one-click conversion from a meeting to a task payload.
+  - title: Multi-provider cloud storage
+    body: >-
+      Storage policy follows the sign-in provider: Google users upload to Drive,
+      Microsoft users to OneDrive, others to Firebase Storage — with resumable
+      uploads and server-side streaming for playback.
+  - title: Mya assistant + Chrome extension
+    body: >-
+      An in-app chat widget (Claude Haiku, scoped to MMM help) and a lightweight
+      MV3 extension that detects active calls on Meet/Teams/Zoom, shows an
+      in-page reminder banner, and deep-links to /record.
+gallery:
+  - src: /projects/meeting-me-memory/home-dashboard.svg
+    alt: Home dashboard with meetings, tasks, and recordings
+    caption: Home — dashboard tying together meetings, tasks, and recent recordings.
+  - src: /projects/meeting-me-memory/recorder.svg
+    alt: Browser-based screen recorder with upload progress
+    caption: Recorder — in-browser capture, trim, tag, and cloud upload.
+  - src: /projects/meeting-me-memory/calendar-sync.svg
+    alt: Calendar sync across Google, Microsoft, and Zoho
+    caption: Calendar — multi-provider sync so recordings match the right meeting.
+  - src: /projects/meeting-me-memory/mya-assistant.svg
+    alt: Mya in-app assistant and Chrome extension
+    caption: Mya — scoped AI help in the app plus a Chrome sidekick on call sites.
+demo:
+  kind: screenshots
+---
+
+## What it is
+
+Meeting Me Memory is a production web app I built to own the full loop from
+**"I'm in a call"** to **"I can find that recording later."** It combines a
+browser recorder, a tagged cloud library, calendar sync, and a tasks layer —
+plus Mya, a small assistant (in-app chat + Chrome extension) that keeps
+recording top-of-mind when I'm on Google Meet, Teams, or Zoom.
+
+## How it works
+
+- **Record.** The `/record` page uses the browser's screen-capture APIs to
+  record meetings, optionally trim with FFmpeg.wasm, categorise on save, and
+  either download locally (free, no account) or upload to cloud storage.
+- **Store.** Firestore holds metadata (tags, categories, meeting links); blobs
+  land in Firebase Storage, Google Drive, or OneDrive depending on the user's
+  auth provider and storage policy.
+- **Sync.** OAuth flows for Google, Microsoft, and Zoho pull calendar events
+  into Firestore; recordings are matched to meetings by time window.
+- **Find.** The library and home dashboard support search/filter by title, tag,
+  and category. Tasks can be created from meetings for follow-up work.
+- **Assist.** Mya answers scoped help questions via a server-side Claude route;
+  the Chrome extension detects call URLs and surfaces reminders without bundling
+  auth secrets.
+
+## Why it matters
+
+It's a end-to-end product build — not just a UI mock. OAuth across three
+calendar providers, resumable multi-backend uploads, Firebase security rules,
+production deploy on Vercel, and a companion extension that bridges the web
+app and the meeting tabs I actually use day to day.
+
+> Next: replace the placeholder gallery SVGs with real screenshots from
+> [meetingmememory.com](https://meetingmememory.com/home), then optionally flip
+> `demo.kind` to `iframe` for an embedded live preview.

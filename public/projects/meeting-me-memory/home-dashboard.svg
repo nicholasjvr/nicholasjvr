@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="Home dashboard placeholder">
+  <rect width="1600" height="900" fill="#0f172a"/>
+  <rect x="80" y="80" width="1440" height="740" rx="24" fill="#1e293b" stroke="#334155"/>
+  <text x="800" y="460" fill="#94a3b8" font-family="Inter, sans-serif" font-size="36" text-anchor="middle">Home dashboard  meetings, tasks, recordings</text>
+</svg>

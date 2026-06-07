@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="Browser recorder placeholder">
+  <rect width="1600" height="900" fill="#0f172a"/>
+  <rect x="80" y="80" width="1440" height="740" rx="24" fill="#1e293b" stroke="#334155"/>
+  <circle cx="800" cy="420" r="48" fill="#ef4444"/>
+  <text x="800" y="560" fill="#94a3b8" font-family="Inter, sans-serif" font-size="36" text-anchor="middle">Browser screen recorder + cloud upload</text>
+</svg>

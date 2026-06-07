@@ -56,8 +56,13 @@ export const SKILLS = {
   'realtime': { key: 'realtime', label: 'Real-Time Systems', category: 'Backend / APIs' },
 
   astro: { key: 'astro', label: 'Astro', category: 'Frontend / UI' },
+  nextjs: { key: 'nextjs', label: 'Next.js', category: 'Frontend / UI' },
+  react: { key: 'react', label: 'React', category: 'Frontend / UI' },
   tailwind: { key: 'tailwind', label: 'Tailwind CSS', category: 'Frontend / UI' },
   dashboards: { key: 'dashboards', label: 'Dashboard UX', category: 'Frontend / UI' },
+
+  firebase: { key: 'firebase', label: 'Firebase', category: 'Backend / APIs' },
+  oauth: { key: 'oauth', label: 'OAuth Integrations', category: 'Backend / APIs' },
 
   'llm-agents': { key: 'llm-agents', label: 'LLM / Agent Integration', category: 'AI / Agents' },
   'risk-logic': { key: 'risk-logic', label: 'Risk-Management Logic', category: 'AI / Agents' },

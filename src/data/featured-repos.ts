@@ -8,4 +8,5 @@
 //   only and never reaches the browser.
 export const FEATURED_REPOS: string[] = [
   'nicholasjvr/tradebot',
+  'nicholasjvr/meeting_memory_nextjs',
 ];

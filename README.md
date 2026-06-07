@@ -4,6 +4,67 @@ A data-driven portfolio that showcases each project as a **case study**
 (objective → approach → skills used → outcome) and stays **in lockstep with my
 GitHub profile**. Built with Astro + Tailwind, static-first.
 
+## Tech stack
+
+### Core
+
+| Layer | What |
+| --- | --- |
+| **Framework** | [Astro 4](https://astro.build) — static output (`output: 'static'`) |
+| **Language** | TypeScript (strict, `@/*` path alias) |
+| **Package manager** | npm |
+| **Build output** | Pre-rendered HTML/CSS/JS in `dist/` |
+
+### UI & styling
+
+| Layer | What |
+| --- | --- |
+| **CSS** | [Tailwind CSS 3](https://tailwindcss.com) via `@astrojs/tailwind` |
+| **Design tokens** | CSS custom properties in `src/styles/global.css` (light default; `[data-theme="neon"]` stubbed for a future dark theme) |
+| **Typography** | [Inter](https://fonts.google.com/specimen/Inter) + [JetBrains Mono](https://fonts.google.com/specimen/JetBrains+Mono) (Google Fonts) |
+| **Components** | `.astro` components only — no React/Vue/Svelte on this site |
+| **Client JS** | Vanilla `<script>` islands (scroll reveal, gallery lightbox, projects skill filter) |
+
+### Content & data model
+
+| Layer | What |
+| --- | --- |
+| **Case studies** | MDX files in `src/content/projects/` via `@astrojs/mdx` |
+| **Schema** | Astro Content Collections + [Zod](https://zod.dev) (`src/content/config.ts`) — invalid frontmatter fails the build |
+| **Skills taxonomy** | Central registry in `src/data/skills.ts` (projects reference skills by `key`) |
+| **Static data** | `src/data/about.ts`, `faq.ts`, `featured-repos.ts` |
+| **Knowledge corpus** | `src/lib/knowledge.ts` — aggregates curated context for a future portfolio chatbot |
+
+### GitHub integration
+
+| Layer | What |
+| --- | --- |
+| **API** | GitHub REST API (`/users`, `/repos`) — fetched **at build time** only |
+| **Curated repos** | Allowlist in `src/data/featured-repos.ts` (not env-driven) |
+| **Auth** | Optional `GITHUB_TOKEN` (fine-grained PAT, build-time / CI secret — never shipped to the browser) |
+| **Resilience** | Falls back to `public/github-cache.json` if the live fetch fails |
+| **JSON endpoint** | `/api/github.json` — prerendered static snapshot, refreshes on each deploy |
+
+### SEO & metadata
+
+- Canonical URLs via `site` in `astro.config.mjs`
+- Open Graph + Twitter card tags in `BaseLayout.astro`
+- Placeholder assets: `public/og-image.svg`, `public/favicon.svg`
+- `@astrojs/sitemap` is listed in `package.json` but not yet wired in config (planned v1.1)
+
+### Environment variables
+
+Copy `.env.example` → `.env` for local builds; set the same keys as CI/hosting secrets.
+
+| Variable | Required | Purpose |
+| --- | --- | --- |
+| `PUBLIC_GITHUB_USERNAME` | No (defaults to `nicholasjvr`) | Which GitHub profile to feature |
+| `GITHUB_TOKEN` | No | Raises rate limits; required only if a featured repo is **private** |
+
+### Deployment
+
+Static-first — deploy `dist/` to any static host (**Vercel**, **Netlify**, **GitHub Pages**, etc.). No server adapter or runtime required today. GitHub data refreshes automatically on every build/deploy.
+
 ## Quick start
 
 ```bash
