@@ -22,7 +22,7 @@ export const ABOUT = {
 
   contact: {
     email: 'nicholas241cut@gmail.com',
-    website: 'https://nicholasjvr.co.za',
+    website: 'https://nicholasjvr.github.io/nicholasjvr/',
   },
 
   // Tone guidance for the bot — keep it honest and grounded in the corpus.

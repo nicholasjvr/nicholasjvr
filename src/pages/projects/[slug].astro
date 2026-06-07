@@ -5,6 +5,7 @@ import MetricStat from '../../components/MetricStat.astro';
 import FeatureCallout from '../../components/FeatureCallout.astro';
 import SkillBadge from '../../components/SkillBadge.astro';
 import ProjectDemo from '../../components/ProjectDemo.astro';
+import { withBase } from '../../lib/paths';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
@@ -27,7 +28,7 @@ const statusLabel: Record<string, string> = {
 
 <BaseLayout title={`${data.title} — Nicholas`} description={data.tagline}>
   <article class="section">
-    <a href="/projects" class="text-sm font-medium text-muted hover:text-ink">← All projects</a>
+    <a href={withBase('/projects')} class="text-sm font-medium text-muted hover:text-ink">← All projects</a>
 
     <!-- Header -->
     <header class="mt-6">

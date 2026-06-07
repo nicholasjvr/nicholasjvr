@@ -6,6 +6,7 @@ import ProjectCard from '../components/ProjectCard.astro';
 import SkillMatrix from '../components/SkillMatrix.astro';
 import GitHubPanel from '../components/GitHubPanel.astro';
 import { SITE } from '../data/site';
+import { withBase } from '../lib/paths';
 
 const featured = (await getCollection('projects'))
   .filter((p) => p.data.featured)
@@ -23,7 +24,7 @@ const featured = (await getCollection('projects'))
           Featured projects
         </h2>
       </div>
-      <a href="/projects" class="reveal hidden text-sm font-semibold text-accent hover:underline sm:inline">
+      <a href={withBase('/projects')} class="reveal hidden text-sm font-semibold text-accent hover:underline sm:inline">
         All projects →
       </a>
     </div>
@@ -33,7 +34,7 @@ const featured = (await getCollection('projects'))
     </div>
 
     <div class="mt-8 sm:hidden">
-      <a href="/projects" class="text-sm font-semibold text-accent hover:underline">All projects →</a>
+      <a href={withBase('/projects')} class="text-sm font-semibold text-accent hover:underline">All projects →</a>
     </div>
   </section>
 

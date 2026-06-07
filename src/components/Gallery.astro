@@ -1,4 +1,6 @@
 ---
+import { withBase } from '../lib/paths';
+
 interface GalleryItem {
   src: string;
   alt: string;
@@ -17,11 +19,11 @@ const { items } = Astro.props;
         <button
           type="button"
           class="block w-full bg-surface-2"
-          data-lightbox-src={item.src}
+          data-lightbox-src={withBase(item.src)}
           data-lightbox-alt={item.alt}
           aria-label={`Open ${item.alt} full size`}
         >
-          <img src={item.src} alt={item.alt} loading="lazy" class="h-full w-full object-cover" />
+          <img src={withBase(item.src)} alt={item.alt} loading="lazy" class="h-full w-full object-cover" />
         </button>
         {item.caption && (
           <figcaption class="border-t border-border px-4 py-3 text-sm text-muted">

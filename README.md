@@ -1,138 +1,147 @@
-# nicholasjvr — portfolio
+<div align="center">
 
-**Live site:** [nicholasjvr.co.za](https://nicholasjvr.co.za)
+<img src=".github/assets/readme/banner.svg" alt="Nicholas — Software & ML builder" width="100%" />
 
-Software & ML builder — case studies in applied machine learning, real-time
-dashboards, and AI companions. Each project is documented end-to-end (objective →
-approach → skills → outcome) and stays **in lockstep with my GitHub profile**.
-Built with Astro + Tailwind, static-first.
+<br /><br />
 
-> **GitHub About (paste into repo settings):**  
-> Description: `Software & ML portfolio — case studies synced with GitHub.`  
-> Website: `https://nicholasjvr.co.za`  
-> Topics: `portfolio`, `astro`, `typescript`, `tailwindcss`, `machine-learning`
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=22&pause=1200&color=6366F1&center=true&vCenter=true&width=600&lines=Data-to-decision+systems%2C+end+to+end.;Applied+ML+%C2%B7+real-time+dashboards+%C2%B7+AI+companions;The+users+are+my+QA.)](https://git.io/typing-svg)
 
-## Tech stack
+<br />
 
-### Core
+[![Portfolio](https://img.shields.io/badge/Portfolio-live-6366f1?style=for-the-badge&logo=astro&logoColor=white)](https://nicholasjvr.github.io/nicholasjvr/)
+[![Email](https://img.shields.io/badge/Email-nicholas241cut@gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:nicholas241cut@gmail.com)
+[![LinkedIn](https://img.shields.io/badge/GitHub-nicholasjvr-181717?style=for-the-badge&logo=github)](https://github.com/nicholasjvr)
 
-| Layer | What |
-| --- | --- |
-| **Framework** | [Astro 4](https://astro.build) — static output (`output: 'static'`) |
-| **Language** | TypeScript (strict, `@/*` path alias) |
-| **Package manager** | npm |
-| **Build output** | Pre-rendered HTML/CSS/JS in `dist/` |
+<br /><br />
 
-### UI & styling
+**This repo is my pinned portfolio** — case studies synced with GitHub, built with Astro + Tailwind.
 
-| Layer | What |
-| --- | --- |
-| **CSS** | [Tailwind CSS 3](https://tailwindcss.com) via `@astrojs/tailwind` |
-| **Design tokens** | CSS custom properties in `src/styles/global.css` (light default; `[data-theme="neon"]` stubbed for a future dark theme) |
-| **Typography** | [Inter](https://fonts.google.com/specimen/Inter) + [JetBrains Mono](https://fonts.google.com/specimen/JetBrains+Mono) (Google Fonts) |
-| **Components** | `.astro` components only — no React/Vue/Svelte on this site |
-| **Client JS** | Vanilla `<script>` islands (scroll reveal, gallery lightbox, projects skill filter) |
+</div>
 
-### Content & data model
+---
 
-| Layer | What |
-| --- | --- |
-| **Case studies** | MDX files in `src/content/projects/` via `@astrojs/mdx` |
-| **Schema** | Astro Content Collections + [Zod](https://zod.dev) (`src/content/config.ts`) — invalid frontmatter fails the build |
-| **Skills taxonomy** | Central registry in `src/data/skills.ts` (projects reference skills by `key`) |
-| **Static data** | `src/data/about.ts`, `faq.ts`, `featured-repos.ts` |
-| **Knowledge corpus** | `src/lib/knowledge.ts` — aggregates curated context for a future portfolio chatbot |
+## What I build
 
-### GitHub integration
+Applied machine learning, real-time dashboards, exchange/API integrations, and AI companions. I like owning the **full loop** — data pipeline → model → execution logic → an interface you can reason about (and talk to).
 
-| Layer | What |
-| --- | --- |
-| **API** | GitHub REST API (`/users`, `/repos`) — fetched **at build time** only |
-| **Curated repos** | Allowlist in `src/data/featured-repos.ts` (not env-driven) |
-| **Auth** | Optional `GITHUB_TOKEN` (fine-grained PAT, build-time / CI secret — never shipped to the browser) |
-| **Resilience** | Falls back to `public/github-cache.json` if the live fetch fails |
-| **JSON endpoint** | `/api/github.json` — prerendered static snapshot, refreshes on each deploy |
+| | |
+| :--- | :--- |
+| 🧠 **ML & data** | Feature engineering, time-series, scikit-learn, SQLite pipelines |
+| 📊 **Dashboards** | Live cockpits, activity feeds, decision journals |
+| 🤖 **AI layer** | LLM companions scoped to live domain data |
+| 🌐 **Full-stack** | Astro / Next.js, Firebase, OAuth, GitHub Pages |
 
-### SEO & metadata
+---
 
-- Canonical URLs via `site` in `astro.config.mjs`
-- Open Graph + Twitter card tags in `BaseLayout.astro`
-- Placeholder assets: `public/og-image.svg`, `public/favicon.svg`
-- `@astrojs/sitemap` is listed in `package.json` but not yet wired in config (planned v1.1)
+## Featured work
 
-### Environment variables
+### TradeBot Companion
 
-Copy `.env.example` → `.env` for local builds; set the same keys as CI/hosting secrets.
+Local crypto trading cockpit — volatility + ML strategies with a natural-language companion.
 
-| Variable | Required | Purpose |
-| --- | --- | --- |
-| `PUBLIC_GITHUB_USERNAME` | No (defaults to `nicholasjvr`) | Which GitHub profile to feature |
-| `GITHUB_TOKEN` | No | Raises rate limits; required only if a featured repo is **private** |
+<table>
+<tr>
+<td width="52%" align="center">
 
-### Deployment (GitHub Pages + Actions)
+<!-- Swap for docs/assets/readme/tradebot-demo.gif when you have a recording -->
+<img src="public/projects/tradebot/live-watch.svg" alt="TradeBot Live Watch cockpit" width="100%" />
 
-This repo deploys automatically on every push to `main`.
+</td>
+<td width="48%" valign="top">
 
-1. **Make the repo public** (required for free GitHub Pages).
-2. **Settings → Pages → Build and deployment → Source:** choose **GitHub Actions** (not “Deploy from a branch”).
-3. Push to `main` — the [Deploy to GitHub Pages](.github/workflows/deploy-pages.yml) workflow builds Astro and publishes `dist/`.
-4. **Settings → Pages → Custom domain:** enter `nicholasjvr.co.za` (also declared in `public/CNAME`).
-5. **DNS at your `.co.za` registrar:**
-   - `@` (apex) → four **A** records: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
-   - `www` → **CNAME** → `nicholasjvr.github.io`
-6. Enable **Enforce HTTPS** once DNS checks pass.
-7. Optional: add repo secret **`GITHUB_PAT`** (fine-grained PAT, read-only Metadata on featured repos) if build-time GitHub fetch needs auth.
+**Paper-trade on Luno (ZAR)** with two cooperating bots, a RandomForest ML trader, hard risk guards, and an AI companion over live trade data.
 
-Until DNS propagates, the site is also at `https://nicholasjvr.github.io` (after the first successful deploy).
+`Python` · `scikit-learn` · `SQLite` · `Luno API` · `LLM chat`
 
-## Quick start
+<br />
+
+[![Case study](https://img.shields.io/badge/Case_study-TradeBot-6366f1?style=flat-square)](https://nicholasjvr.github.io/nicholasjvr/projects/tradebot/)
+[![Repo](https://img.shields.io/badge/GitHub-tradebot-181717?style=flat-square&logo=github)](https://github.com/nicholasjvr/tradebot)
+
+</td>
+</tr>
+</table>
+
+---
+
+### Meeting Me Memory
+
+Record meetings in the browser, tag them, sync to the cloud — [live at meetingmememory.com](https://meetingmememory.com/home).
+
+<table>
+<tr>
+<td width="52%" align="center">
+
+<!-- Swap for docs/assets/readme/meeting-me-memory-demo.gif when you have a recording -->
+<img src="public/projects/meeting-me-memory/recorder.svg" alt="Meeting Me Memory browser recorder" width="100%" />
+
+</td>
+<td width="48%" valign="top">
+
+**Production SaaS** — browser screen capture, Firebase cloud library, Google/Microsoft/Zoho calendar sync, and **Mya** (in-app AI + Chrome extension for Meet/Teams/Zoom).
+
+`Next.js 16` · `React 19` · `Firebase` · `OAuth` · `Vercel`
+
+<br />
+
+[![Case study](https://img.shields.io/badge/Case_study-Meeting_Me_Memory-0ea5e9?style=flat-square)](https://nicholasjvr.github.io/nicholasjvr/projects/meeting-me-memory/)
+[![Live site](https://img.shields.io/badge/Live-meetingmememory.com-22c55e?style=flat-square&logo=googlechrome&logoColor=white)](https://meetingmememory.com/home)
+[![Repo](https://img.shields.io/badge/GitHub-meeting__memory__nextjs-181717?style=flat-square&logo=github)](https://github.com/nicholasjvr/meeting_memory_nextjs)
+
+</td>
+</tr>
+</table>
+
+---
+
+## Explore the portfolio
+
+<div align="center">
+
+[![Open portfolio site](https://img.shields.io/badge/Open_portfolio-nicholasjvr.github.io%2Fnicholasjvr-6366f1?style=for-the-badge&logo=astro&logoColor=white)](https://nicholasjvr.github.io/nicholasjvr/)
+
+<br />
+
+<img src="public/projects/tradebot/cover.svg" alt="TradeBot" width="32%" />
+&nbsp;
+<img src="public/projects/meeting-me-memory/cover.svg" alt="Meeting Me Memory" width="32%" />
+
+</div>
+
+---
+
+## Stack & tooling
+
+![Astro](https://img.shields.io/badge/Astro-4-BC52EE?logo=astro&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
+![Tailwind](https://img.shields.io/badge/Tailwind-06B6D4?logo=tailwindcss&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
+![Next.js](https://img.shields.io/badge/Next.js-000?logo=nextdotjs&logoColor=white)
+![Firebase](https://img.shields.io/badge/Firebase-FFCA28?logo=firebase&logoColor=black)
+
+---
+
+## Contact
+
+**nicholas241cut@gmail.com** · [Portfolio](https://nicholasjvr.github.io/nicholasjvr/) · [GitHub](https://github.com/nicholasjvr)
+
+---
+
+<details>
+<summary><strong>Developer docs</strong> — deployment, env vars, repo layout</summary>
+
+<br />
+
+See **[docs/DEVELOPMENT.md](docs/DEVELOPMENT.md)** for the full technical reference (GitHub Pages setup, content schema, TODO checklist).
+
+**Quick start**
 
 ```bash
 npm install
-cp .env.example .env   # optional: add a GITHUB_TOKEN for live, rate-limit-free data
-npm run dev            # http://localhost:4321
-npm run build          # static output in dist/
+cp .env.example .env
+npm run dev
 ```
 
-## How it's organised
+**Add README demo GIFs:** drop screen recordings in [`docs/assets/readme/`](docs/assets/readme/) and update the `<img>` paths above.
 
-Projects are **content entries**, not hardcoded pages. To add a project, drop a
-new `.mdx` file into `src/content/projects/` that satisfies the schema in
-`src/content/config.ts`. It automatically gets a card on the home/projects grids
-and its own case-study page at `/projects/<slug>`.
-
-```
-src/
-  content/config.ts        ← project schema (the frontmatter contract)
-  content/projects/*.mdx   ← one file per project (case study)
-  data/skills.ts           ← central skills taxonomy (reference by `key`)
-  lib/github.ts            ← live GitHub fetch + cache fallback
-  components/              ← Card, SkillMatrix, Gallery, GitHubPanel, ProjectDemo…
-  pages/                   ← index, projects/index, projects/[slug], api/github.json
-```
-
-### The demo slot (a.k.a. "berserk mode")
-
-Each project has a `demo.kind` field: `screenshots` (today) → `video` → `iframe`
-→ `replay`. The detail page switches on it (`components/ProjectDemo.astro`), so
-making the TradeBot interactive later is an **additive component, not a rewrite**.
-
-## TODO before going live
-
-- [ ] **Screenshots:** replace the placeholder SVGs in
-      `public/projects/tradebot/` with real exports, then (optionally) update the
-      `src:` paths in `src/content/projects/tradebot.mdx` to `.png`.
-- [ ] **GitHub:** confirm `PUBLIC_GITHUB_USERNAME`; curate which repos show in
-      `src/data/featured-repos.ts`. Add a `GITHUB_TOKEN` only if a featured repo
-      is **private** — use a **fine-grained PAT scoped to just those repos,
-      read-only Metadata** (not a classic `repo`-scope token). Build-time only.
-- [x] **Hero copy / contact:** updated in `Hero.astro`, `Footer.astro`, and `pages/index.astro` (via `src/data/site.ts`).
-- [ ] Replace `public/og-image.svg` and `public/favicon.svg` with branded assets.
-- [x] Set the real domain in `astro.config.mjs` (`SITE` → `https://nicholasjvr.co.za`).
-- [ ] **DNS / hosting:** point `nicholasjvr.co.za` at GitHub Pages (see Deployment above); set repo **Website** to `https://nicholasjvr.co.za`.
-
-## Themes
-
-The light/professional look is built on CSS custom-property tokens in
-`src/styles/global.css`. A dark/neon "TradeBot universe" theme is stubbed under
-`[data-theme="neon"]` — switch it on by setting `data-theme` on `<html>`.
+</details>

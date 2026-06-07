@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import SkillBadge from './SkillBadge.astro';
+import { withBase } from '../lib/paths';
 
 interface Props {
   project: CollectionEntry<'projects'>;
@@ -21,13 +22,13 @@ const statusLabel: Record<string, string> = {
 ---
 
 <a
-  href={`/projects/${slug}`}
+  href={withBase(`/projects/${slug}`)}
   class="group flex flex-col overflow-hidden rounded-2xl border border-border bg-surface shadow-card transition-all hover:-translate-y-1 hover:shadow-card-hover"
   data-skills={data.skills.join(',')}
 >
   <div class="aspect-[16/9] overflow-hidden border-b border-border bg-surface-2">
     <img
-      src={data.cover}
+      src={withBase(data.cover)}
       alt={`${data.title} preview`}
       loading="lazy"
       class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
