@@ -1,13 +1,9 @@
 <div align="center">
 
-<!-- Use raw.githubusercontent.com so images render on the GitHub profile README -->
+<!-- Company-oriented banner -->
 <img src="https://raw.githubusercontent.com/nicholasjvr/nicholasjvr/main/.github/assets/readme/banner.svg" alt="Nicholas, Software and ML builder" width="100%" />
 
 <br /><br />
-
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=22&pause=1200&color=6366F1&center=true&vCenter=true&width=600&lines=Data-to-decision+systems%2C+end+to+end.;Applied+ML+%C2%B7+real-time+dashboards+%C2%B7+AI+companions;The+users+are+my+QA.)](https://git.io/typing-svg)
-
-<br />
 
 [![Portfolio](https://img.shields.io/badge/Portfolio-live-6366f1?style=for-the-badge&logo=astro&logoColor=white)](https://nicholasjvr.github.io/nicholasjvr/)
 [![Email](https://img.shields.io/badge/Email-nicholas241cut@gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:nicholas241cut@gmail.com)
@@ -15,105 +11,89 @@
 
 <br /><br />
 
-**This repo is my pinned portfolio.** Case studies synced with GitHub, built with Astro + Tailwind.
+**Welcome to my portfolio repository.** This is a showcase of my professional work, combining data systems, machine learning, and software development. Built with Astro and Tailwind.
 
 </div>
 
 ---
 
-## What I build
+## What I Build
 
-Applied machine learning, real-time dashboards, exchange/API integrations, and AI companions. I like owning the **full loop**: data pipeline → model → execution logic → an interface you can reason about (and talk to).
+My expertise includes:
 
-| | |
-| :--- | :--- |
-| 🧠 **ML & data** | Feature engineering, time-series, scikit-learn, SQLite pipelines |
-| 📊 **Dashboards** | Live cockpits, activity feeds, decision journals |
-| 🤖 **AI layer** | LLM companions scoped to live domain data |
-| 🌐 **Full-stack** | Astro / Next.js, Firebase, OAuth, GitHub Pages |
+- **Machine Learning & Data**: Feature engineering, time-series analysis, scikit-learn, SQLite pipelines.
+- **Dashboards**: Real-time analytics, interactive feeds, and decision-support tools.
+- **AI Systems**: LLM integrations for dynamic and live decision-making.
+- **Full-Stack Development**: Delivering end-to-end solutions with Astro, Next.js, Firebase, and GitHub Pages.
 
 ---
 
-## Featured work
+## Featured Projects
 
 ### TradeBot Companion
 
-Local crypto trading cockpit. Volatility + ML strategies with a natural-language companion.
+A comprehensive cryptocurrency trading assistant with ML strategies and live market insights. Includes a natural-language AI companion.
 
 <table>
 <tr>
 <td width="52%" align="center">
 
-<img src="https://raw.githubusercontent.com/nicholasjvr/nicholasjvr/main/.github/assets/readme/tradebot-preview.png" alt="TradeBot Live Watch cockpit" width="100%" />
+<img src="https://raw.githubusercontent.com/nicholasjvr/nicholasjvr/main/.github/assets/readme/tradebot-preview.png" alt="TradeBot cockpit overview" width="100%" />
 
 </td>
 <td width="48%" valign="top">
 
-**Paper-trade on Luno (ZAR)** with two cooperating bots, a RandomForest ML trader, hard risk guards, and an AI companion over live trade data.
+Case study: TradeBot integrates RandomForest-based trading, live Luno API connections, and a conversational LLM for insights.
 
-`Python` · `scikit-learn` · `SQLite` · `Luno API` · `LLM chat`
+- **Tags**: Python, scikit-learn, Luno API, SQLite
 
-<br />
-
-[![Case study](https://img.shields.io/badge/Case_study-TradeBot-6366f1?style=flat-square)](https://nicholasjvr.github.io/nicholasjvr/projects/tradebot/)
-[![Repo](https://img.shields.io/badge/GitHub-tradebot-181717?style=flat-square&logo=github)](https://github.com/nicholasjvr/tradebot)
+[View Case Study](https://nicholasjvr.github.io/nicholasjvr/projects/tradebot/) | [GitHub Repository](https://github.com/nicholasjvr/tradebot)
 
 </td>
 </tr>
 </table>
-
----
 
 ### Meeting Me Memory
 
-Record meetings in the browser, tag them, sync to the cloud. [Live at meetingmememory.com](https://meetingmememory.com/home).
+A SaaS platform for seamless meeting recording, cloud syncing, and tagging with built-in AI services.
 
 <table>
 <tr>
 <td width="52%" align="center">
 
-<img src="https://raw.githubusercontent.com/nicholasjvr/nicholasjvr/main/.github/assets/readme/mmm-preview.png" alt="Meeting Me Memory browser recorder" width="100%" />
+<img src="https://raw.githubusercontent.com/nicholasjvr/nicholasjvr/main/.github/assets/readme/mmm-preview.png" alt="Meeting Me Memory browser view" width="100%" />
 
 </td>
 <td width="48%" valign="top">
 
-**Production SaaS.** Browser screen capture, Firebase cloud library, Google/Microsoft/Zoho calendar sync, and **Mya** (in-app AI + Chrome extension for Meet/Teams/Zoom).
+Google, Microsoft, and Zoho calendar integrations with AI-supported meeting assistance tools.
 
-`Next.js 16` · `React 19` · `Firebase` · `OAuth` · `Vercel`
+- **Tags**: Next.js, Firebase, OAuth, Vercel
 
-<br />
-
-[![Case study](https://img.shields.io/badge/Case_study-Meeting_Me_Memory-0ea5e9?style=flat-square)](https://nicholasjvr.github.io/nicholasjvr/projects/meeting-me-memory/)
-[![Live site](https://img.shields.io/badge/Live-meetingmememory.com-22c55e?style=flat-square&logo=googlechrome&logoColor=white)](https://meetingmememory.com/home)
-[![Repo](https://img.shields.io/badge/GitHub-meeting__memory__nextjs-181717?style=flat-square&logo=github)](https://github.com/nicholasjvr/meeting_memory_nextjs)
+[View Case Study](https://nicholasjvr.github.io/nicholasjvr/projects/meeting-me-memory/) | [Visit SaaS Platform](https://meetingmememory.com/home)
 
 </td>
 </tr>
 </table>
-
----
 
 ### CinHaus
 
-B2B app-infrastructure billing for Flutter, React Native, and web apps. [Live at cinhaus.co.za](https://cinhaus-co-za.vercel.app/).
+A billing solution for cross-platform apps with intelligent usage tracking and invoicing.
 
 <table>
 <tr>
 <td width="52%" align="center">
 
-<img src="https://raw.githubusercontent.com/nicholasjvr/nicholasjvr/main/.github/assets/readme/cinhaus-preview.png" alt="CinHaus marketing landing" width="100%" />
+<img src="https://raw.githubusercontent.com/nicholasjvr/nicholasjvr/main/.github/assets/readme/cinhaus-preview.png" alt="CinHaus dashboard view" width="100%" />
 
 </td>
 <td width="48%" valign="top">
 
-**WIP platform.** Metered API/server usage per Client ID (CID), monthly ZAR invoicing, admin dashboard + client portal, and an **Azure GPT-4o billing agent** over live SQL context.
+Custom-built for application infrastructure needs with an Azure GPT-enhanced assistant for invoicing.
 
-`Next.js 14` · `Prisma` · `Azure SQL` · `Firebase` · `Azure AI Foundry` · `Vercel`
+- **Tags**: Next.js, Prisma, Azure SQL, Firebase
 
-<br />
-
-[![Case study](https://img.shields.io/badge/Case_study-CinHaus-c8f04a?style=flat-square&labelColor=080808)](https://nicholasjvr.github.io/nicholasjvr/projects/cinhaus/)
-[![Live site](https://img.shields.io/badge/Live-cinhaus.co.za-c8f04a?style=flat-square&logo=googlechrome&logoColor=black&labelColor=080808)](https://cinhaus-co-za.vercel.app/)
+[View Case Study](https://nicholasjvr.github.io/nicholasjvr/projects/cinhaus/) | [Visit Platform](https://cinhaus-co-za.vercel.app/)
 
 </td>
 </tr>
@@ -121,25 +101,7 @@ B2B app-infrastructure billing for Flutter, React Native, and web apps. [Live at
 
 ---
 
-## Explore the portfolio
-
-<div align="center">
-
-[![Open portfolio site](https://img.shields.io/badge/Open_portfolio-nicholasjvr.github.io%2Fnicholasjvr-6366f1?style=for-the-badge&logo=astro&logoColor=white)](https://nicholasjvr.github.io/nicholasjvr/)
-
-<br />
-
-<img src="https://raw.githubusercontent.com/nicholasjvr/nicholasjvr/main/.github/assets/readme/tradebot-cover.png" alt="TradeBot" width="32%" />
-&nbsp;
-<img src="https://raw.githubusercontent.com/nicholasjvr/nicholasjvr/main/.github/assets/readme/mmm-cover.png" alt="Meeting Me Memory" width="32%" />
-&nbsp;
-<img src="https://raw.githubusercontent.com/nicholasjvr/nicholasjvr/main/.github/assets/readme/cinhaus-cover.png" alt="CinHaus" width="32%" />
-
-</div>
-
----
-
-## Stack & tooling
+## Technology Stack
 
 ![Astro](https://img.shields.io/badge/Astro-4-BC52EE?logo=astro&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
@@ -152,18 +114,20 @@ B2B app-infrastructure billing for Flutter, React Native, and web apps. [Live at
 
 ## Contact
 
-**nicholas241cut@gmail.com** · [Portfolio](https://nicholasjvr.github.io/nicholasjvr/) · [GitHub](https://github.com/nicholasjvr)
+For inquiries or collaborations, feel free to reach out:
+
+- **Email**: nicholas241cut@gmail.com
+- **Portfolio**: [nicholasjvr.github.io/nicholasjvr](https://nicholasjvr.github.io/nicholasjvr/)
+- **GitHub**: [github.com/nicholasjvr](https://github.com/nicholasjvr)
 
 ---
 
 <details>
-<summary><strong>Developer docs</strong> (deployment, env vars, repo layout)</summary>
+<summary><strong>Developer Notes</strong></summary>
 
-<br />
+See the [Developer Documentation](docs/DEVELOPMENT.md) file for technical setup and deployment instructions.
 
-See **[docs/DEVELOPMENT.md](docs/DEVELOPMENT.md)** for the full technical reference (GitHub Pages setup, content schema, TODO checklist).
-
-**Quick start**
+Quick Start:
 
 ```bash
 npm install
@@ -171,6 +135,6 @@ cp .env.example .env
 npm run dev
 ```
 
-**Add README demo GIFs:** drop screen recordings in [`docs/assets/readme/`](docs/assets/readme/) and update the `<img>` paths above.
+For image or GIF updates, drop new files into [`docs/assets/readme/`](docs/assets/readme/) and update the README with their paths.
 
 </details>
