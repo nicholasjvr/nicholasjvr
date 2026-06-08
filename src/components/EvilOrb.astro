@@ -1,0 +1,93 @@
+---
+import { withBase } from '../lib/paths';
+
+interface Props {
+  caption?: string;
+}
+
+const { caption } = Astro.props;
+const fallback = withBase('/readme/evil-orb-fallback.png');
+---
+
+<figure class="m-0">
+  <div class="evil-orb" data-evil-orb aria-label="Menacing neon smiley orb, rendered in Three.js">
+    <img
+      src={fallback}
+      alt="Menacing neon smiley orb"
+      class="evil-orb-fallback"
+      data-evil-orb-fallback
+      loading="lazy"
+      width="460"
+      height="380"
+    />
+  </div>
+  {
+    caption && (
+      <figcaption class="mt-2 text-center font-mono text-[10px] uppercase tracking-[0.2em] text-muted/70">
+        {caption}
+      </figcaption>
+    )
+  }
+</figure>
+
+<script>
+  import type { EvilOrbHandle } from '../lib/evil-orb';
+
+  function setupEvilOrbs() {
+    const mounts = document.querySelectorAll<HTMLElement>('[data-evil-orb]');
+
+    mounts.forEach((mount) => {
+      if (mount.dataset.orbReady === 'true') return;
+
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const fallback = mount.querySelector<HTMLImageElement>('[data-evil-orb-fallback]');
+
+      // Reduced motion: keep the static fallback image, never load Three.js.
+      if (prefersReducedMotion) {
+        mount.dataset.orbReady = 'true';
+        return;
+      }
+
+      if (!('IntersectionObserver' in window)) return;
+
+      let handle: EvilOrbHandle | null = null;
+      let loading = false;
+
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              if (handle) {
+                handle.start();
+              } else if (!loading) {
+                // Dynamic import keeps the Three.js bundle out of the initial
+                // page load; it is only fetched once the orb scrolls into view.
+                loading = true;
+                mount.dataset.orbReady = 'true';
+                import('../lib/evil-orb').then(({ initEvilOrb }) => {
+                  handle = initEvilOrb(mount);
+                  if (fallback) fallback.style.opacity = '0';
+                  handle.start();
+                });
+              }
+            } else {
+              handle?.stop();
+            }
+          }
+        },
+        { rootMargin: '0px 0px -5% 0px', threshold: 0.1 }
+      );
+
+      io.observe(mount);
+    });
+  }
+
+  setupEvilOrbs();
+  document.addEventListener('astro:page-load', setupEvilOrbs);
+</script>
+
+<style>
+  .evil-orb-fallback {
+    transition: opacity 0.6s ease;
+  }
+</style>

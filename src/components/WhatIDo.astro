@@ -1,8 +1,9 @@
 ---
 import { WHAT_I_DO } from '../data/copy';
+import AsciiTerminal from './AsciiTerminal.astro';
 ---
 
-<section id="about" class="section">
+<section id="about" class="section pb-10 md:pb-14">
   <p class="eyebrow reveal">{WHAT_I_DO.eyebrow}</p>
   <h2 class="reveal mt-4 max-w-3xl text-3xl font-semibold tracking-tight text-ink md:text-4xl">
     {WHAT_I_DO.title}
@@ -21,4 +22,6 @@ import { WHAT_I_DO } from '../data/copy';
       ))
     }
   </div>
+
+  <AsciiTerminal />
 </section>

@@ -1,0 +1,54 @@
+---
+import { HOW_I_WORK, NEURO_LINK } from '../data/copy';
+import EvilOrb from './EvilOrb.astro';
+import NeuroLink from './NeuroLink.astro';
+---
+
+<section id="how-i-work" class="section section-compact section-flow-top">
+  <p class="eyebrow reveal">{HOW_I_WORK.eyebrow}</p>
+  <h2 class="reveal mt-3 max-w-3xl text-3xl font-semibold tracking-tight text-ink md:text-4xl">
+    {HOW_I_WORK.title}
+  </h2>
+
+  <div class="ai-labour-panel reveal mt-5">
+    <div class="grid items-center gap-6 p-5 md:p-7 lg:grid-cols-[minmax(0,1fr)_min(320px,34%)]">
+      <p class="text-base leading-relaxed text-muted md:text-lg">
+        I welcome my <strong class="text-ink">airtificial labourers</strong> with open arms
+        {
+          HOW_I_WORK.agents.map((agent, i) => (
+            <>
+              {i > 0 ? ', ' : ' '}
+              <a
+                href={agent.url}
+                class="font-medium text-accent hover:underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {agent.name}
+              </a>
+            </>
+          ))
+        }, and whatever else is having a moment this week. They handle scaffolding, exploration, and iteration. I handle architecture, product taste, and the personalization that makes something <em class="text-ink not-italic">yours</em>.
+      </p>
+
+      <EvilOrb caption="three.js · webgl · orbital curious" />
+    </div>
+  </div>
+
+  <div class="reveal mt-10">
+    <p class="eyebrow">{NEURO_LINK.eyebrow}</p>
+    <h3 class="mt-3 max-w-2xl text-2xl font-semibold tracking-tight text-ink md:text-3xl">
+      {NEURO_LINK.title}
+    </h3>
+    <p class="mt-4 max-w-2xl text-base leading-relaxed text-muted">{NEURO_LINK.body}</p>
+
+    <div class="mt-6">
+      <NeuroLink />
+    </div>
+  </div>
+
+  <p class="reveal mt-5 text-sm italic text-muted">{HOW_I_WORK.disclaimer}</p>
+  <p class="reveal mt-2 text-lg text-ink">
+    These tools make me fast. <strong>Good.</strong> That's the whole point.
+  </p>
+</section>

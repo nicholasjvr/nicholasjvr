@@ -15,8 +15,8 @@
 
 ## i dabble in
 
-Turning ideas into working software shaped around how you actually operate, not copied from a template.
-
+Turning ideas into software shaped around how you actually operate, not copied from a template.
+-terminal-
 ---
 
 ## for those concerned: yes, i use non-sentient artificial inteligence
@@ -25,13 +25,31 @@ Turning ideas into working software shaped around how you actually operate, not 
 
 <br /><br />
 
-I welcome my **airtificial labourers** with open arms — [Cursor](https://cursor.com), [Windsurf](https://windsurf.com), [Cline](https://cline.bot), [Continue](https://continue.dev), [Kilo Code](https://kilocode.ai), [GitHub Copilot](https://github.com/features/copilot), [Amazon Q Developer](https://aws.amazon.com/q/developer/), [Gemini Code Assist](https://cloud.google.com/products/gemini/code-assist), and whatever else is having a moment this week. They handle scaffolding, exploration, and iteration. I handle architecture, product taste, and the personalization that makes something *yours*(mine).
+I welcome my **airtificial labourers** with open arms [Cursor](https://cursor.com), [Windsurf](https://windsurf.com), [Cline](https://cline.bot), [Continue](https://continue.dev), [Kilo Code](https://kilocode.ai), [GitHub Copilot](https://github.com/features/copilot), [Amazon Q Developer](https://aws.amazon.com/q/developer/), [Gemini Code Assist](https://cloud.google.com/products/gemini/code-assist), and whatever else is having a moment this week. They handle scaffolding, exploration, and iteration. I handle architecture, product taste, and the personalization that makes something *yours* (mine).
 
-<img src="https://raw.githubusercontent.com/nicholasjvr/nicholasjvr/main/.github/assets/readme/agents-comparison.png" alt="Comparison of AI coding agents — yes, I've tried most of them" width="100%" />
+<div align="center">
+
+<img src="https://raw.githubusercontent.com/nicholasjvr/nicholasjvr/main/.github/assets/readme/agents-comparison.png" alt="Comparison of AI coding agents, yes I've tried most of them" width="720" />
+
+</div>
 
 <br /><br />
 
 *The lineup above is subject to change the moment something better drops. not a bug.*
+
+<br /><br />
+
+### not just using them. learning to train them.
+
+These agents are my daily tools, but the real interest runs deeper: training, fine-tuning, and orchestrating complex models myself. Every node is a system I plug into, and a step toward shaping intelligence instead of just consuming it.
+
+<div align="center">
+
+<img src="https://raw.githubusercontent.com/nicholasjvr/nicholasjvr/main/.github/assets/readme/neurolink.svg" alt="Neural graph wiring the AI agents into a central training core" width="760" />
+
+</div>
+
+<br /><br />
 
 These tools make me fast. **Good.** That's the whole point.
 
@@ -77,7 +95,7 @@ Meeting intelligence platform that captures conversations and turns them into se
 </td>
 <td width="48%" valign="top">
 
-A live production SaaS at meetingmememory.com — browser recording, a searchable cloud library, calendar sync across providers, and an in-app assistant for Meet, Teams, and Zoom.
+A live production SaaS at meetingmememory.com: browser recording, a searchable cloud library, calendar sync across providers, and an in-app assistant for Meet, Teams, and Zoom.
 
 [Case study](https://nicholasjvr.github.io/nicholasjvr/projects/meeting-me-memory/) · [Live site](https://meetingmememory.com/home) · [Repo](https://github.com/nicholasjvr/meeting_memory_nextjs)
 
@@ -110,9 +128,9 @@ Metered API and server usage per client, monthly ZAR invoicing, an admin dashboa
 
 ## Stack
 
-**Core** — JavaScript · Node.js · React · Next.js · TypeScript · SQL · Zoho
+**Core** · JavaScript · Node.js · React · Next.js · TypeScript · SQL · Zoho
 
-**Additional** — Python · Azure · Firebase · Prisma · Machine Learning
+**Additional** · Python · Azure · Firebase · Prisma · Machine Learning
 
 ---
 

@@ -10,15 +10,24 @@
 
 :root,
 [data-theme='dark'] {
-  --c-bg: 11 15 25; /* #0B0F19 */
-  --c-surface: 17 24 39; /* #111827 */
-  --c-surface-2: 22 31 46; /* #161F2E */
-  --c-border: 30 41 59; /* #1E293B — subtle border on dark */
-  --c-ink: 248 250 252; /* #F8FAFC */
-  --c-muted: 148 163 184; /* #94A3B8 */
-  --c-accent: 0 247 255; /* #00F7FF */
-  --c-accent-soft: 176 255 250; /* #B0FFFA */
-  --c-accent-warm: 255 0 135; /* #FF0087 */
+  --c-bg: 11 15 25;
+  /* #0B0F19 */
+  --c-surface: 17 24 39;
+  /* #111827 */
+  --c-surface-2: 22 31 46;
+  /* #161F2E */
+  --c-border: 30 41 59;
+  /* #1E293B, subtle border on dark */
+  --c-ink: 248 250 252;
+  /* #F8FAFC */
+  --c-muted: 148 163 184;
+  /* #94A3B8 */
+  --c-accent: 0 247 255;
+  /* #00F7FF */
+  --c-accent-soft: 176 255 250;
+  /* #B0FFFA */
+  --c-accent-warm: 255 0 135;
+  /* #FF0087 */
   --c-success: 52 211 153;
   --c-danger: 248 113 113;
   --c-nav-bg: 11 15 25;
@@ -26,15 +35,21 @@
 }
 
 [data-theme='light'] {
-  --c-bg: 248 250 252; /* #F8FAFC */
+  --c-bg: 248 250 252;
+  /* #F8FAFC */
   --c-surface: 255 255 255;
   --c-surface-2: 241 245 249;
-  --c-border: 226 232 240; /* #E2E8F0 — subtle border on light */
-  --c-ink: 15 23 42; /* #0F172A */
-  --c-muted: 100 116 139; /* #64748B */
-  --c-accent: 8 145 178; /* #0891B2 — darker cyan for contrast on light */
+  --c-border: 226 232 240;
+  /* #E2E8F0, subtle border on light */
+  --c-ink: 15 23 42;
+  /* #0F172A */
+  --c-muted: 100 116 139;
+  /* #64748B */
+  --c-accent: 8 145 178;
+  /* #0891B2, darker cyan for contrast on light */
   --c-accent-soft: 165 243 252;
-  --c-accent-warm: 219 39 119; /* #DB2777 */
+  --c-accent-warm: 219 39 119;
+  /* #DB2777 */
   --c-success: 22 163 74;
   --c-danger: 220 38 38;
   --c-nav-bg: 255 255 255;
@@ -75,8 +90,60 @@ body {
   @apply mx-auto w-full max-w-content px-6 py-20 md:py-32;
 }
 
+/* Tighter vertical rhythm for sections that should feel dense / connected. */
+.section-compact {
+  @apply py-10 md:py-14;
+}
+
+/* Lets a section hug the one above it so they read as one flowing block. */
+.section-flow-top {
+  @apply pt-0 md:pt-4;
+}
+
 .eyebrow {
   @apply text-xs font-semibold uppercase tracking-[0.18em] text-muted;
+}
+
+/* Single neon panel that wraps the AI banner + copy + orb as one unit. */
+.ai-labour-panel {
+  @apply overflow-hidden rounded-2xl border;
+  border-color: rgb(var(--c-accent) / 0.22);
+  background:
+    radial-gradient(120% 140% at 0% 0%, rgb(var(--c-accent) / 0.06), transparent 55%),
+    radial-gradient(120% 140% at 100% 100%, rgb(var(--c-accent-warm) / 0.07), transparent 55%),
+    rgb(var(--c-surface) / 0.55);
+  box-shadow:
+    0 0 0 1px rgb(var(--c-accent) / 0.08),
+    0 18px 60px -28px rgb(0 0 0 / 0.7),
+    0 0 60px -30px rgb(var(--c-accent-warm) / 0.25);
+}
+
+/* Orb mount: reserve height before the canvas/WebGL initializes (no layout shift). */
+.evil-orb {
+  position: relative;
+  width: 100%;
+  height: 220px;
+}
+
+@screen md {
+  .evil-orb {
+    height: 300px;
+  }
+}
+
+.evil-orb canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.evil-orb-fallback {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 24px rgb(var(--c-accent-warm) / 0.45));
 }
 
 .text-accent-warm {
@@ -108,16 +175,50 @@ body {
   background: rgb(var(--c-surface) / 0.6);
 }
 
-.project-card {
-  @apply rounded-xl border transition-all;
-  border-color: rgb(var(--c-border));
-  background: rgb(var(--c-surface) / 0.6);
+.project-cards-3d {
+  perspective: 1400px;
 }
 
-.project-card:hover {
-  transform: translateY(-2px);
-  border-color: rgb(var(--c-accent) / 0.3);
-  box-shadow: 0 8px 32px -8px rgb(0 0 0 / 0.4);
+.project-card {
+  @apply rounded-xl border;
+  border-color: rgb(var(--c-border));
+  background: rgb(var(--c-surface) / 0.72);
+  transform-style: preserve-3d;
+  transform: rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) translateY(var(--lift, 0px)) scale(var(--card-scale, 1));
+  transition:
+    transform 0.12s ease-out,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+  box-shadow:
+    var(--shadow-x, 0px) var(--shadow-y, 8px) 32px -10px rgb(0 0 0 / 0.45),
+    0 0 0 1px rgb(var(--c-border) / 0.8);
+  will-change: transform;
+}
+
+.project-card.is-tilting {
+  --card-scale: 1.02;
+  border-color: rgb(var(--c-accent) / 0.35);
+  box-shadow:
+    var(--shadow-x, 0px) var(--shadow-y, 16px) 48px -12px rgb(0 0 0 / 0.55),
+    0 0 0 1px rgb(var(--c-accent) / 0.2),
+    0 0 40px -8px rgb(var(--c-accent) / 0.15);
+}
+
+.project-card-inner {
+  transform: translateZ(24px);
+  transform-style: preserve-3d;
+}
+
+.project-card-shine {
+  background: linear-gradient(125deg,
+      rgb(var(--c-accent) / 0.14) 0%,
+      transparent 38%,
+      transparent 62%,
+      rgb(var(--c-accent-warm) / 0.1) 100%);
+}
+
+.project-card-image {
+  transform: translateZ(12px);
 }
 
 .reveal {
@@ -140,7 +241,8 @@ body {
     transition: none;
   }
 
-  .project-card:hover {
-    transform: none;
+  .project-card.is-tilting {
+    --card-scale: 1;
+    --lift: 0px;
   }
 }

@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 480" role="img" aria-label="Neural graph of AI agents wired into a training core">
+  <defs>
+    <radialGradient id="core" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFE3F2"/>
+      <stop offset="35%" stop-color="#FF0087"/>
+      <stop offset="100%" stop-color="#6B00FF"/>
+    </radialGradient>
+    <radialGradient id="node" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#CFFCFF"/>
+      <stop offset="60%" stop-color="#00F7FF"/>
+      <stop offset="100%" stop-color="#0066FF"/>
+    </radialGradient>
+    <radialGradient id="nodeWarm" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFD9EC"/>
+      <stop offset="60%" stop-color="#FF00AA"/>
+      <stop offset="100%" stop-color="#B026FF"/>
+    </radialGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="5" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect x="2" y="2" width="876" height="476" rx="18" fill="#0B0F19" stroke="#1E293B" stroke-width="1"/>
+  <ellipse cx="440" cy="240" rx="330" ry="180" fill="none" stroke="rgba(0,247,255,0.10)" stroke-width="1" stroke-dasharray="3 7"/>
+
+  <!-- edges -->
+  <g stroke-width="1.4" stroke-dasharray="5 10">
+    <line x1="440" y1="60"  x2="440" y2="240" stroke="rgba(255,0,135,0.55)"/>
+    <line x1="673" y1="113" x2="440" y2="240" stroke="rgba(0,247,255,0.55)"/>
+    <line x1="770" y1="240" x2="440" y2="240" stroke="rgba(255,0,135,0.55)"/>
+    <line x1="673" y1="367" x2="440" y2="240" stroke="rgba(0,247,255,0.55)"/>
+    <line x1="440" y1="420" x2="440" y2="240" stroke="rgba(255,0,135,0.55)"/>
+    <line x1="207" y1="367" x2="440" y2="240" stroke="rgba(0,247,255,0.55)"/>
+    <line x1="110" y1="240" x2="440" y2="240" stroke="rgba(255,0,135,0.55)"/>
+    <line x1="207" y1="113" x2="440" y2="240" stroke="rgba(0,247,255,0.55)"/>
+  </g>
+
+  <!-- signal particles (static snapshot mid-edge) -->
+  <g>
+    <circle cx="440" cy="150" r="3.2" fill="#FFD9EC"/>
+    <circle cx="557" cy="177" r="3.2" fill="#CFFCFF"/>
+    <circle cx="605" cy="240" r="3.2" fill="#FFD9EC"/>
+    <circle cx="557" cy="304" r="3.2" fill="#CFFCFF"/>
+    <circle cx="440" cy="330" r="3.2" fill="#FFD9EC"/>
+    <circle cx="324" cy="304" r="3.2" fill="#CFFCFF"/>
+    <circle cx="275" cy="240" r="3.2" fill="#FFD9EC"/>
+    <circle cx="324" cy="177" r="3.2" fill="#CFFCFF"/>
+  </g>
+
+  <!-- agent nodes -->
+  <g font-family="ui-monospace, SFMono-Regular, monospace" font-size="13" letter-spacing="0.5" fill="#94A3B8">
+    <circle cx="440" cy="60"  r="7" fill="url(#nodeWarm)" filter="url(#glow)"/>
+    <text x="440" y="46"  text-anchor="middle">Cursor</text>
+    <circle cx="673" cy="113" r="7" fill="url(#node)" filter="url(#glow)"/>
+    <text x="689" y="99"  text-anchor="start">Windsurf</text>
+    <circle cx="770" cy="240" r="7" fill="url(#nodeWarm)" filter="url(#glow)"/>
+    <text x="786" y="244" text-anchor="start">Cline</text>
+    <circle cx="673" cy="367" r="7" fill="url(#node)" filter="url(#glow)"/>
+    <text x="689" y="389" text-anchor="start">Continue</text>
+    <circle cx="440" cy="420" r="7" fill="url(#nodeWarm)" filter="url(#glow)"/>
+    <text x="440" y="442" text-anchor="middle">Kilo</text>
+    <circle cx="207" cy="367" r="7" fill="url(#node)" filter="url(#glow)"/>
+    <text x="191" y="389" text-anchor="end">Copilot</text>
+    <circle cx="110" cy="240" r="7" fill="url(#nodeWarm)" filter="url(#glow)"/>
+    <text x="94"  y="244" text-anchor="end">Amazon Q</text>
+    <circle cx="207" cy="113" r="7" fill="url(#node)" filter="url(#glow)"/>
+    <text x="191" y="99"  text-anchor="end">Gemini</text>
+  </g>
+
+  <!-- training core -->
+  <circle cx="440" cy="240" r="48" fill="rgba(255,0,135,0.14)"/>
+  <circle cx="440" cy="240" r="30" fill="url(#core)" filter="url(#glow)"/>
+  <text x="440" y="245" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, monospace" font-size="15" font-weight="700" fill="#FFFFFF">ME</text>
+  <text x="440" y="310" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, monospace" font-size="13" font-weight="600" letter-spacing="2" fill="#F8FAFC">TRAINING CORE</text>
+  <text x="440" y="328" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, monospace" font-size="10" letter-spacing="1" fill="#94A3B8">fine-tune // orchestrate // ship</text>
+</svg>

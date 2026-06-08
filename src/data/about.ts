@@ -4,7 +4,7 @@ export const ABOUT = {
   headline:
     'Fullstack JavaScript developer. I build software, systems, automations, and products that are uniquely yours.',
   summary:
-    'I turn ideas into working software shaped around how people actually operate — ' +
+    'I turn ideas into working software shaped around how people actually operate, ' +
     'not copied from a template. From Zoho ecosystems and internal business tools to ' +
     'fullstack SaaS platforms, dashboards, integrations, and automation systems. ' +
     'Daily development includes AI agents like Cursor and other IDE-native models to ' +
@@ -13,7 +13,7 @@ export const ABOUT = {
 
   canBuild: [
     'Fullstack SaaS products (Node.js, React, Next.js, TypeScript)',
-    'Zoho ecosystems — Creator, CRM, custom widgets, business automation',
+    'Zoho ecosystems: Creator, CRM, custom widgets, business automation',
     'Internal business tools, dashboards, and operational systems',
     'API integrations between platforms and third-party services',
     'Automation platforms that remove manual, repetitive work',

@@ -20,7 +20,7 @@ export const FAQ: FaqItem[] = [
   },
   {
     q: 'What does Nicholas do?',
-    a: 'Fullstack JavaScript developer. He builds software, systems, automations, and products — SaaS platforms, Zoho ecosystems, internal business tools, dashboards, integrations, and automation systems.',
+    a: 'Fullstack JavaScript developer. He builds software, systems, automations, and products: SaaS platforms, Zoho ecosystems, internal business tools, dashboards, integrations, and automation systems.',
     tags: ['identity', 'about'],
   },
   {

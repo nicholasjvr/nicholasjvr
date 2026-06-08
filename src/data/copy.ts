@@ -18,9 +18,34 @@ export const PROJECTS_SECTION = {
 
 export const WHAT_I_DO = {
   eyebrow: 'What I Do',
-  title: 'I turn ideas into working software — shaped around how you actually operate.',
+  title: 'I turn ideas into working software, shaped around how you actually operate.',
   body: 'From Zoho ecosystems and internal business tools to fullstack SaaS platforms, dashboards, integrations, and automation systems. Custom where it matters. Built to evolve with you.',
   pillars: ['Tailored to your context.', 'Shipped with intent.', 'Designed to feel like yours.'],
+} as const;
+
+export const HOW_I_WORK = {
+  eyebrow: 'for those concerned',
+  title: 'yes, i use non-sentient artificial inteligence',
+  agents: [
+    { name: 'Cursor', short: 'Cursor', url: 'https://cursor.com' },
+    { name: 'Windsurf', short: 'Windsurf', url: 'https://windsurf.com' },
+    { name: 'Cline', short: 'Cline', url: 'https://cline.bot' },
+    { name: 'Continue', short: 'Continue', url: 'https://continue.dev' },
+    { name: 'Kilo Code', short: 'Kilo', url: 'https://kilocode.ai' },
+    { name: 'GitHub Copilot', short: 'Copilot', url: 'https://github.com/features/copilot' },
+    { name: 'Amazon Q Developer', short: 'Amazon Q', url: 'https://aws.amazon.com/q/developer/' },
+    { name: 'Gemini Code Assist', short: 'Gemini', url: 'https://cloud.google.com/products/gemini/code-assist' },
+  ],
+  disclaimer: 'The lineup above is subject to change the moment something better drops. Not a bug.',
+  fastLine: "These tools make me fast. Good. That's the whole point.",
+} as const;
+
+export const NEURO_LINK = {
+  eyebrow: 'the bigger picture',
+  title: 'not just using them. learning to train them.',
+  body: "These agents are my daily tools, but the real interest runs deeper: training, fine-tuning, and orchestrating complex models myself. Every node is a system I plug into, and a step toward shaping intelligence instead of just consuming it.",
+  coreLabel: 'TRAINING CORE',
+  coreSubLabel: 'fine-tune // orchestrate // ship',
 } as const;
 
 export const CURRENTLY = {

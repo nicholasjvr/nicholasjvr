@@ -7,7 +7,7 @@ export const SITE = {
   domain: 'nicholasjvr.github.io/nicholasjvr',
   url: 'https://nicholasjvr.github.io/nicholasjvr/',
   name: 'Nicholas van Rensburg',
-  title: 'Nicholas van Rensburg — Fullstack JavaScript Developer',
+  title: 'Nicholas van Rensburg · Fullstack JavaScript Developer',
   description:
     'Fullstack JavaScript developer. I build software, systems, automations, and products that are uniquely yours.',
   tagline: "If it sounds remotely possible, I'll probably build it.",
