@@ -7,37 +7,37 @@
 
 **Fullstack JavaScript Developer**
 
-I build software, systems, automations, and products that are uniquely yours.
-
-Everyone builds things that work. I focus on what makes a build *yours* — your workflow, your team, your constraints, and the problem that only makes sense in your context.
-
-If it sounds remotely possible, I'll probably build it.
-
 [Portfolio](https://nicholasjvr.github.io/nicholasjvr/) · [Email](mailto:nicholas241cut@gmail.com) · [GitHub](https://github.com/nicholasjvr)
 
 </div>
 
 ---
 
-## What I do
+## i dabble in
 
-I turn ideas into working software — shaped around how you actually operate, not copied from a template.
-
-From Zoho ecosystems and internal business tools to fullstack SaaS platforms, dashboards, integrations, and automation systems. Custom where it matters. Built to evolve with you.
-
-Tailored to your context · Shipped with intent · Designed to feel like yours
+Turning ideas into working software shaped around how you actually operate, not copied from a template.
 
 ---
 
-## How I work
+## for those concerned: yes, i use non-sentient artificial inteligence
 
-<img src="https://raw.githubusercontent.com/nicholasjvr/nicholasjvr/main/.github/assets/readme/ai-workflow.svg" alt="AI-assisted development workflow" width="100%" />
+<img src="https://raw.githubusercontent.com/nicholasjvr/nicholasjvr/main/.github/assets/readme/ai-workflow.svg" alt="ai labour development" width="100%" />
 
 <br /><br />
 
-I bring **AI agents** — [Cursor](https://cursor.com) and other IDE-native models — into my daily development. They speed up scaffolding, exploration, and iteration so I can spend more time on architecture, product decisions, and the personalization that makes something truly yours.
+I welcome my **airtificial labourers** with open arms — [Cursor](https://cursor.com), [Windsurf](https://windsurf.com), [Cline](https://cline.bot), [Continue](https://continue.dev), [Kilo Code](https://kilocode.ai), [GitHub Copilot](https://github.com/features/copilot), [Amazon Q Developer](https://aws.amazon.com/q/developer/), [Gemini Code Assist](https://cloud.google.com/products/gemini/code-assist), and whatever else is having a moment this week. They handle scaffolding, exploration, and iteration. I handle architecture, product taste, and the personalization that makes something *yours*(mine).
 
-The tooling keeps scaling and developing; I keep learning alongside it. Faster workflow, sharper craft, same focus on builds that fit *you*.
+<img src="https://raw.githubusercontent.com/nicholasjvr/nicholasjvr/main/.github/assets/readme/agents-comparison.png" alt="Comparison of AI coding agents — yes, I've tried most of them" width="100%" />
+
+<br /><br />
+
+*The lineup above is subject to change the moment something better drops. not a bug.*
+
+These tools make me fast. **Good.** That's the whole point.
+
+<br />
+
+</details>
 
 ---
 
