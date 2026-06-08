@@ -1,0 +1,24 @@
+---
+import { WHAT_I_DO } from '../data/copy';
+---
+
+<section id="about" class="section">
+  <p class="eyebrow reveal">{WHAT_I_DO.eyebrow}</p>
+  <h2 class="reveal mt-4 max-w-3xl text-3xl font-semibold tracking-tight text-ink md:text-4xl">
+    {WHAT_I_DO.title}
+  </h2>
+  <p class="reveal mt-5 max-w-2xl text-lg leading-relaxed text-muted">
+    {WHAT_I_DO.body}
+  </p>
+
+  <div class="reveal mt-10 flex flex-wrap gap-x-10 gap-y-3">
+    {
+      WHAT_I_DO.pillars.map((pillar) => (
+        <p class="text-base font-medium text-ink">
+          <span class="mr-2 text-accent">/</span>
+          {pillar}
+        </p>
+      ))
+    }
+  </div>
+</section>

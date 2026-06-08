@@ -19,8 +19,13 @@ export const FAQ: FaqItem[] = [
     tags: ['tradebot', 'ml'],
   },
   {
+    q: 'What does Nicholas do?',
+    a: 'Fullstack JavaScript developer. He builds software, systems, automations, and products — SaaS platforms, Zoho ecosystems, internal business tools, dashboards, integrations, and automation systems.',
+    tags: ['identity', 'about'],
+  },
+  {
     q: 'What can Nicholas build for me?',
-    a: 'Applied ML systems, real-time dashboards, trading/market-data tooling, LLM and agent integrations, and full-stack web apps with serverless backends.',
+    a: 'Fullstack SaaS products (Node.js, React, Next.js, TypeScript), Zoho ecosystems (Creator, CRM, custom widgets), internal business tools and dashboards, API integrations, and automation platforms. AI-enhanced workflows where they add real value.',
     tags: ['hire', 'services'],
   },
   {

@@ -1,7 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Site preview">
-  <rect width="1200" height="630" fill="#0f172a"/>
-  <text x="80" y="300" fill="#ffffff" font-family="Inter, sans-serif" font-size="72" font-weight="800">Nicholas</text>
-  <text x="80" y="380" fill="#a5b4fc" font-family="Inter, sans-serif" font-size="36">Data-to-decision systems · ML · real-time · AI</text>
-  <text x="80" y="430" fill="#64748b" font-family="Inter, sans-serif" font-size="28">nicholasjvr.github.io/nicholasjvr</text>
-  <rect x="80" y="440" width="220" height="6" fill="#4f46e5"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Nicholas van Rensburg, Fullstack JavaScript Developer">
+  <rect width="1200" height="630" fill="#0B0F19"/>
+  <text x="80" y="290" fill="#F8FAFC" font-family="Inter, system-ui, sans-serif" font-size="72" font-weight="600" letter-spacing="-2">Nicholas van Rensburg</text>
+  <text x="80" y="350" fill="#00F7FF" font-family="ui-monospace, SFMono-Regular, monospace" font-size="32" font-weight="500">Fullstack JavaScript Developer</text>
+  <text x="80" y="420" fill="#94A3B8" font-family="Inter, system-ui, sans-serif" font-size="30">If it sounds remotely possible, I'll probably build it.</text>
+  <rect x="80" y="452" width="160" height="4" rx="2" fill="#00F7FF"/>
 </svg>

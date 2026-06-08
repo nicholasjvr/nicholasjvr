@@ -1,52 +1,36 @@
 ---
 import { SITE } from '../data/site';
-import { withBase } from '../lib/paths';
 
 const username = import.meta.env.PUBLIC_GITHUB_USERNAME || 'nicholasjvr';
 const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer mt-auto">
-  <div class="mx-auto max-w-content px-6 py-12">
-    <div class="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
+  <div class="mx-auto max-w-content px-6 py-14">
+    <div class="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
       <div class="max-w-md">
-        <p class="text-lg font-bold text-ink">
-          nicholas<span class="text-gradient">jvr</span>
-        </p>
+        <p class="text-lg font-semibold text-ink">Nicholas van Rensburg</p>
         <p class="mt-2 text-sm leading-relaxed text-muted">{SITE.tagline}</p>
-        <a href={withBase('/projects')} class="btn-primary mt-5 inline-flex text-sm">
-          View case studies
-        </a>
       </div>
 
-      <div class="grid grid-cols-2 gap-8 sm:gap-12">
-        <div>
-          <p class="text-xs font-semibold uppercase tracking-wider text-muted">Site</p>
-          <ul class="mt-3 space-y-2 text-sm font-medium">
-            <li><a href={import.meta.env.BASE_URL} class="text-muted transition hover:text-accent">Home</a></li>
-            <li><a href={withBase('/projects')} class="text-muted transition hover:text-accent">Projects</a></li>
-            <li><a href={SITE.url} class="text-muted transition hover:text-accent">{SITE.domain}</a></li>
-          </ul>
-        </div>
-        <div>
-          <p class="text-xs font-semibold uppercase tracking-wider text-muted">Connect</p>
-          <ul class="mt-3 space-y-2 text-sm font-medium">
-            <li>
-              <a href={`https://github.com/${username}`} target="_blank" rel="noopener" class="text-muted transition hover:text-accent">
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href={`mailto:${SITE.email}`} class="text-muted transition hover:text-accent">Email</a>
-            </li>
-          </ul>
-        </div>
+      <div class="flex flex-wrap gap-6 text-sm font-medium">
+        <a href={`mailto:${SITE.email}`} class="text-muted transition hover:text-accent">
+          {SITE.email}
+        </a>
+        <a
+          href={`https://github.com/${username}`}
+          target="_blank"
+          rel="noopener"
+          class="text-muted transition hover:text-accent"
+        >
+          GitHub
+        </a>
       </div>
     </div>
 
-    <div class="mt-10 flex flex-col items-center justify-between gap-3 border-t border-border/60 pt-6 text-sm text-muted sm:flex-row">
-      <p>© {year} {SITE.name}</p>
-      <p class="text-xs">Built with Astro + Tailwind · GitHub Pages</p>
+    <div class="mt-10 flex flex-col items-center justify-between gap-3 border-t border-border pt-6 text-xs text-muted sm:flex-row">
+      <p>© {year} Nicholas van Rensburg</p>
+      <p>Built with Astro + Tailwind</p>
     </div>
   </div>
 </footer>

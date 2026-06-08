@@ -2,10 +2,12 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
+import WhatIDo from '../components/WhatIDo.astro';
 import ProjectCard from '../components/ProjectCard.astro';
-import SkillMatrix from '../components/SkillMatrix.astro';
-import GitHubPanel from '../components/GitHubPanel.astro';
+import Currently from '../components/Currently.astro';
+import TechStack from '../components/TechStack.astro';
 import { SITE } from '../data/site';
+import { PROJECTS_SECTION, CONTACT_CTA } from '../data/copy';
 import { withBase } from '../lib/paths';
 
 const featured = (await getCollection('projects'))
@@ -15,13 +17,14 @@ const featured = (await getCollection('projects'))
 
 <BaseLayout>
   <Hero />
+  <WhatIDo />
 
-  <section id="projects" class="section pt-4">
+  <section id="projects" class="section">
     <div class="flex items-end justify-between">
       <div>
-        <p class="eyebrow reveal">Selected work</p>
-        <h2 class="reveal mt-3 text-3xl font-bold tracking-tight text-ink md:text-4xl">
-          Featured projects
+        <p class="eyebrow reveal">{PROJECTS_SECTION.eyebrow}</p>
+        <h2 class="reveal mt-4 text-3xl font-semibold tracking-tight text-ink md:text-4xl">
+          {PROJECTS_SECTION.title}
         </h2>
       </div>
       <a href={withBase('/projects')} class="reveal hidden text-sm font-semibold text-accent hover:underline sm:inline">
@@ -29,7 +32,7 @@ const featured = (await getCollection('projects'))
       </a>
     </div>
 
-    <div class="reveal mt-10 grid gap-6 md:grid-cols-2">
+    <div class="reveal mt-12 grid gap-6 md:grid-cols-2">
       {featured.map((project) => <ProjectCard project={project} />)}
     </div>
 
@@ -38,22 +41,17 @@ const featured = (await getCollection('projects'))
     </div>
   </section>
 
-  <SkillMatrix />
-  <GitHubPanel />
+  <Currently />
+  <TechStack />
 
-  <section class="section">
-    <div class="reveal rounded-3xl border border-border bg-surface p-10 text-center shadow-card">
-      <h2 class="text-2xl font-bold text-ink md:text-3xl">Let's build something.</h2>
-      <p class="mx-auto mt-3 max-w-xl text-muted">
-        Open to interesting problems in ML, real-time systems, and AI products.
-        Reach me at {SITE.email} or via {SITE.domain}.
-      </p>
-      <a
-        href={`mailto:${SITE.email}`}
-        class="mt-6 inline-block rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-white shadow-card transition hover:shadow-card-hover"
-      >
-        Get in touch
+  <section id="contact" class="section">
+    <div class="reveal card-surface rounded-2xl p-10 text-center md:p-16">
+      <h2 class="text-2xl font-semibold tracking-tight text-ink md:text-4xl">{CONTACT_CTA.title}</h2>
+      <p class="mx-auto mt-4 max-w-xl text-muted">{CONTACT_CTA.body}</p>
+      <a href={`mailto:${SITE.email}`} class="btn-primary mt-8 inline-block">
+        {CONTACT_CTA.cta.label}
       </a>
+      <p class="mt-5 font-mono text-sm text-muted">{SITE.email}</p>
     </div>
   </section>
 </BaseLayout>

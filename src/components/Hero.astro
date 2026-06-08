@@ -1,33 +1,23 @@
 ---
-import { SITE } from '../data/site';
-
-const githubUrl = `https://github.com/${import.meta.env.PUBLIC_GITHUB_USERNAME || 'nicholasjvr'}`;
+import { HERO } from '../data/copy';
 ---
 
-<section class="section pt-20 md:pt-28">
-  <p class="eyebrow reveal">{SITE.domain} · Software &amp; ML builder</p>
+<section class="section pt-24 md:pt-36">
+  <p class="eyebrow reveal">{HERO.role}</p>
   <h1
-    class="reveal mt-4 max-w-3xl text-4xl font-extrabold leading-[1.1] tracking-tight text-ink md:text-6xl"
+    class="reveal mt-5 max-w-4xl text-5xl font-semibold leading-[1.05] tracking-tight text-ink md:text-7xl"
   >
-    I build <span class="text-gradient">data-to-decision</span> systems, end to end.
+    {HERO.name}
   </h1>
-  <p class="reveal mt-6 max-w-2xl text-lg leading-relaxed text-muted">
-    Applied machine learning, real-time dashboards, and AI companions. I own the
-    full loop: data pipeline → model → execution logic → an interface you can
-    reason about (and talk to). Selected case studies below; GitHub stays in sync.
+  <p class="reveal mt-6 max-w-2xl text-lg leading-relaxed text-muted md:text-xl">
+    {HERO.line}
+  </p>
+  <p class="reveal mt-3 max-w-2xl text-lg leading-relaxed text-ink md:text-xl">
+    If it sounds remotely possible, <span class="text-accent-warm">I'll probably build it.</span>
   </p>
 
-  <div class="reveal mt-8 flex flex-wrap items-center gap-3">
-    <a href="#projects" class="btn-primary">
-      View projects
-    </a>
-    <a
-      href={githubUrl}
-      target="_blank"
-      rel="noopener"
-      class="rounded-lg border border-accent/25 bg-surface/80 px-5 py-2.5 text-sm font-semibold text-ink backdrop-blur transition hover:border-accent/40 hover:bg-surface"
-    >
-      GitHub profile →
-    </a>
+  <div class="reveal mt-9 flex flex-wrap items-center gap-3">
+    <a href={HERO.ctaPrimary.href} class="btn-primary">{HERO.ctaPrimary.label}</a>
+    <a href={HERO.ctaSecondary.href} class="btn-ghost">{HERO.ctaSecondary.label}</a>
   </div>
 </section>

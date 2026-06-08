@@ -4,87 +4,46 @@
 
 /* ---------------------------------------------------------------------------
    Theme tokens
-   - data-theme: light | dark (toggle + system default)
-   - data-accent-theme: default | tradebot | meeting-memory | cinhaus (project pages/cards)
+   - data-theme: dark (default) | light
+   Monochrome base with a single cyan accent and one warm pink highlight.
 --------------------------------------------------------------------------- */
 
 :root,
+[data-theme='dark'] {
+  --c-bg: 11 15 25; /* #0B0F19 */
+  --c-surface: 17 24 39; /* #111827 */
+  --c-surface-2: 22 31 46; /* #161F2E */
+  --c-border: 30 41 59; /* #1E293B — subtle border on dark */
+  --c-ink: 248 250 252; /* #F8FAFC */
+  --c-muted: 148 163 184; /* #94A3B8 */
+  --c-accent: 0 247 255; /* #00F7FF */
+  --c-accent-soft: 176 255 250; /* #B0FFFA */
+  --c-accent-warm: 255 0 135; /* #FF0087 */
+  --c-success: 52 211 153;
+  --c-danger: 248 113 113;
+  --c-nav-bg: 11 15 25;
+  --c-footer-bg: 11 15 25;
+}
+
 [data-theme='light'] {
-  --c-bg: 246 244 255;
+  --c-bg: 248 250 252; /* #F8FAFC */
   --c-surface: 255 255 255;
-  --c-surface-2: 237 233 254;
-  --c-border: 221 214 254;
-  --c-ink: 15 23 42;
-  --c-muted: 100 116 139;
-  --c-accent: 99 102 241;
-  --c-accent-2: 236 72 153;
-  --c-accent-soft: 224 231 255;
-  --c-glow: 139 92 246;
+  --c-surface-2: 241 245 249;
+  --c-border: 226 232 240; /* #E2E8F0 — subtle border on light */
+  --c-ink: 15 23 42; /* #0F172A */
+  --c-muted: 100 116 139; /* #64748B */
+  --c-accent: 8 145 178; /* #0891B2 — darker cyan for contrast on light */
+  --c-accent-soft: 165 243 252;
+  --c-accent-warm: 219 39 119; /* #DB2777 */
   --c-success: 22 163 74;
   --c-danger: 220 38 38;
   --c-nav-bg: 255 255 255;
   --c-footer-bg: 255 255 255;
 }
 
-[data-theme='dark'] {
-  --c-bg: 10 8 26;
-  --c-surface: 20 16 44;
-  --c-surface-2: 30 24 62;
-  --c-border: 55 48 96;
-  --c-ink: 237 233 254;
-  --c-muted: 148 163 184;
-  --c-accent: 129 140 248;
-  --c-accent-2: 244 114 182;
-  --c-accent-soft: 46 38 88;
-  --c-glow: 167 139 250;
-  --c-success: 52 211 153;
-  --c-danger: 248 113 113;
-  --c-nav-bg: 14 11 32;
-  --c-footer-bg: 14 11 32;
-}
-
-/* Project accent overrides (case-study pages + cards) */
-[data-accent-theme='tradebot'] {
-  --c-accent: 139 92 246;
-  --c-accent-2: 236 72 153;
-  --c-glow: 168 85 247;
-}
-
-[data-theme='dark'][data-accent-theme='tradebot'] {
-  --c-accent-soft: 76 29 149;
-}
-
-[data-accent-theme='meeting-memory'] {
-  --c-accent: 14 165 233;
-  --c-accent-2: 6 182 212;
-  --c-glow: 56 189 248;
-}
-
-[data-theme='dark'][data-accent-theme='meeting-memory'] {
-  --c-accent-soft: 12 74 110;
-}
-
-[data-theme='light'][data-accent-theme='meeting-memory'] {
-  --c-accent-soft: 224 242 254;
-}
-
-[data-accent-theme='cinhaus'] {
-  --c-accent: 200 240 74;
-  --c-accent-2: 245 244 240;
-  --c-glow: 200 240 74;
-}
-
-[data-theme='dark'][data-accent-theme='cinhaus'] {
-  --c-accent-soft: 40 48 12;
-}
-
-[data-theme='light'][data-accent-theme='cinhaus'] {
-  --c-accent-soft: 236 252 203;
-}
-
 html {
   scroll-behavior: smooth;
-  color-scheme: light dark;
+  color-scheme: dark;
 }
 
 [data-theme='light'] {
@@ -97,150 +56,76 @@ html {
 
 body {
   background-color: rgb(var(--c-bg));
-  background-image:
-    radial-gradient(ellipse 90% 55% at 0% -5%, rgb(var(--c-accent) / 0.16), transparent 55%),
-    radial-gradient(ellipse 70% 45% at 100% 0%, rgb(var(--c-accent-2) / 0.12), transparent 50%),
-    radial-gradient(ellipse 60% 40% at 50% 100%, rgb(var(--c-glow) / 0.08), transparent 55%);
   color: rgb(var(--c-ink));
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
-[data-theme='dark'] body {
-  background-image:
-    radial-gradient(ellipse 80% 50% at 0% -10%, rgb(var(--c-accent) / 0.22), transparent 55%),
-    radial-gradient(ellipse 60% 40% at 100% 0%, rgb(var(--c-accent-2) / 0.14), transparent 50%),
-    radial-gradient(ellipse 50% 35% at 50% 100%, rgb(var(--c-glow) / 0.1), transparent 55%);
-}
-
 .site-chrome {
-  background: linear-gradient(180deg, rgb(var(--c-nav-bg) / 0.97), rgb(var(--c-nav-bg) / 0.88));
-  border-bottom: 1px solid rgb(var(--c-border) / 0.8);
-  box-shadow: 0 1px 0 rgb(var(--c-accent) / 0.12), 0 8px 32px -20px rgb(var(--c-glow) / 0.35);
-}
-
-.site-chrome::after {
-  content: '';
-  display: block;
-  height: 2px;
-  background: linear-gradient(90deg, rgb(var(--c-accent)), rgb(var(--c-accent-2)), rgb(var(--c-glow)));
-  opacity: 0.85;
+  background: rgb(var(--c-nav-bg) / 0.85);
+  border-bottom: 1px solid rgb(var(--c-border));
 }
 
 .site-footer {
-  background: linear-gradient(0deg, rgb(var(--c-footer-bg) / 0.98), rgb(var(--c-footer-bg) / 0.9));
-  border-top: 1px solid rgb(var(--c-border) / 0.8);
-  box-shadow: 0 -1px 0 rgb(var(--c-accent) / 0.1);
-}
-
-.site-footer::before {
-  content: '';
-  display: block;
-  height: 2px;
-  background: linear-gradient(90deg, rgb(var(--c-glow)), rgb(var(--c-accent)), rgb(var(--c-accent-2)));
-  opacity: 0.75;
+  background: rgb(var(--c-footer-bg) / 0.6);
+  border-top: 1px solid rgb(var(--c-border));
 }
 
 .section {
-  @apply mx-auto w-full max-w-content px-6 py-16 md:py-24;
+  @apply mx-auto w-full max-w-content px-6 py-20 md:py-32;
 }
 
 .eyebrow {
-  @apply text-xs font-semibold uppercase tracking-[0.18em];
-  background: linear-gradient(90deg, rgb(var(--c-accent)), rgb(var(--c-accent-2)));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  @apply text-xs font-semibold uppercase tracking-[0.18em] text-muted;
 }
 
-.text-gradient {
-  background: linear-gradient(135deg, rgb(var(--c-accent)), rgb(var(--c-accent-2)));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+.text-accent-warm {
+  color: rgb(var(--c-accent-warm));
 }
 
 .btn-primary {
-  @apply rounded-lg px-5 py-2.5 text-sm font-semibold text-white shadow-card transition hover:shadow-card-hover;
-  background: linear-gradient(135deg, rgb(var(--c-accent)), rgb(var(--c-accent-2)));
+  @apply rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold transition;
+  color: rgb(var(--c-bg));
 }
 
 .btn-primary:hover {
-  filter: brightness(1.06);
+  filter: brightness(1.08);
+}
+
+.btn-ghost {
+  @apply rounded-lg border px-5 py-2.5 text-sm font-semibold text-ink transition;
+  border-color: rgb(var(--c-border));
+  background: rgb(var(--c-surface) / 0.6);
+}
+
+.btn-ghost:hover {
+  border-color: rgb(var(--c-accent) / 0.4);
 }
 
 .card-surface {
-  @apply rounded-2xl border border-border shadow-card;
-  background: linear-gradient(180deg, rgb(var(--c-surface)), rgb(var(--c-surface-2) / 0.45));
+  @apply rounded-xl border;
+  border-color: rgb(var(--c-border));
+  background: rgb(var(--c-surface) / 0.6);
 }
 
 .project-card {
-  @apply rounded-2xl border border-border bg-surface shadow-card transition-all;
-}
-
-.project-card[data-accent-theme='tradebot'] {
-  border-color: rgb(var(--c-accent) / 0.2);
-}
-
-.project-card[data-accent-theme='meeting-memory'] {
-  border-color: rgb(14 165 233 / 0.25);
-}
-
-.project-card[data-accent-theme='cinhaus'] {
-  border-color: rgb(200 240 74 / 0.25);
+  @apply rounded-xl border transition-all;
+  border-color: rgb(var(--c-border));
+  background: rgb(var(--c-surface) / 0.6);
 }
 
 .project-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 40px -16px rgb(var(--c-glow) / 0.35);
-}
-
-.project-card[data-accent-theme='tradebot']:hover {
-  border-color: rgb(139 92 246 / 0.45);
-}
-
-.project-card[data-accent-theme='meeting-memory']:hover {
-  border-color: rgb(14 165 233 / 0.45);
-}
-
-.project-card[data-accent-theme='cinhaus']:hover {
-  border-color: rgb(200 240 74 / 0.45);
-}
-
-.card-accent-top {
-  @apply relative overflow-hidden;
-}
-
-.card-accent-top::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, rgb(var(--c-accent)), rgb(var(--c-accent-2)));
-}
-
-.card-accent-left {
-  @apply relative overflow-hidden;
-}
-
-.card-accent-left::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 4px;
-  background: linear-gradient(180deg, rgb(var(--c-accent)), rgb(var(--c-accent-2)));
+  transform: translateY(-2px);
+  border-color: rgb(var(--c-accent) / 0.3);
+  box-shadow: 0 8px 32px -8px rgb(0 0 0 / 0.4);
 }
 
 .reveal {
   opacity: 0;
-  transform: translateY(16px);
+  transform: translateY(8px);
   transition:
-    opacity 0.6s ease,
-    transform 0.6s ease;
+    opacity 0.4s ease,
+    transform 0.4s ease;
 }
 
 .reveal.is-visible {

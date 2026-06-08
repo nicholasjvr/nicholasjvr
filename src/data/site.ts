@@ -6,10 +6,11 @@
 export const SITE = {
   domain: 'nicholasjvr.github.io/nicholasjvr',
   url: 'https://nicholasjvr.github.io/nicholasjvr/',
-  name: 'Nicholas',
-  title: 'Nicholas | Portfolio',
+  name: 'Nicholas van Rensburg',
+  title: 'Nicholas van Rensburg — Fullstack JavaScript Developer',
   description:
-    'Portfolio of Nicholas, software & ML builder. Case studies in applied machine learning, real-time dashboards, and AI companions.',
-  tagline: 'Software & ML builder. Data-to-decision systems, end to end.',
+    'Fullstack JavaScript developer. I build software, systems, automations, and products that solve real problems.',
+  tagline: "If it sounds remotely possible, I'll probably build it.",
+  role: 'Fullstack JavaScript Developer',
   email: 'nicholas241cut@gmail.com',
 } as const;

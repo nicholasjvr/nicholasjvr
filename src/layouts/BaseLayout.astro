@@ -26,8 +26,7 @@ const ogImage = new URL(withBase('/og-image.svg'), Astro.site).toString();
     <script is:inline>
       (function () {
         var stored = localStorage.getItem('theme');
-        var prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
-        var theme = stored === 'light' || stored === 'dark' ? stored : prefersLight ? 'light' : 'dark';
+        var theme = stored === 'light' || stored === 'dark' ? stored : 'dark';
         document.documentElement.setAttribute('data-theme', theme);
       })();
     </script>

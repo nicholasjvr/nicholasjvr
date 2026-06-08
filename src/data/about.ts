@@ -1,20 +1,20 @@
 // "Who I am / what I can build". Part of the knowledge corpus (src/lib/knowledge.ts).
 export const ABOUT = {
-  name: 'Nicholas',
-  headline: 'Software & ML builder. Data-to-decision systems, end to end.',
+  name: 'Nicholas van Rensburg',
+  headline: 'Fullstack JavaScript developer. I build software, systems, automations, and products.',
   summary:
-    'I build systems that turn data into decisions: applied machine learning, ' +
-    'real-time dashboards, exchange/API integrations, and AI companions. I like ' +
-    'owning the whole loop: data pipeline → model → execution logic → an ' +
-    'interface you can reason about (and talk to).',
+    'I turn ideas into working software. From Zoho ecosystems and internal ' +
+    'business tools to fullstack SaaS platforms, dashboards, integrations, and ' +
+    'automation systems. I build useful things, ship quickly, and solve real ' +
+    'problems. AI is a tool I reach for, not the headline.',
 
   canBuild: [
-    'Applied ML systems (feature engineering, training, serving, monitoring)',
-    'Real-time dashboards and operational cockpits',
-    'Trading / market-data systems with exchange APIs and risk guards',
-    'LLM / agent integrations and conversational interfaces',
-    'Full-stack web apps (Astro/React + serverless backends)',
-    'Data pipelines and analytics over SQL/SQLite',
+    'Fullstack SaaS products (Node.js, React, Next.js, TypeScript)',
+    'Zoho ecosystems — Creator, CRM, custom widgets, business automation',
+    'Internal business tools, dashboards, and operational systems',
+    'API integrations between platforms and third-party services',
+    'Automation platforms that remove manual, repetitive work',
+    'AI-enhanced workflows and data systems where they earn their place',
   ],
 
   contact: {
@@ -23,6 +23,7 @@ export const ABOUT = {
   },
 
   voice:
-    'Direct, technical, and concrete. Answer only from the provided context; ' +
-    'if something is not in the corpus, say so and offer to connect via email.',
+    'Direct, technical, and concrete. A builder, not a buzzword. Answer only ' +
+    'from the provided context; if something is not in the corpus, say so and ' +
+    'offer to connect via email.',
 };

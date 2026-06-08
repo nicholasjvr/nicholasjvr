@@ -14,9 +14,8 @@ export default {
         ink: "rgb(var(--c-ink) / <alpha-value>)",
         muted: "rgb(var(--c-muted) / <alpha-value>)",
         accent: "rgb(var(--c-accent) / <alpha-value>)",
-        "accent-2": "rgb(var(--c-accent-2) / <alpha-value>)",
         "accent-soft": "rgb(var(--c-accent-soft) / <alpha-value>)",
-        glow: "rgb(var(--c-glow) / <alpha-value>)",
+        "accent-warm": "rgb(var(--c-accent-warm) / <alpha-value>)",
         success: "rgb(var(--c-success) / <alpha-value>)",
         danger: "rgb(var(--c-danger) / <alpha-value>)",
       },
@@ -33,9 +32,8 @@ export default {
         content: "72rem",
       },
       boxShadow: {
-        card: "0 1px 2px rgb(15 23 42 / 0.04), 0 8px 24px -12px rgb(15 23 42 / 0.12)",
-        "card-hover":
-          "0 1px 2px rgb(15 23 42 / 0.06), 0 16px 40px -16px rgb(15 23 42 / 0.22)",
+        card: "0 1px 2px rgb(0 0 0 / 0.2), 0 8px 32px -12px rgb(0 0 0 / 0.4)",
+        "card-hover": "0 8px 32px -8px rgb(0 0 0 / 0.45)",
       },
     },
   },

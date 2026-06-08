@@ -8,8 +8,8 @@ const { title, body, index } = Astro.props;
 const num = String(index + 1).padStart(2, '0');
 ---
 
-<div class="card-surface card-accent-left flex gap-4 rounded-xl p-5">
-  <div class="font-mono text-sm font-semibold text-gradient">{num}</div>
+<div class="card-surface flex gap-4 rounded-xl p-5">
+  <div class="font-mono text-sm font-semibold text-accent">{num}</div>
   <div>
     <h3 class="font-semibold text-ink">{title}</h3>
     <p class="mt-1.5 text-sm leading-relaxed text-muted">{body}</p>

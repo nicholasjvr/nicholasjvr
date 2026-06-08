@@ -1,0 +1,18 @@
+---
+import { CURRENTLY } from '../data/copy';
+---
+
+<section id="currently" class="section">
+  <p class="eyebrow reveal">{CURRENTLY.eyebrow}</p>
+
+  <ul class="reveal mt-8 max-w-2xl divide-y divide-border border-t border-border">
+    {
+      CURRENTLY.items.map((item) => (
+        <li class="flex items-center gap-3 py-4 text-lg text-ink">
+          <span class="text-accent">·</span>
+          {item}
+        </li>
+      ))
+    }
+  </ul>
+</section>
