@@ -7,7 +7,10 @@
 
 **Fullstack JavaScript Developer**
 
-I build software, systems, automations, and products that solve real problems.
+I build software, systems, automations, and products that are uniquely yours.
+
+Everyone builds things that work. I focus on what makes a build *yours* — your workflow, your team, your constraints, and the problem that only makes sense in your context.
+
 If it sounds remotely possible, I'll probably build it.
 
 [Portfolio](https://nicholasjvr.github.io/nicholasjvr/) · [Email](mailto:nicholas241cut@gmail.com) · [GitHub](https://github.com/nicholasjvr)
@@ -18,9 +21,23 @@ If it sounds remotely possible, I'll probably build it.
 
 ## What I do
 
-I turn ideas into working software. From Zoho ecosystems and internal business tools to fullstack SaaS platforms, dashboards, integrations, and automation systems.
+I turn ideas into working software — shaped around how you actually operate, not copied from a template.
 
-Build useful things. Ship quickly. Solve real problems.
+From Zoho ecosystems and internal business tools to fullstack SaaS platforms, dashboards, integrations, and automation systems. Custom where it matters. Built to evolve with you.
+
+Tailored to your context · Shipped with intent · Designed to feel like yours
+
+---
+
+## How I work
+
+<img src="https://raw.githubusercontent.com/nicholasjvr/nicholasjvr/main/.github/assets/readme/ai-workflow.svg" alt="AI-assisted development workflow" width="100%" />
+
+<br /><br />
+
+I bring **AI agents** — [Cursor](https://cursor.com) and other IDE-native models — into my daily development. They speed up scaffolding, exploration, and iteration so I can spend more time on architecture, product decisions, and the personalization that makes something truly yours.
+
+The tooling keeps scaling and developing; I keep learning alongside it. Faster workflow, sharper craft, same focus on builds that fit *you*.
 
 ---
 

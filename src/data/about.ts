@@ -1,12 +1,15 @@
 // "Who I am / what I can build". Part of the knowledge corpus (src/lib/knowledge.ts).
 export const ABOUT = {
   name: 'Nicholas van Rensburg',
-  headline: 'Fullstack JavaScript developer. I build software, systems, automations, and products.',
+  headline:
+    'Fullstack JavaScript developer. I build software, systems, automations, and products that are uniquely yours.',
   summary:
-    'I turn ideas into working software. From Zoho ecosystems and internal ' +
-    'business tools to fullstack SaaS platforms, dashboards, integrations, and ' +
-    'automation systems. I build useful things, ship quickly, and solve real ' +
-    'problems. AI is a tool I reach for, not the headline.',
+    'I turn ideas into working software shaped around how people actually operate — ' +
+    'not copied from a template. From Zoho ecosystems and internal business tools to ' +
+    'fullstack SaaS platforms, dashboards, integrations, and automation systems. ' +
+    'Daily development includes AI agents like Cursor and other IDE-native models to ' +
+    'speed up iteration while keeping focus on architecture, customization, and what ' +
+    'makes a build truly yours.',
 
   canBuild: [
     'Fullstack SaaS products (Node.js, React, Next.js, TypeScript)',

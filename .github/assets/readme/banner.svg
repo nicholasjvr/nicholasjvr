@@ -3,6 +3,6 @@
   <rect x="0" y="0" width="1200" height="320" fill="none" stroke="#1E293B" stroke-width="1"/>
   <text x="80" y="132" fill="#F8FAFC" font-family="Inter, system-ui, sans-serif" font-size="56" font-weight="600" letter-spacing="-1">Nicholas van Rensburg</text>
   <text x="80" y="182" fill="#00F7FF" font-family="ui-monospace, SFMono-Regular, monospace" font-size="24" font-weight="500">Fullstack JavaScript Developer</text>
-  <text x="80" y="232" fill="#94A3B8" font-family="Inter, system-ui, sans-serif" font-size="22">I build software, systems, automations, and products that solve real problems.</text>
+  <text x="80" y="232" fill="#94A3B8" font-family="Inter, system-ui, sans-serif" font-size="22">Software, systems, automations, and products that are uniquely yours.</text>
   <rect x="80" y="262" width="120" height="3" rx="1.5" fill="#00F7FF"/>
 </svg>

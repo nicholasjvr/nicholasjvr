@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 200" role="img" aria-label="AI-assisted development workflow">
+  <rect width="1200" height="200" fill="#0B0F19"/>
+  <rect x="0" y="0" width="1200" height="200" fill="none" stroke="#1E293B" stroke-width="1"/>
+  <text x="80" y="72" fill="#F8FAFC" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="600">AI-assisted, human-directed</text>
+  <text x="80" y="112" fill="#94A3B8" font-family="Inter, system-ui, sans-serif" font-size="18">Cursor � IDE agents � faster iteration � more time for what is uniquely yours</text>
+  <rect x="80" y="136" width="88" height="32" rx="6" fill="#111827" stroke="#334155"/>
+  <text x="96" y="158" fill="#00F7FF" font-family="ui-monospace, SFMono-Regular, monospace" font-size="14">Cursor</text>
+  <rect x="184" y="136" width="120" height="32" rx="6" fill="#111827" stroke="#334155"/>
+  <text x="200" y="158" fill="#94A3B8" font-family="ui-monospace, SFMono-Regular, monospace" font-size="14">IDE agents</text>
+  <rect x="320" y="136" width="140" height="32" rx="6" fill="#111827" stroke="#334155"/>
+  <text x="336" y="158" fill="#94A3B8" font-family="ui-monospace, SFMono-Regular, monospace" font-size="14">your workflow</text>
+  <rect x="80" y="176" width="160" height="3" rx="1.5" fill="#00F7FF"/>
+</svg>

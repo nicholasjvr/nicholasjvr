@@ -9,7 +9,7 @@ export const SITE = {
   name: 'Nicholas van Rensburg',
   title: 'Nicholas van Rensburg — Fullstack JavaScript Developer',
   description:
-    'Fullstack JavaScript developer. I build software, systems, automations, and products that solve real problems.',
+    'Fullstack JavaScript developer. I build software, systems, automations, and products that are uniquely yours.',
   tagline: "If it sounds remotely possible, I'll probably build it.",
   role: 'Fullstack JavaScript Developer',
   email: 'nicholas241cut@gmail.com',

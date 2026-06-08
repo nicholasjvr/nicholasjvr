@@ -1,11 +1,11 @@
 // Single source of homepage copy. Keep the GitHub profile README in sync with
-// these strings (see README.md sections: Hero, What I Do, Selected work,
+// these strings (see README.md sections: Hero, What I Do, How I Work, Selected work,
 // Currently, Stack, Contact).
 
 export const HERO = {
   name: 'Nicholas van Rensburg',
   role: 'Fullstack JavaScript Developer',
-  line: 'I build software, systems, automations, and products that solve real problems.',
+  line: 'I build software, systems, automations, and products that are uniquely yours.',
   signature: "If it sounds remotely possible, I'll probably build it.",
   ctaPrimary: { label: 'View Projects', href: '#projects' },
   ctaSecondary: { label: 'Get In Touch', href: '#contact' },
@@ -18,17 +18,17 @@ export const PROJECTS_SECTION = {
 
 export const WHAT_I_DO = {
   eyebrow: 'What I Do',
-  title: 'I turn ideas into working software.',
-  body: 'From Zoho ecosystems and internal business tools to fullstack SaaS platforms, dashboards, integrations, and automation systems.',
-  pillars: ['Build useful things.', 'Ship quickly.', 'Solve real problems.'],
+  title: 'I turn ideas into working software — shaped around how you actually operate.',
+  body: 'From Zoho ecosystems and internal business tools to fullstack SaaS platforms, dashboards, integrations, and automation systems. Custom where it matters. Built to evolve with you.',
+  pillars: ['Tailored to your context.', 'Shipped with intent.', 'Designed to feel like yours.'],
 } as const;
 
 export const CURRENTLY = {
   eyebrow: 'Currently',
   items: [
-    'Building business systems and SaaS products',
-    'Exploring AI-assisted workflows',
-    'Learning scalable architecture',
+    'Building business systems and SaaS products tailored to real workflows',
+    'Working daily with Cursor and IDE-native AI agents',
+    'Learning scalable architecture as the tooling evolves',
     'Making Zoho do things it was never designed to do',
   ],
 } as const;
