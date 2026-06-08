@@ -106,13 +106,11 @@ Metered API and server usage per client, monthly ZAR invoicing, an admin dashboa
 ---
 
 <details>
-<summary><strong>Developer docs</strong> (deployment, env vars, repo layout)</summary>
+<summary><strong>Developer Notes</strong></summary>
 
-<br />
+See the [Developer Documentation](docs/DEVELOPMENT.md) file for technical setup and deployment instructions.
 
-See **[docs/DEVELOPMENT.md](docs/DEVELOPMENT.md)** for the full technical reference (GitHub Pages setup, content schema, TODO checklist).
-
-**Quick start**
+Quick Start:
 
 ```bash
 npm install
@@ -120,6 +118,6 @@ cp .env.example .env
 npm run dev
 ```
 
-**Add README demo GIFs:** drop screen recordings in [`docs/assets/readme/`](docs/assets/readme/) and update the `<img>` paths above.
+For image or GIF updates, drop new files into [`docs/assets/readme/`](docs/assets/readme/) and update the README with their paths.
 
 </details>
