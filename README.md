@@ -15,12 +15,6 @@ Everything on the portfolio projects, stack, how I work, and how to reach me.
 - [Email](mailto:nicholas241cut@gmail.com)
 - [GitHub](https://github.com/nicholasjvr)
 
----
-
-## Developer Notes
-
-See [docs/DEVELOPMENT.md](/docs/DEVELOPMENT.md) for setup and deployment.
-
 ### Tech Stack
 
 - **47.7%** Astro
