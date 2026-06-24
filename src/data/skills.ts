@@ -60,6 +60,14 @@ export const SKILLS = {
   react: { key: 'react', label: 'React', category: 'Frontend / UI' },
   tailwind: { key: 'tailwind', label: 'Tailwind CSS', category: 'Frontend / UI' },
   dashboards: { key: 'dashboards', label: 'Dashboard UX', category: 'Frontend / UI' },
+  'react-native': {
+    key: 'react-native',
+    label: 'React Native',
+    category: 'Frontend / UI',
+  },
+  flutter: { key: 'flutter', label: 'Flutter', category: 'Frontend / UI' },
+  threejs: { key: 'threejs', label: 'Three.js / WebGL', category: 'Frontend / UI' },
+  nfc: { key: 'nfc', label: 'NFC / Mobile Hardware', category: 'Frontend / UI' },
 
   firebase: { key: 'firebase', label: 'Firebase', category: 'Backend / APIs' },
   oauth: { key: 'oauth', label: 'OAuth Integrations', category: 'Backend / APIs' },

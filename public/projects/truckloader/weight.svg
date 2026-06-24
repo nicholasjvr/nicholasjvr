@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="Weight distribution placeholder">
+  <rect width="1600" height="900" fill="#1c1917"/>
+  <rect x="200" y="200" width="400" height="500" rx="12" fill="#292524"/>
+  <text x="400" y="280" fill="#fde047" font-family="Inter, sans-serif" font-size="24" font-weight="700" text-anchor="middle">Axle load</text>
+  <rect x="260" y="340" width="280" height="40" rx="6" fill="#ca8a04"/>
+  <rect x="260" y="420" width="200" height="40" rx="6" fill="#a16207"/>
+  <text x="800" y="820" fill="#a16207" font-family="JetBrains Mono, monospace" font-size="16" text-anchor="middle">Weight panel  placeholder screenshot</text>
+</svg>

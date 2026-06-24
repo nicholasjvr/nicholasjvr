@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="Recruiter dashboard placeholder">
+  <rect width="1600" height="900" fill="#431407"/>
+  <rect x="80" y="100" width="320" height="700" rx="12" fill="#7c2d12"/>
+  <rect x="440" y="100" width="1080" height="700" rx="12" fill="#9a3412"/>
+  <text x="800" y="820" fill="#9a3412" font-family="JetBrains Mono, monospace" font-size="16" text-anchor="middle">Recruiter dashboard  placeholder screenshot</text>
+</svg>

@@ -1,0 +1,102 @@
+---
+title: SportsOpp
+tagline: Flutter sports recruitment app connecting athletes with opportunities and a dedicated athlete platform.
+status: wip
+featured: true
+order: 5
+accentTheme: sportsopp
+timeframe: Jun 2026 to present
+role: Solo build (Flutter mobile app, athlete platform, backend APIs, recruitment workflows)
+objective: >-
+  Give athletes one place to build a profile, discover recruitment opportunities,
+  and manage applications, while giving recruiters and clubs tools to post
+  openings, filter talent, and track pipeline status.
+outcome: >-
+  A Flutter cross-platform app plus athlete-facing platform in active
+  development: profile and media uploads, opportunity browse/search, application
+  tracking, and role-based views for athletes vs recruiters. Proves mobile-first
+  product design in Dart, state management at scale, and a two-sided marketplace
+  UX.
+skills:
+  - flutter
+  - firebase
+  - rest-api
+  - dashboards
+  - oauth
+techStack:
+  - Flutter
+  - Dart
+  - Firebase (Auth, Firestore, Storage)
+  - REST APIs
+  - iOS · Android · Web (athlete platform)
+cover: /projects/sportsopp/cover.svg
+metrics:
+  - { label: "Platforms", value: "iOS · Android · Web" }
+  - { label: "User roles", value: "Athlete · Recruiter" }
+  - { label: "Core loop", value: "Profile → Opp → Apply" }
+  - { label: "Backend", value: "Firebase + APIs" }
+highlights:
+  - title: Athlete profiles
+    body: >-
+      Sport, position, stats, highlights, and media uploads. Profiles are the
+      single source of truth recruiters search against.
+  - title: Opportunity marketplace
+    body: >-
+      Browse and filter openings by sport, region, level, and deadline.
+      Saved-opportunity lists and push-style alerts for new matches.
+  - title: Application pipeline
+    body: >-
+      Athletes track submitted applications; recruiters see inbound interest,
+      shortlist status, and notes per candidate.
+  - title: Athlete platform (web)
+    body: >-
+      Complementary web experience for deeper profile editing, document uploads,
+      and desktop-friendly recruiter review workflows.
+gallery:
+  - src: /projects/sportsopp/feed.svg
+    alt: SportsOpp opportunity feed
+    caption: "Feed: browse recruitment opportunities by sport and region (placeholder)."
+  - src: /projects/sportsopp/profile.svg
+    alt: Athlete profile screen
+    caption: "Profile: stats, media, and sport-specific fields (placeholder)."
+  - src: /projects/sportsopp/apply.svg
+    alt: Application detail and submit flow
+    caption: "Apply: opportunity detail and one-tap application (placeholder)."
+  - src: /projects/sportsopp/recruiter.svg
+    alt: Recruiter dashboard view
+    caption: "Recruiter: post openings and review applicant pipeline (placeholder)."
+demo:
+  kind: screenshots
+---
+
+## What it is
+
+SportsOpp is a **Flutter** sports recruitment product with two surfaces: a
+**mobile app** for athletes on the move and an **athlete platform** for richer
+profile and application management. Recruiters and clubs get tools to publish
+opportunities and manage talent pipelines.
+
+## How it works
+
+- **Athletes** build profiles, upload highlights, and apply to posted
+  opportunities with status tracking in one inbox.
+- **Recruiters** create listings, filter the athlete directory, and move
+  candidates through shortlist → contact → signed stages.
+- **Platform** shares auth and data between mobile and web so athletes can
+  edit deep profile fields on desktop while staying mobile-first for discovery.
+
+## Stack choices
+
+| Layer   | Choice              | Why                                              |
+| ------- | ------------------- | ------------------------------------------------ |
+| Mobile  | Flutter             | Single codebase for iOS and Android              |
+| Backend | Firebase + REST     | Fast auth, real-time lists, media storage        |
+| Web     | Flutter Web / split | Athlete platform for uploads and recruiter admin |
+
+## Status
+
+**WIP.** App shell, navigation, and data models are scaffolded. Next: auth flows,
+opportunity CRUD, profile media upload, and first end-to-end apply path.
+
+> Add `repo` and `liveUrl` to frontmatter when repos and staging URLs are live.
+> Replace gallery SVGs with simulator/device captures.

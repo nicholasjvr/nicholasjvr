@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="NFC scan placeholder">
+  <rect width="1600" height="900" fill="#042f2e"/>
+  <rect x="560" y="200" width="480" height="500" rx="32" fill="#065f46" stroke="#34d399" stroke-width="3" stroke-dasharray="12 8"/>
+  <text x="800" y="460" fill="#a7f3d0" font-family="Inter, sans-serif" font-size="32" font-weight="700" text-anchor="middle">Tap NFC tag</text>
+  <text x="800" y="820" fill="#047857" font-family="JetBrains Mono, monospace" font-size="16" text-anchor="middle">NFC scan  placeholder screenshot</text>
+</svg>

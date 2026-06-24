@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="Alarm setup placeholder">
+  <rect width="1600" height="900" fill="#042f2e"/>
+  <rect x="200" y="150" width="1200" height="600" rx="20" fill="#064e3b"/>
+  <rect x="260" y="220" width="1080" height="80" rx="12" fill="#065f46"/>
+  <rect x="260" y="340" width="1080" height="80" rx="12" fill="#065f46"/>
+  <rect x="260" y="460" width="1080" height="80" rx="12" fill="#065f46"/>
+  <text x="800" y="820" fill="#047857" font-family="JetBrains Mono, monospace" font-size="16" text-anchor="middle">Alarm setup  placeholder screenshot</text>
+</svg>

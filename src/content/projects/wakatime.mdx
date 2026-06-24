@@ -1,0 +1,100 @@
+---
+title: WakaTime Alarm
+tagline: React Native NFC alarm app that ties physical tags to coding-time goals and WakaTime stats.
+status: wip
+featured: true
+order: 4
+accentTheme: wakatime
+timeframe: Jun 2026 to present
+role: Solo build (React Native app, NFC hardware, WakaTime API, iOS + Android store pipelines)
+objective: >-
+  Build a cross-platform mobile alarm that uses NFC tags as physical triggers,
+  syncs with WakaTime for real coding-time context, and ships to both the App
+  Store and Google Play as a polished consumer app.
+outcome: >-
+  A React Native app in active development: NFC read/write flows for arming and
+  dismissing alarms, WakaTime API integration for daily/weekly coding stats,
+  local notifications with snooze and repeat rules, and store-ready builds for
+  iOS and Android. Proves mobile hardware integration, third-party API auth, and
+  dual-platform release discipline.
+skills:
+  - typescript
+  - react-native
+  - nfc
+  - rest-api
+  - firebase
+techStack:
+  - React Native
+  - TypeScript
+  - Expo (NFC module)
+  - WakaTime API
+  - iOS (App Store)
+  - Android (Google Play)
+  - Push notifications
+cover: /projects/wakatime/cover.svg
+metrics:
+  - { label: "Platforms", value: "iOS · Android" }
+  - { label: "Trigger", value: "NFC tags" }
+  - { label: "Data source", value: "WakaTime API" }
+  - { label: "Distribution", value: "App Store · Play Store" }
+highlights:
+  - title: NFC arm / dismiss flow
+    body: >-
+      Tap an NFC tag to arm or dismiss alarms. Tags are registered in-app so
+      each physical sticker maps to a routine (wake, focus block, end-of-day).
+  - title: WakaTime-aware scheduling
+    body: >-
+      Pull daily and weekly coding totals from the WakaTime API so alarm
+      thresholds and reminders reflect actual dev time, not just clock time.
+  - title: Cross-platform React Native
+    body: >-
+      One TypeScript codebase with platform-specific NFC and notification
+      handling. Shared UI, navigation, and API layer; native modules where
+      required.
+  - title: Store release pipeline
+    body: >-
+      iOS provisioning, Android signing, and Play Console / App Store Connect
+      metadata scaffolded for TestFlight and internal testing tracks.
+gallery:
+  - src: /projects/wakatime/home.svg
+    alt: WakaTime Alarm home screen with today's coding stats
+    caption: "Home: today's WakaTime summary and next alarm state (placeholder)."
+  - src: /projects/wakatime/nfc-scan.svg
+    alt: NFC tag scan screen
+    caption: "NFC: scan-to-arm flow with tag registration (placeholder)."
+  - src: /projects/wakatime/alarm-setup.svg
+    alt: Alarm configuration screen
+    caption: "Alarms: schedule, repeat rules, and WakaTime-linked thresholds (placeholder)."
+  - src: /projects/wakatime/settings.svg
+    alt: Settings and WakaTime API connection
+    caption: "Settings: WakaTime OAuth/API key and notification preferences (placeholder)."
+demo:
+  kind: screenshots
+---
+
+## What it is
+
+WakaTime Alarm is a **React Native** mobile app that combines **NFC hardware**
+with **WakaTime coding analytics**. Physical NFC tags act as alarm triggers;
+the app layers WakaTime stats so reminders and goals are grounded in how much
+you actually coded, not just what time it is on the clock.
+
+## How it works
+
+- **Register tags.** Pair NFC stickers in-app; each tag gets a label and
+  action (arm alarm, dismiss, toggle focus mode).
+- **Connect WakaTime.** OAuth or API key flow pulls heartbeats, languages, and
+  daily totals into the home dashboard.
+- **Schedule alarms.** Local notifications with repeat rules; optional
+  WakaTime-linked conditions (e.g. nudge when below a daily hour target).
+- **Ship.** Separate iOS and Android build profiles, store listings, and
+  privacy-policy pages for App Store and Play Store submission.
+
+## Status
+
+**WIP.** Core navigation, NFC scan UI, and WakaTime API client are scaffolded.
+Next: end-to-end NFC write on device, notification reliability on both OSes,
+and first TestFlight / internal testing upload.
+
+> Replace SVG placeholders with device screenshots once builds run on hardware.
+> Add `repo` and `liveUrl` (store links) to frontmatter when published.

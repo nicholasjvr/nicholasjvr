@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="Opportunity feed placeholder">
+  <rect width="1600" height="900" fill="#431407"/>
+  <rect x="200" y="140" width="1200" height="140" rx="16" fill="#7c2d12"/>
+  <rect x="200" y="310" width="1200" height="140" rx="16" fill="#9a3412"/>
+  <rect x="200" y="480" width="1200" height="140" rx="16" fill="#7c2d12"/>
+  <text x="800" y="820" fill="#9a3412" font-family="JetBrains Mono, monospace" font-size="16" text-anchor="middle">Opportunity feed  placeholder screenshot</text>
+</svg>

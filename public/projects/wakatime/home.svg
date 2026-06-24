@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="WakaTime Alarm home placeholder">
+  <rect width="1600" height="900" fill="#042f2e"/>
+  <rect x="120" y="100" width="1360" height="700" rx="24" fill="#064e3b" stroke="#10b981" stroke-width="2"/>
+  <text x="800" y="420" fill="#a7f3d0" font-family="Inter, sans-serif" font-size="36" font-weight="700" text-anchor="middle">Today's coding stats</text>
+  <text x="800" y="520" fill="#6ee7b7" font-family="JetBrains Mono, monospace" font-size="20" text-anchor="middle">WakaTime summary + next alarm</text>
+  <text x="800" y="820" fill="#047857" font-family="JetBrains Mono, monospace" font-size="16" text-anchor="middle">Home screen  placeholder screenshot</text>
+</svg>

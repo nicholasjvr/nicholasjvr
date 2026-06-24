@@ -13,7 +13,7 @@ export const HERO = {
 
 export const PROJECTS_SECTION = {
   eyebrow: 'Selected work',
-  title: 'Three products. Real outcomes.',
+  title: 'Six products. Real outcomes.',
 } as const;
 
 export const WHAT_I_DO = {

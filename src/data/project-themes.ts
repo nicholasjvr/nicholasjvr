@@ -1,5 +1,12 @@
 /** Per-project accent palettes. Applied via `data-accent-theme` on `<html>` or cards. */
-export type AccentTheme = 'default' | 'tradebot' | 'meeting-memory' | 'cinhaus';
+export type AccentTheme =
+  | 'default'
+  | 'tradebot'
+  | 'meeting-memory'
+  | 'cinhaus'
+  | 'wakatime'
+  | 'sportsopp'
+  | 'truckloader';
 
 export interface AccentThemeTokens {
   label: string;
@@ -32,5 +39,23 @@ export const ACCENT_THEMES: Record<AccentTheme, AccentThemeTokens> = {
     accent: '200 240 74',
     accent2: '245 244 240',
     glow: '200 240 74',
+  },
+  wakatime: {
+    label: 'WakaTime Alarm',
+    accent: '0 173 131',
+    accent2: '52 211 153',
+    glow: '16 185 129',
+  },
+  sportsopp: {
+    label: 'SportsOpp',
+    accent: '249 115 22',
+    accent2: '234 88 12',
+    glow: '251 146 60',
+  },
+  truckloader: {
+    label: 'Truckloader',
+    accent: '234 179 8',
+    accent2: '202 138 4',
+    glow: '250 204 21',
   },
 };

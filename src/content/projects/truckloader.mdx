@@ -1,0 +1,101 @@
+---
+title: Truckloader
+tagline: Three.js frontend for truck loading mechanics — visualise cargo placement, weight distribution, and load plans in 3D.
+status: wip
+featured: true
+order: 6
+accentTheme: truckloader
+timeframe: Jun 2026 to present
+role: Solo build (Three.js scene, loading physics UX, procedural truck/cargo models, web frontend)
+objective: >-
+  Build an interactive 3D web experience that shows how cargo fits inside a
+  truck trailer: drag-and-drop placement, weight and balance feedback, and
+  clear visuals for loaders and dispatchers without installing desktop software.
+outcome: >-
+  A browser-based Three.js application in active development: procedural truck
+  and pallet meshes, orbit camera controls, raycast picking for cargo placement,
+  and a UI layer for dimensions, weight limits, and load-plan export. Proves
+  real-time WebGL product UX and domain-specific 3D interaction design.
+skills:
+  - typescript
+  - threejs
+  - react
+  - dashboards
+techStack:
+  - Three.js
+  - WebGL
+  - TypeScript
+  - Vite (or Astro island)
+  - glTF / procedural geometry
+  - Raycasting · OrbitControls
+cover: /projects/truckloader/cover.svg
+metrics:
+  - { label: "Runtime", value: "WebGL / browser" }
+  - { label: "Interaction", value: "Drag · snap · raycast" }
+  - { label: "Output", value: "Load plan views" }
+  - { label: "Models", value: "Procedural + glTF" }
+highlights:
+  - title: 3D trailer scene
+    body: >-
+      Configurable trailer dimensions with interior volume, wheel wells, and
+      door zones rendered as a readable loading bay.
+  - title: Cargo placement mechanics
+    body: >-
+      Pick, move, and rotate pallets/boxes with snap-to-grid and collision
+      hints so illegal overlaps are visible before save.
+  - title: Weight and balance feedback
+    body: >-
+      Running totals for axle load estimates and centre-of-gravity indicators
+      tied to each placed item's weight metadata.
+  - title: Load-plan UI
+    body: >-
+      Side panel for item catalogue, dimensions, and export-friendly summary
+      views (top-down and elevation) alongside the live 3D scene.
+gallery:
+  - src: /projects/truckloader/scene.svg
+    alt: Three.js truck trailer 3D scene
+    caption: "Scene: trailer interior with orbit camera (placeholder)."
+  - src: /projects/truckloader/placement.svg
+    alt: Cargo placement with snap grid
+    caption: "Placement: drag-and-drop pallets with collision hints (placeholder)."
+  - src: /projects/truckloader/weight.svg
+    alt: Weight distribution panel
+    caption: "Weight: axle totals and balance indicators (placeholder)."
+  - src: /projects/truckloader/catalog.svg
+    alt: Cargo catalogue sidebar
+    caption: "Catalogue: item list and dimensions for load planning (placeholder)."
+demo:
+  kind: screenshots
+---
+
+## What it is
+
+Truckloader is a **Three.js** web frontend focused on **truck loading
+mechanics**: how cargo fits in a trailer, how weight distributes across axles,
+and how dispatchers can iterate on a load plan in the browser.
+
+## How it works
+
+- **Scene.** A Three.js renderer hosts the trailer mesh, lighting, and camera
+  rig (orbit + focus on placement zone).
+- **Interaction.** Raycasting selects cargo; transforms update position/rotation
+  with grid snap and overlap warnings.
+- **Data.** Each cargo item carries L×W×H and weight; the UI aggregates totals
+  and flags over-limit states.
+- **Views.** Toggle top-down and side elevation helpers without leaving the
+  3D context.
+
+## Relation to this portfolio
+
+This site already uses Three.js for the decorative orb (`src/lib/evil-orb.ts`).
+Truckloader is the **product-grade** application: domain meshes, interaction
+loops, and a UI shell around the renderer rather than ambient background FX.
+
+## Status
+
+**WIP.** Scene bootstrap, camera controls, and placeholder procedural trailer
+geometry are scaffolded. Next: cargo catalogue, snap/collision rules, weight
+math, and optional `demo.kind: iframe` once a hosted build exists.
+
+> Flip `demo.kind` to `iframe` when a public demo URL is deployed.
+> Replace SVG placeholders with WebGL capture screenshots or a short screen recording.
