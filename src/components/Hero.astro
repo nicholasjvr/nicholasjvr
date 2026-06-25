@@ -1,5 +1,9 @@
 ---
 import { HERO } from '../data/copy';
+
+const githubUrl = `https://github.com/${import.meta.env.PUBLIC_GITHUB_USERNAME || 'nicholasjvr'}`;
+const secondaryHref = HERO.ctaSecondary.href === 'github' ? githubUrl : HERO.ctaSecondary.href;
+const secondaryExternal = HERO.ctaSecondary.href === 'github';
 ---
 
 <section class="section pt-24 md:pt-36">
@@ -13,11 +17,18 @@ import { HERO } from '../data/copy';
     {HERO.line}
   </p>
   <p class="reveal mt-3 max-w-2xl text-lg leading-relaxed text-ink md:text-xl">
-    If it sounds remotely possible, <span class="text-accent-warm">I'll probably build it.</span>
+    {HERO.signatureBefore}{' '}
+    <span class="text-accent-warm">{HERO.signatureAccent}</span>
   </p>
 
   <div class="reveal mt-9 flex flex-wrap items-center gap-3">
     <a href={HERO.ctaPrimary.href} class="btn-primary">{HERO.ctaPrimary.label}</a>
-    <a href={HERO.ctaSecondary.href} class="btn-ghost">{HERO.ctaSecondary.label}</a>
+    <a
+      href={secondaryHref}
+      class="btn-ghost"
+      {...(secondaryExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+    >
+      {HERO.ctaSecondary.label}
+    </a>
   </div>
 </section>

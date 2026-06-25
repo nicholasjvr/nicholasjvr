@@ -1,12 +1,10 @@
 ---
 import { SITE } from '../data/site';
 import ThemeToggle from './ThemeToggle.astro';
-import { withBase } from '../lib/paths';
 
 const links = [
   { href: `${import.meta.env.BASE_URL}#projects`, label: 'Projects' },
   { href: `${import.meta.env.BASE_URL}#stack`, label: 'Stack' },
-  { href: `${import.meta.env.BASE_URL}#contact`, label: 'Contact' },
 ];
 const githubUrl = `https://github.com/${import.meta.env.PUBLIC_GITHUB_USERNAME || 'nicholasjvr'}`;
 ---
@@ -16,7 +14,7 @@ const githubUrl = `https://github.com/${import.meta.env.PUBLIC_GITHUB_USERNAME |
     <a href={import.meta.env.BASE_URL} class="font-semibold tracking-tight text-ink" aria-label={`${SITE.name} home`}>
       <span class="text-base sm:text-lg">Nicholas van Rensburg</span>
       <span class="mt-0.5 block text-[10px] font-medium uppercase tracking-[0.18em] text-muted">
-        Fullstack JavaScript Developer
+        {SITE.role}
       </span>
     </a>
 

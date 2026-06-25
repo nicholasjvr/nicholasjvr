@@ -19,18 +19,18 @@ export const FAQ: FaqItem[] = [
     tags: ['tradebot', 'ml'],
   },
   {
-    q: 'What does Nicholas do?',
-    a: 'Fullstack JavaScript developer. He builds software, systems, automations, and products: SaaS platforms, Zoho ecosystems, internal business tools, dashboards, integrations, and automation systems.',
+    q: 'What is this site?',
+    a: 'A personal portfolio of side projects Nicholas has built outside of work — trading tools, SaaS experiments, automations, and other experiments. Each project has a case study write-up.',
     tags: ['identity', 'about'],
   },
   {
-    q: 'What can Nicholas build for me?',
-    a: 'Fullstack SaaS products (Node.js, React, Next.js, TypeScript), Zoho ecosystems (Creator, CRM, custom widgets), internal business tools and dashboards, API integrations, and automation platforms. AI-enhanced workflows where they add real value.',
-    tags: ['hire', 'services'],
+    q: 'Is Nicholas available for hire?',
+    a: 'This site is a showcase of personal side projects, not a services pitch. For code and context, GitHub (@nicholasjvr) is the best place to look.',
+    tags: ['about'],
   },
   {
-    q: 'How do I get in touch?',
-    a: 'Email nicholas241cut@gmail.com, or open an issue / DM on GitHub (@nicholasjvr).',
-    tags: ['contact'],
+    q: 'Where can I find the source code?',
+    a: 'GitHub: github.com/nicholasjvr. Individual project repos are linked from each case study where applicable.',
+    tags: ['contact', 'projects'],
   },
 ];

@@ -5,30 +5,18 @@ export type TerminalFrame = {
 
 export const TERMINAL_ART: TerminalFrame[] = [
   {
-    file: 'uniquely_yours.txt',
+    file: 'side_projects.txt',
     art: String.raw`
   ┌─────────────────────────────────────┐
-  │  not a template. not a clone.       │
-  │  built for how *you* actually work. │
+  │  built after hours                  │
+  │  shipped anyway                     │
+  │  documented here                    │
   └─────────────────────────────────────┘
          \\   ^__^
           \\  (oo)\\_______
               (__)\\       )\\/\\
                   ||----w |
                   ||     ||
-`.trim(),
-  },
-  {
-    file: 'airtificial_labourers.sh',
-    art: String.raw`
-       ___________________________
-      |  CURSOR  CLINE  CONTINUE  |
-      |  KILO    COPILOT  WINDSURF  |
-      |___________________________|
-            \\   ____
-             \\  |  |
-                 |  |  non-sentient
-                 |__|  very helpful
 `.trim(),
   },
   {
@@ -57,15 +45,15 @@ export const TERMINAL_ART: TerminalFrame[] = [
 `.trim(),
   },
   {
-    file: 'idea_to_software.gif',
+    file: 'idea_to_build.gif',
     art: String.raw`
       ( idea )
          |
          v
-    [========]  <- you
+    [========]  <- late night
          |
          v
-    { software }  <- also you, but faster
+    { project }  <- side quest
 `.trim(),
   },
   {
@@ -73,7 +61,7 @@ export const TERMINAL_ART: TerminalFrame[] = [
     art: String.raw`
         Z   Z
        (-.-)
-      __|_|__   // humans still required
+      __|_|__   // still shipping
      |       |
      |  zzz  |
      |_______|
@@ -93,23 +81,12 @@ export const TERMINAL_ART: TerminalFrame[] = [
 `.trim(),
   },
   {
-    file: 'vaporwave.sys',
-    art: String.raw`
-  ░▒▓█ AI LABOUR DEVELOPMENT █▓▒░
-  ═══════════════════════════════
-   SENTIENCE .......... 0.00%
-   REGRET ............. NONE
-   ERA STATUS ......... LOVED
-  ═══════════════════════════════
-`.trim(),
-  },
-  {
     file: 'build_loop.sh',
     art: String.raw`
-   while (possible) {
-     scaffold();   // agents
-     architect();  // human
-     ship();       // always
+   while (curious) {
+     prototype();
+     break_things();
+     ship();
    }
 `.trim(),
   },
@@ -134,21 +111,41 @@ export const TERMINAL_ART: TerminalFrame[] = [
     |_______________________|
        |  projects  |
        |  stack     |
-       |  contact   |
+       |  github    |
        |____________|
 `.trim(),
   },
   {
-    file: 'agent_swarm.map',
+    file: 'orb_render.glsl',
     art: String.raw`
           .---.
          /     \\
-        | O   O |   IDE agents
-         \\___/    orbiting the
-      .---' '---.  human layer
+        | O   O |   three.js
+         \\___/    smiley orb
+      .---' '---.  because why not
      /           \\
-    |  ( YOU )    |
+    |  ( orb )    |
      \\___________/
+`.trim(),
+  },
+  {
+    file: 'case_study.md',
+    art: String.raw`
+   # objective
+   # approach
+   # outcome
+   -----------------
+   status: documented
+   audience: future me
+`.trim(),
+  },
+  {
+    file: 'weekend_deploy.sh',
+    art: String.raw`
+   git commit -m "probably fine"
+   npm run build
+   fingers crossed...
+   ==================> live
 `.trim(),
   },
 ];
