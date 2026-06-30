@@ -4,8 +4,8 @@ export default {
   theme: {
     extend: {
       // Colors map onto CSS custom properties defined in src/styles/global.css.
-      // This is the seam that lets a future dark/neon "TradeBot universe" theme
-      // be layered via [data-theme] without touching component markup.
+      // The whole site is now a terminal/build-log skin, so tokens lean toward a
+      // flat near-black surface with a green "prompt" accent and an amber warning.
       colors: {
         bg: "rgb(var(--c-bg) / <alpha-value>)",
         surface: "rgb(var(--c-surface) / <alpha-value>)",
@@ -20,20 +20,18 @@ export default {
         danger: "rgb(var(--c-danger) / <alpha-value>)",
       },
       fontFamily: {
-        sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
-        mono: [
-          '"JetBrains Mono"',
-          "ui-monospace",
-          "SFMono-Regular",
-          "monospace",
-        ],
+        // Mono is now the default everywhere. This single change is what makes the
+        // entire site read as a terminal rather than a designed-startup landing page.
+        sans: ['"JetBrains Mono"', "ui-monospace", "SFMono-Regular", "monospace"],
+        mono: ['"JetBrains Mono"', "ui-monospace", "SFMono-Regular", "monospace"],
       },
       maxWidth: {
-        content: "72rem",
+        content: "64rem",
       },
       boxShadow: {
-        card: "0 1px 2px rgb(0 0 0 / 0.2), 0 8px 32px -12px rgb(0 0 0 / 0.4)",
-        "card-hover": "0 8px 32px -8px rgb(0 0 0 / 0.45)",
+        // Flat by design. No soft floaty product shadows.
+        card: "none",
+        "card-hover": "none",
       },
     },
   },

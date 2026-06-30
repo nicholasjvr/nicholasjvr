@@ -3,57 +3,45 @@
 @tailwind utilities;
 
 /* ---------------------------------------------------------------------------
-   Theme tokens
-   - data-theme: dark (default) | light
-   Monochrome base with a single cyan accent and one warm pink highlight.
+   Terminal / build-log theme
+   - data-theme: dark (default) | light ("paper terminal")
+   Flat near-black surface, hard 1px borders, a single green prompt accent and
+   an amber highlight. No neon, no glass, no 3D. Looks like a dev's actual
+   homepage, not an agency landing page.
 --------------------------------------------------------------------------- */
 
 :root,
 [data-theme='dark'] {
-  --c-bg: 11 15 25;
-  /* #0B0F19 */
-  --c-surface: 17 24 39;
-  /* #111827 */
-  --c-surface-2: 22 31 46;
-  /* #161F2E */
-  --c-border: 30 41 59;
-  /* #1E293B, subtle border on dark */
-  --c-ink: 248 250 252;
-  /* #F8FAFC */
-  --c-muted: 148 163 184;
-  /* #94A3B8 */
-  --c-accent: 0 247 255;
-  /* #00F7FF */
-  --c-accent-soft: 176 255 250;
-  /* #B0FFFA */
-  --c-accent-warm: 255 0 135;
-  /* #FF0087 */
-  --c-success: 52 211 153;
-  --c-danger: 248 113 113;
-  --c-nav-bg: 11 15 25;
-  --c-footer-bg: 11 15 25;
+  --c-bg: 10 13 12;          /* #0A0D0C near-black, faint green tint */
+  --c-surface: 16 20 19;     /* #101413 panel */
+  --c-surface-2: 22 27 25;   /* #161B19 raised panel */
+  --c-border: 38 46 42;      /* #262E2A hard, visible border */
+  --c-ink: 209 216 211;      /* #D1D8D3 dim white (terminals aren't pure white) */
+  --c-muted: 122 134 126;    /* #7A867E */
+  --c-accent: 63 185 80;     /* #3FB950 prompt green */
+  --c-accent-soft: 134 222 145;
+  --c-accent-warm: 210 162 76; /* #D2A24C amber, for wip / highlights */
+  --c-success: 63 185 80;
+  --c-danger: 248 81 73;     /* #F85149 */
+  --c-nav-bg: 10 13 12;
+  --c-footer-bg: 10 13 12;
 }
 
 [data-theme='light'] {
-  --c-bg: 248 250 252;
-  /* #F8FAFC */
-  --c-surface: 255 255 255;
-  --c-surface-2: 241 245 249;
-  --c-border: 226 232 240;
-  /* #E2E8F0, subtle border on light */
-  --c-ink: 15 23 42;
-  /* #0F172A */
-  --c-muted: 100 116 139;
-  /* #64748B */
-  --c-accent: 8 145 178;
-  /* #0891B2, darker cyan for contrast on light */
-  --c-accent-soft: 165 243 252;
-  --c-accent-warm: 219 39 119;
-  /* #DB2777 */
-  --c-success: 22 163 74;
-  --c-danger: 220 38 38;
-  --c-nav-bg: 255 255 255;
-  --c-footer-bg: 255 255 255;
+  /* "Paper terminal": warm off-white, dark ink. Keeps the toggle honest. */
+  --c-bg: 244 241 232;       /* #F4F1E8 paper */
+  --c-surface: 252 250 244;
+  --c-surface-2: 235 231 220;
+  --c-border: 213 206 190;
+  --c-ink: 38 42 38;         /* #262A26 */
+  --c-muted: 110 112 102;
+  --c-accent: 33 122 45;     /* darker green for contrast on paper */
+  --c-accent-soft: 96 158 104;
+  --c-accent-warm: 166 116 28;
+  --c-success: 33 122 45;
+  --c-danger: 191 47 39;
+  --c-nav-bg: 244 241 232;
+  --c-footer-bg: 244 241 232;
 }
 
 html {
@@ -61,188 +49,162 @@ html {
   color-scheme: dark;
 }
 
-[data-theme='light'] {
-  color-scheme: light;
-}
-
-[data-theme='dark'] {
-  color-scheme: dark;
-}
+[data-theme='light'] { color-scheme: light; }
+[data-theme='dark'] { color-scheme: dark; }
 
 body {
   background-color: rgb(var(--c-bg));
   color: rgb(var(--c-ink));
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  /* Subtle CRT scanlines + faint grid, painted straight onto the body so there
+     is no overlay element to fight with for stacking context. */
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      rgb(255 255 255 / 0.014) 0px,
+      rgb(255 255 255 / 0.014) 1px,
+      transparent 1px,
+      transparent 3px
+    ),
+    linear-gradient(rgb(var(--c-border) / 0.18) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--c-border) / 0.18) 1px, transparent 1px);
+  background-size: 100% 3px, 44px 44px, 44px 44px;
 }
 
+/* --- chrome ---------------------------------------------------------------- */
+
 .site-chrome {
-  background: rgb(var(--c-nav-bg) / 0.85);
+  background: rgb(var(--c-nav-bg) / 0.9);
   border-bottom: 1px solid rgb(var(--c-border));
 }
 
 .site-footer {
-  background: rgb(var(--c-footer-bg) / 0.6);
+  background: rgb(var(--c-footer-bg) / 0.7);
   border-top: 1px solid rgb(var(--c-border));
 }
 
 .section {
-  @apply mx-auto w-full max-w-content px-6 py-20 md:py-32;
+  @apply mx-auto w-full max-w-content px-5 py-16 md:py-24;
 }
 
-/* Tighter vertical rhythm for sections that should feel dense / connected. */
-.section-compact {
-  @apply py-10 md:py-14;
-}
-
-/* Lets a section hug the one above it so they read as one flowing block. */
-.section-flow-top {
-  @apply pt-0 md:pt-4;
-}
+.section-compact { @apply py-10 md:py-14; }
+.section-flow-top { @apply pt-0 md:pt-4; }
 
 .eyebrow {
-  @apply text-xs font-semibold uppercase tracking-[0.18em] text-muted;
+  @apply text-xs font-medium uppercase tracking-[0.2em] text-accent;
+}
+/* Prefix eyebrows with a prompt so every section header reads as a command. */
+.eyebrow::before {
+  content: '$ ';
+  color: rgb(var(--c-accent));
 }
 
-/* Single neon panel that wraps the AI banner + copy + orb as one unit. */
-.ai-labour-panel {
-  @apply overflow-hidden rounded-2xl border;
-  border-color: rgb(var(--c-accent) / 0.22);
-  background:
-    radial-gradient(120% 140% at 0% 0%, rgb(var(--c-accent) / 0.06), transparent 55%),
-    radial-gradient(120% 140% at 100% 100%, rgb(var(--c-accent-warm) / 0.07), transparent 55%),
-    rgb(var(--c-surface) / 0.55);
-  box-shadow:
-    0 0 0 1px rgb(var(--c-accent) / 0.08),
-    0 18px 60px -28px rgb(0 0 0 / 0.7),
-    0 0 60px -30px rgb(var(--c-accent-warm) / 0.25);
+/* --- terminal primitives --------------------------------------------------- */
+
+/* A framed "window" with a fake title bar. The workhorse panel for the site. */
+.term-window {
+  @apply overflow-hidden rounded-lg border;
+  border-color: rgb(var(--c-border));
+  background: rgb(var(--c-surface) / 0.85);
 }
 
-/* Orb mount: reserve height before the canvas/WebGL initializes (no layout shift). */
-.evil-orb {
-  position: relative;
-  width: 100%;
-  height: 220px;
+.term-titlebar {
+  @apply flex items-center gap-2 border-b px-4 py-2.5;
+  border-color: rgb(var(--c-border));
+  background: rgb(var(--c-surface-2) / 0.8);
 }
 
-@screen md {
-  .evil-orb {
-    height: 300px;
-  }
+/* The three "traffic light" dots. Decorative. */
+.term-dot {
+  @apply inline-block h-3 w-3 rounded-full;
+  border: 1px solid rgb(0 0 0 / 0.25);
 }
 
-.evil-orb canvas {
-  display: block;
-  width: 100% !important;
-  height: 100% !important;
+.prompt::before {
+  content: '$ ';
+  color: rgb(var(--c-accent));
+  font-weight: 700;
 }
 
-.evil-orb-fallback {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  filter: drop-shadow(0 0 24px rgb(var(--c-accent-warm) / 0.45));
+/* Blinking block cursor. Replaces the old fade-up motion as the site's signature. */
+.cursor::after {
+  content: '';
+  display: inline-block;
+  width: 0.6em;
+  height: 1.05em;
+  margin-left: 0.15em;
+  vertical-align: text-bottom;
+  background: rgb(var(--c-accent));
+  animation: term-blink 1.05s steps(1) infinite;
 }
 
-.text-accent-warm {
-  color: rgb(var(--c-accent-warm));
+@keyframes term-blink {
+  0%, 50% { opacity: 1; }
+  50.01%, 100% { opacity: 0; }
 }
+
+/* Sticker / bracket tag, used for statuses and stack chips. */
+.tag {
+  @apply inline-flex items-center gap-1 rounded border px-2 py-0.5 text-xs;
+  border-color: rgb(var(--c-border));
+  background: rgb(var(--c-surface-2) / 0.6);
+  color: rgb(var(--c-muted));
+}
+.tag-accent { color: rgb(var(--c-accent)); border-color: rgb(var(--c-accent) / 0.4); }
+.tag-warm   { color: rgb(var(--c-accent-warm)); border-color: rgb(var(--c-accent-warm) / 0.4); }
+
+/* --- buttons (rendered as bracketed commands) ------------------------------ */
 
 .btn-primary {
-  @apply rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold transition;
-  color: rgb(var(--c-bg));
+  @apply inline-flex items-center rounded border px-4 py-2 text-sm font-medium transition;
+  border-color: rgb(var(--c-accent) / 0.5);
+  color: rgb(var(--c-accent));
+  background: rgb(var(--c-accent) / 0.06);
 }
-
 .btn-primary:hover {
-  filter: brightness(1.08);
+  background: rgb(var(--c-accent) / 0.14);
+  border-color: rgb(var(--c-accent));
 }
 
 .btn-ghost {
-  @apply rounded-lg border px-5 py-2.5 text-sm font-semibold text-ink transition;
+  @apply inline-flex items-center rounded border px-4 py-2 text-sm font-medium transition text-ink;
   border-color: rgb(var(--c-border));
-  background: rgb(var(--c-surface) / 0.6);
+  background: transparent;
 }
-
-.btn-ghost:hover {
-  border-color: rgb(var(--c-accent) / 0.4);
-}
+.btn-ghost:hover { border-color: rgb(var(--c-accent) / 0.5); color: rgb(var(--c-accent)); }
 
 .card-surface {
-  @apply rounded-xl border;
+  @apply rounded-lg border;
   border-color: rgb(var(--c-border));
-  background: rgb(var(--c-surface) / 0.6);
+  background: rgb(var(--c-surface) / 0.7);
 }
 
-.project-cards-3d {
-  perspective: 1400px;
-}
+.text-accent-warm { color: rgb(var(--c-accent-warm)); }
+
+/* --- project cards (flat, no tilt) ----------------------------------------- */
 
 .project-card {
-  @apply rounded-xl border;
+  @apply rounded-lg border;
   border-color: rgb(var(--c-border));
-  background: rgb(var(--c-surface) / 0.72);
-  transform-style: preserve-3d;
-  transform: rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) translateY(var(--lift, 0px)) scale(var(--card-scale, 1));
-  transition:
-    transform 0.12s ease-out,
-    border-color 0.25s ease,
-    box-shadow 0.25s ease;
-  box-shadow:
-    var(--shadow-x, 0px) var(--shadow-y, 8px) 32px -10px rgb(0 0 0 / 0.45),
-    0 0 0 1px rgb(var(--c-border) / 0.8);
-  will-change: transform;
+  background: rgb(var(--c-surface) / 0.7);
+  transition: border-color 0.18s ease, transform 0.18s ease, background 0.18s ease;
+}
+.project-card:hover {
+  border-color: rgb(var(--c-accent) / 0.55);
+  background: rgb(var(--c-surface-2) / 0.7);
+  transform: translateY(-2px);
 }
 
-.project-card.is-tilting {
-  --card-scale: 1.02;
-  border-color: rgb(var(--c-accent) / 0.35);
-  box-shadow:
-    var(--shadow-x, 0px) var(--shadow-y, 16px) 48px -12px rgb(0 0 0 / 0.55),
-    0 0 0 1px rgb(var(--c-accent) / 0.2),
-    0 0 40px -8px rgb(var(--c-accent) / 0.15);
-}
-
-.project-card-inner {
-  transform: translateZ(24px);
-  transform-style: preserve-3d;
-}
-
-.project-card-shine {
-  background: linear-gradient(125deg,
-      rgb(var(--c-accent) / 0.14) 0%,
-      transparent 38%,
-      transparent 62%,
-      rgb(var(--c-accent-warm) / 0.1) 100%);
-}
-
-.project-card-image {
-  transform: translateZ(12px);
-}
+/* --- reveal: snappy, not floaty -------------------------------------------- */
 
 .reveal {
   opacity: 0;
-  transform: translateY(8px);
-  transition:
-    opacity 0.4s ease,
-    transform 0.4s ease;
+  transition: opacity 0.25s ease;
 }
-
-.reveal.is-visible {
-  opacity: 1;
-  transform: none;
-}
+.reveal.is-visible { opacity: 1; }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-
-  .project-card.is-tilting {
-    --card-scale: 1;
-    --lift: 0px;
-  }
+  .reveal { opacity: 1; transition: none; }
+  .cursor::after { animation: none; }
 }

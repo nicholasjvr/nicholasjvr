@@ -1,5 +1,6 @@
 ---
 import Gallery from './Gallery.astro';
+import { withBase } from '../lib/paths';
 
 // The pluggable demo slot. Switches on demo.kind so "berserk mode" (live iframe
 // / canned-data replay) becomes an additive component, not a layout rewrite.
@@ -8,45 +9,129 @@ interface GalleryItem {
   alt: string;
   caption?: string;
 }
+interface IframeSource {
+  src: string;
+  label: string;
+}
 interface Props {
-  demo: { kind: 'screenshots' | 'video' | 'iframe' | 'replay'; src?: string };
+  demo: {
+    kind: 'screenshots' | 'video' | 'iframe' | 'replay';
+    src?: string;
+    sources?: IframeSource[];
+  };
   gallery: GalleryItem[];
   title: string;
 }
 const { demo, gallery, title } = Astro.props;
+
+// Local public assets need the base path; external URLs pass through untouched.
+const resolve = (s: string) => (/^https?:\/\//.test(s) ? s : withBase(s));
+
+// Normalize iframe inputs to a single labeled list so the template has one path.
+const iframeSources: IframeSource[] =
+  demo.kind === 'iframe'
+    ? demo.sources?.length
+      ? demo.sources
+      : demo.src
+        ? [{ src: demo.src, label: 'preview' }]
+        : []
+    : [];
 ---
 
 {demo.kind === 'screenshots' && <Gallery items={gallery} />}
 
 {
   demo.kind === 'video' && demo.src && (
-    <video controls playsinline class="w-full rounded-2xl border border-border shadow-card">
-      <source src={demo.src} type="video/mp4" />
+    <video controls playsinline class="w-full rounded-lg border border-border">
+      <source src={resolve(demo.src)} type="video/mp4" />
     </video>
   )
 }
 
 {
-  demo.kind === 'iframe' && demo.src && (
-    <div class="overflow-hidden rounded-2xl border border-border shadow-card">
-      <iframe
-        src={demo.src}
-        title={`${title} live demo`}
-        loading="lazy"
-        class="aspect-[16/10] w-full"
-        sandbox="allow-scripts allow-same-origin"
-      />
+  demo.kind === 'iframe' && iframeSources.length > 0 && (
+    <div class="term-window" data-demo>
+      <div class="term-titlebar">
+        <span class="term-dot" style="background:#f85149" aria-hidden="true" />
+        <span class="term-dot" style="background:#d2a24c" aria-hidden="true" />
+        <span class="term-dot" style="background:#3fb950" aria-hidden="true" />
+        <span class="ml-2 truncate text-xs text-muted">{title} — live preview</span>
+
+        {iframeSources.length > 1 && (
+          <div class="ml-auto flex gap-1" role="tablist" aria-label={`${title} demo pages`}>
+            {iframeSources.map((s, i) => (
+              <button
+                type="button"
+                class="tag transition hover:text-accent data-[active=true]:border-accent/40 data-[active=true]:text-accent"
+                data-demo-tab={i}
+                data-active={i === 0 ? 'true' : 'false'}
+                role="tab"
+                aria-selected={i === 0 ? 'true' : 'false'}
+              >
+                {s.label}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <div class="relative bg-surface-2">
+        {iframeSources.map((s, i) => (
+          <iframe
+            src={resolve(s.src)}
+            title={`${title} — ${s.label}`}
+            loading="lazy"
+            class="aspect-[16/10] w-full data-[active=false]:hidden"
+            data-demo-frame={i}
+            data-active={i === 0 ? 'true' : 'false'}
+            sandbox="allow-scripts allow-same-origin allow-popups"
+          />
+        ))}
+      </div>
     </div>
   )
 }
 
 {
   demo.kind === 'replay' && (
-    <div class="rounded-2xl border border-dashed border-border bg-surface-2 p-10 text-center">
-      <p class="font-semibold text-ink">Interactive replay coming soon</p>
+    <div class="card-surface rounded-lg border-dashed p-10 text-center">
+      <p class="prompt font-semibold text-ink">echo "interactive replay coming soon"</p>
       <p class="mt-1 text-sm text-muted">
         A self-contained clone of the cockpit driven by canned data. No live infra.
       </p>
     </div>
+  )
+}
+
+{
+  iframeSources.length > 1 && (
+    <script>
+      function initDemoTabs() {
+        document.querySelectorAll<HTMLElement>('[data-demo]').forEach((root) => {
+          if (root.dataset.tabsReady === 'true') return;
+          root.dataset.tabsReady = 'true';
+
+          const tabs = root.querySelectorAll<HTMLElement>('[data-demo-tab]');
+          const frames = root.querySelectorAll<HTMLElement>('[data-demo-frame]');
+
+          tabs.forEach((tab) => {
+            tab.addEventListener('click', () => {
+              const idx = tab.dataset.demoTab;
+              tabs.forEach((t) => {
+                const active = t.dataset.demoTab === idx;
+                t.dataset.active = String(active);
+                t.setAttribute('aria-selected', String(active));
+              });
+              frames.forEach((f) => {
+                f.dataset.active = String(f.dataset.demoFrame === idx);
+              });
+            });
+          });
+        });
+      }
+
+      initDemoTabs();
+      document.addEventListener('astro:page-load', initDemoTabs);
+    </script>
   )
 }

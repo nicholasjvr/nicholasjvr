@@ -56,6 +56,12 @@ const projects = defineCollection({
       .object({
         kind: z.enum(['screenshots', 'video', 'iframe', 'replay']),
         src: z.string().optional(),
+        // For kind: 'iframe' with more than one embeddable page, list them here
+        // and the demo renders a tabbed live preview. Falls back to `src` when
+        // a single page is enough.
+        sources: z
+          .array(z.object({ src: z.string(), label: z.string() }))
+          .optional(),
       })
       .default({ kind: 'screenshots' }),
   }),

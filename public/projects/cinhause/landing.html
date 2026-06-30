@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CinHaus — App Infrastructure for Modern Businesses</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --black: #080808; --off-black: #0f0f0f; --surface: #141414;
+    --border: rgba(255,255,255,0.07); --border-bright: rgba(255,255,255,0.14);
+    --white: #f5f4f0; --white-dim: rgba(245,244,240,0.55); --white-faint: rgba(245,244,240,0.2);
+    --accent: #c8f04a; --accent-dim: rgba(200,240,74,0.12); --accent-glow: rgba(200,240,74,0.25);
+    --font-display: 'Syne', sans-serif; --font-mono: 'DM Mono', monospace;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--black); color: var(--white); font-family: var(--font-display); overflow-x: hidden; cursor: none; }
+  .cursor { width:10px;height:10px;background:var(--accent);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transition:transform .15s ease;transform:translate(-50%,-50%); }
+  .cursor-ring { width:36px;height:36px;border:1px solid rgba(200,240,74,0.4);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform .35s ease,opacity .3s; }
+  .grid-bg { position:fixed;inset:0;background-image:linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px);background-size:60px 60px;z-index:0;pointer-events:none; }
+  .noise { position:fixed;inset:0;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px;z-index:0;pointer-events:none; }
+  nav { position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:24px 48px;border-bottom:1px solid var(--border);background:rgba(8,8,8,.85);backdrop-filter:blur(12px);animation:fadeDown .8s ease both; }
+  .nav-logo { font-size:18px;font-weight:800;letter-spacing:.12em;text-transform:uppercase; }
+  .nav-logo span { color:var(--accent); }
+  .nav-links { display:flex;align-items:center;gap:40px;list-style:none; }
+  .nav-links a { font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--white-dim);text-decoration:none;transition:color .2s; }
+  .nav-links a:hover { color:var(--white); }
+  .nav-cta { font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;background:var(--accent);color:var(--black);border:none;padding:10px 20px;cursor:none;transition:opacity .2s; }
+  .nav-cta:hover { opacity:.85; }
+  .hero { position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 48px 80px;padding-top:120px; }
+  .hero-tag { font-family:var(--font-mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:32px;display:flex;align-items:center;gap:12px;animation:fadeUp .9s .2s ease both; }
+  .hero-tag::before { content:'';display:block;width:32px;height:1px;background:var(--accent); }
+  .hero-headline { font-size:clamp(52px,8vw,112px);font-weight:800;line-height:.92;letter-spacing:-.03em;text-transform:uppercase;max-width:900px;animation:fadeUp .9s .35s ease both; }
+  .hero-headline .line-accent { color:var(--accent); }
+  .hero-headline .line-outline { -webkit-text-stroke:1px var(--white-faint);color:transparent; }
+  .hero-bottom { margin-top:64px;display:flex;align-items:flex-end;justify-content:space-between;gap:40px;animation:fadeUp .9s .5s ease both; }
+  .hero-desc { font-family:var(--font-mono);font-size:13px;line-height:1.8;color:var(--white-dim);max-width:420px;font-weight:300; }
+  .hero-actions { display:flex;flex-direction:column;align-items:flex-end;gap:16px; }
+  .btn-primary { display:inline-flex;align-items:center;gap:12px;background:var(--accent);color:var(--black);font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:16px 28px;border:none;cursor:none;transition:gap .3s,opacity .2s;text-decoration:none; }
+  .btn-primary:hover { gap:20px;opacity:.9; }
+  .btn-secondary { display:inline-flex;align-items:center;gap:10px;color:var(--white-dim);font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:color .2s;cursor:none; }
+  .btn-secondary:hover { color:var(--white); }
+  .scroll-hint { position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;animation:fadeUp 1s .9s ease both; }
+  .scroll-hint span { font-family:var(--font-mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--white-faint);writing-mode:vertical-lr; }
+  .scroll-line { width:1px;height:48px;background:linear-gradient(to bottom,var(--white-faint),transparent);animation:scrollPulse 2s ease infinite; }
+  .marquee-wrap { position:relative;z-index:1;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--off-black);overflow:hidden;padding:16px 0; }
+  .marquee-track { display:flex;animation:marquee 22s linear infinite;width:max-content; }
+  .marquee-item { display:flex;align-items:center;gap:24px;padding:0 32px;font-family:var(--font-mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--white-faint);white-space:nowrap; }
+  .marquee-item .dot { width:4px;height:4px;border-radius:50%;background:var(--accent);flex-shrink:0; }
+  .section { position:relative;z-index:1;padding:120px 48px; }
+  .section-label { font-family:var(--font-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:56px;display:flex;align-items:center;gap:12px; }
+  .section-label::before { content:'';display:block;width:24px;height:1px;background:var(--accent); }
+  .services-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border); }
+  .service-card { background:var(--off-black);padding:48px 40px;position:relative;overflow:hidden;transition:background .3s; }
+  .service-card::before { content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .4s; }
+  .service-card:hover { background:var(--surface); }
+  .service-card:hover::before { transform:scaleX(1); }
+  .service-number { font-family:var(--font-mono);font-size:10px;letter-spacing:.15em;color:var(--white-faint);margin-bottom:32px; }
+  .service-icon { width:40px;height:40px;margin-bottom:24px;color:var(--accent); }
+  .service-title { font-size:20px;font-weight:700;letter-spacing:-.02em;margin-bottom:16px;line-height:1.2; }
+  .service-desc { font-family:var(--font-mono);font-size:12px;line-height:1.8;color:var(--white-dim);font-weight:300; }
+  .service-tag { margin-top:32px;display:inline-block;font-family:var(--font-mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-dim);padding:5px 10px; }
+  .stats-section { position:relative;z-index:1;padding:80px 48px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border); }
+  .stat-item { background:var(--black);padding:48px 40px; }
+  .stat-value { font-size:56px;font-weight:800;letter-spacing:-.04em;line-height:1;margin-bottom:12px; }
+  .stat-value span { color:var(--accent); }
+  .stat-label { font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--white-dim);font-weight:300; }
+  .process-list { display:flex;flex-direction:column;border:1px solid var(--border); }
+  .process-item { display:grid;grid-template-columns:80px 1fr auto;align-items:center;gap:48px;padding:40px 48px;border-bottom:1px solid var(--border);transition:background .3s; }
+  .process-item:last-child { border-bottom:none; }
+  .process-item:hover { background:var(--off-black); }
+  .process-num { font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;color:var(--white-faint); }
+  .process-title { font-size:22px;font-weight:700;letter-spacing:-.02em;margin-bottom:8px; }
+  .process-detail { font-family:var(--font-mono);font-size:12px;color:var(--white-dim);font-weight:300;line-height:1.7; }
+  .process-badge { font-family:var(--font-mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding:6px 12px;border:1px solid var(--border-bright);color:var(--white-dim);white-space:nowrap; }
+
+  /* ── PRICING ── */
+  .pricing-header { margin-bottom:72px; }
+  .pricing-title { font-size:clamp(36px,5vw,64px);font-weight:800;letter-spacing:-.03em;text-transform:uppercase;line-height:.95;margin-bottom:20px; }
+  .pricing-title span { color:var(--accent); }
+  .pricing-sub { font-family:var(--font-mono);font-size:13px;color:var(--white-dim);max-width:500px;line-height:1.8;font-weight:300; }
+  .pricing-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);position:relative; }
+  .plan-card { background:var(--off-black);padding:52px 44px;position:relative;display:flex;flex-direction:column;transition:background .3s; }
+  .plan-card:hover { background:var(--surface); }
+  .plan-card.featured { background:var(--surface);border:1px solid rgba(200,240,74,0.25); }
+  .plan-card.featured::before { content:'MOST POPULAR';position:absolute;top:-1px;left:44px;font-family:var(--font-mono);font-size:9px;letter-spacing:.2em;background:var(--accent);color:var(--black);padding:5px 12px; }
+  .plan-tier { font-family:var(--font-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--white-faint);margin-bottom:20px; }
+  .plan-name { font-size:28px;font-weight:800;letter-spacing:-.02em;margin-bottom:8px; }
+  .plan-desc { font-family:var(--font-mono);font-size:12px;color:var(--white-dim);line-height:1.7;font-weight:300;margin-bottom:40px; }
+  .plan-price-block { margin-bottom:40px;padding:28px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border); }
+  .plan-price-label { font-family:var(--font-mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--white-faint);margin-bottom:12px; }
+  .plan-price { font-size:42px;font-weight:800;letter-spacing:-.04em;line-height:1;color:var(--white); }
+  .plan-price.tbc { font-size:28px;color:var(--accent);letter-spacing:.02em; }
+  .plan-price-note { font-family:var(--font-mono);font-size:10px;color:var(--white-faint);margin-top:8px;font-weight:300; }
+  .plan-features { flex:1;display:flex;flex-direction:column;gap:0;margin-bottom:40px; }
+  .plan-feature { display:flex;align-items:flex-start;gap:14px;padding:12px 0;border-bottom:1px solid var(--border);font-family:var(--font-mono);font-size:12px;color:var(--white-dim);font-weight:300;line-height:1.5; }
+  .plan-feature:last-child { border-bottom:none; }
+  .feat-check { width:16px;height:16px;flex-shrink:0;margin-top:1px; }
+  .feat-check.yes { color:var(--accent); }
+  .feat-check.no { color:var(--white-faint); opacity:.4; }
+  .plan-cta { display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 24px;font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:all .25s;cursor:none; }
+  .plan-cta.outline { border:1px solid var(--border-bright);color:var(--white-dim); }
+  .plan-cta.outline:hover { border-color:var(--white);color:var(--white); }
+  .plan-cta.solid { background:var(--accent);color:var(--black);border:1px solid var(--accent); }
+  .plan-cta.solid:hover { opacity:.88; }
+  .pricing-note { margin-top:32px;font-family:var(--font-mono);font-size:11px;color:var(--white-faint);text-align:center;line-height:1.8; }
+  .pricing-note a { color:var(--accent);text-decoration:none; }
+
+  .cta-section { position:relative;z-index:1;padding:140px 48px;text-align:center;overflow:hidden; }
+  .cta-glow { position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:400px;background:radial-gradient(ellipse,var(--accent-glow) 0%,transparent 70%);pointer-events:none; }
+  .cta-label { font-family:var(--font-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:32px; }
+  .cta-headline { font-size:clamp(40px,6vw,80px);font-weight:800;letter-spacing:-.03em;text-transform:uppercase;line-height:.95;margin-bottom:48px;max-width:700px;margin-left:auto;margin-right:auto; }
+  .cta-sub { font-family:var(--font-mono);font-size:13px;color:var(--white-dim);max-width:440px;margin:0 auto 48px;line-height:1.8;font-weight:300; }
+  .cta-actions { display:flex;align-items:center;justify-content:center;gap:24px; }
+  footer { position:relative;z-index:1;border-top:1px solid var(--border);padding:40px 48px;display:flex;align-items:center;justify-content:space-between;gap:24px; }
+  .footer-logo { font-size:14px;font-weight:800;letter-spacing:.12em;text-transform:uppercase; }
+  .footer-logo span { color:var(--accent); }
+  .footer-copy { font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;color:var(--white-faint);text-transform:uppercase; }
+  .footer-domain { font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;color:var(--white-faint);text-transform:uppercase; }
+  .footer-domain span { color:var(--accent); }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)} }
+  @keyframes fadeDown { from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:translateY(0)} }
+  @keyframes marquee { from{transform:translateX(0)}to{transform:translateX(-50%)} }
+  @keyframes scrollPulse { 0%,100%{opacity:.3}50%{opacity:1} }
+  .reveal { opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease; }
+  .reveal.visible { opacity:1;transform:translateY(0); }
+  @media(max-width:900px){
+    nav{padding:20px 24px}.nav-links{display:none}
+    .hero{padding:0 24px 64px}.hero-bottom{flex-direction:column;align-items:flex-start}.hero-actions{align-items:flex-start}
+    .services-grid,.pricing-grid{grid-template-columns:1fr}
+    .stats-section{grid-template-columns:repeat(2,1fr)}
+    .section{padding:80px 24px}
+    .process-item{grid-template-columns:48px 1fr;padding:28px 24px}.process-badge{display:none}
+    footer{flex-direction:column;text-align:center;gap:12px}
+    .cta-section{padding:80px 24px}.cta-actions{flex-direction:column}
+  }
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="grid-bg"></div>
+<div class="noise"></div>
+
+<nav>
+  <div class="nav-logo">Cin<span>H</span>aus</div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#process">How it works</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-cta">Get started</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag">App infrastructure · South Africa</div>
+  <h1 class="hero-headline">
+    <div>Your apps.</div>
+    <div class="line-accent">Running.</div>
+    <div class="line-outline">Always.</div>
+  </h1>
+  <div class="hero-bottom">
+    <p class="hero-desc">CinHaus manages the full technical lifecycle of your mobile and web applications — API usage, server infrastructure, and ongoing maintenance — billed simply, transparently, monthly.</p>
+    <div class="hero-actions">
+      <a href="#services" class="btn-primary">See our services <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a href="#contact" class="btn-secondary">Talk to us →</a>
+    </div>
+  </div>
+  <div class="scroll-hint"><div class="scroll-line"></div><span>Scroll</span></div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap"><div class="marquee-track" id="marqueeTrack"></div></div>
+
+<!-- SERVICES -->
+<section class="section" id="services">
+  <div class="section-label">What we manage</div>
+  <div class="services-grid reveal">
+    <div class="service-card"><div class="service-number">01</div><svg class="service-icon" viewBox="0 0 40 40" fill="none"><rect x="4" y="4" width="32" height="32" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="M4 14h32M14 14v22" stroke="currentColor" stroke-width="1.5"/><circle cx="9" cy="9" r="1.5" fill="currentColor"/><circle cx="14" cy="9" r="1.5" fill="currentColor"/><circle cx="19" cy="9" r="1.5" fill="currentColor"/></svg><div class="service-title">Flutter App Maintenance</div><p class="service-desc">Updates, dependency management, crash monitoring, performance optimisation and OS compatibility — handled continuously so your Flutter app never falls behind.</p><span class="service-tag">Flutter · Dart</span></div>
+    <div class="service-card"><div class="service-number">02</div><svg class="service-icon" viewBox="0 0 40 40" fill="none"><rect x="6" y="8" width="12" height="20" rx="2" stroke="currentColor" stroke-width="1.5"/><rect x="22" y="8" width="12" height="20" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M18 18h4M20 14v8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><div class="service-title">React Native Maintenance</div><p class="service-desc">End-to-end React Native care — Expo upgrades, native module maintenance, platform-specific fixes and store compliance. Both platforms, one monthly fee.</p><span class="service-tag">React Native · Expo</span></div>
+    <div class="service-card"><div class="service-number">03</div><svg class="service-icon" viewBox="0 0 40 40" fill="none"><path d="M8 12l12-6 12 6v10l-12 6-12-6V12z" stroke="currentColor" stroke-width="1.5"/><path d="M8 12l12 6m0 0l12-6M20 18v12" stroke="currentColor" stroke-width="1.5"/></svg><div class="service-title">API Usage Billing</div><p class="service-desc">Metered API consumption tracked per CID — every call, every byte. Clear monthly statements with usage breakdowns, no surprises, no hidden fees.</p><span class="service-tag">Metered · Per call</span></div>
+    <div class="service-card"><div class="service-number">04</div><svg class="service-icon" viewBox="0 0 40 40" fill="none"><rect x="4" y="10" width="32" height="8" rx="2" stroke="currentColor" stroke-width="1.5"/><rect x="4" y="22" width="32" height="8" rx="2" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="14" r="1.5" fill="currentColor"/><circle cx="10" cy="26" r="1.5" fill="currentColor"/></svg><div class="service-title">Server Infrastructure</div><p class="service-desc">Cloud hosting on Firebase and Azure — compute, storage, bandwidth managed and monitored. Scale up when you need it, billed for what you actually use.</p><span class="service-tag">Firebase · Azure</span></div>
+    <div class="service-card"><div class="service-number">05</div><svg class="service-icon" viewBox="0 0 40 40" fill="none"><path d="M20 4l4 8h8l-6.5 5.5 2.5 8.5L20 21l-8 5 2.5-8.5L8 12h8l4-8z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg><div class="service-title">AI-Powered Insights</div><p class="service-desc">Built-in AI billing agent surfaces usage anomalies, cost forecasts and performance alerts — so you always know where your budget goes before the invoice arrives.</p><span class="service-tag">Azure AI Foundry</span></div>
+    <div class="service-card"><div class="service-number">06</div><svg class="service-icon" viewBox="0 0 40 40" fill="none"><path d="M20 6v4M20 30v4M6 20h4M30 20h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="20" cy="20" r="8" stroke="currentColor" stroke-width="1.5"/><circle cx="20" cy="20" r="3" fill="currentColor" opacity="0.4"/></svg><div class="service-title">Client Portal</div><p class="service-desc">Your clients get a clean dashboard — live usage, invoice history, app status. Full transparency builds trust, reduces support load, and positions you as a premium partner.</p><span class="service-tag">White-label ready</span></div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-section reveal">
+  <div class="stat-item"><div class="stat-value">3<span>+</span></div><div class="stat-label">Apps under management</div></div>
+  <div class="stat-item"><div class="stat-value">100<span>%</span></div><div class="stat-label">Transparent billing</div></div>
+  <div class="stat-item"><div class="stat-value">2<span>x</span></div><div class="stat-label">Cloud platforms</div></div>
+  <div class="stat-item"><div class="stat-value">ZAR</div><div class="stat-label">Local currency billing</div></div>
+</div>
+
+<!-- PRICING -->
+<section class="section" id="pricing">
+  <div class="section-label">Packages</div>
+  <div class="pricing-header reveal">
+    <div class="pricing-title">Simple pricing.<br><span>No surprises.</span></div>
+    <p class="pricing-sub">Every plan includes a dedicated CID per app, monthly itemised invoicing, and direct access to your infrastructure team. Final pricing confirmed after your free audit.</p>
+  </div>
+  <div class="pricing-grid reveal">
+
+    <!-- STARTER -->
+    <div class="plan-card">
+      <div class="plan-tier">Tier 01</div>
+      <div class="plan-name">Starter</div>
+      <p class="plan-desc">One app, one platform. Everything you need to keep a live Flutter or React Native app healthy and compliant.</p>
+      <div class="plan-price-block">
+        <div class="plan-price-label">Monthly from</div>
+        <div class="plan-price tbc">TBC</div>
+        <div class="plan-price-note">Confirmed after free audit · Billed in ZAR</div>
+      </div>
+      <div class="plan-features">
+        <div class="plan-feature"><svg class="feat-check yes" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>1 app · 1 platform (Flutter or RN)</div>
+        <div class="plan-feature"><svg class="feat-check yes" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Monthly dependency &amp; OS updates</div>
+        <div class="plan-feature"><svg class="feat-check yes" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Basic crash monitoring</div>
+        <div class="plan-feature"><svg class="feat-check yes" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Firebase hosting included</div>
+        <div class="plan-feature"><svg class="feat-check yes" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>CID assigned + client portal access</div>
+        <div class="plan-feature"><svg class="feat-check yes" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Itemised monthly invoice (PDF)</div>
+        <div class="plan-feature"><svg class="feat-check no" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2"/><path d="M5.5 10.5l5-5M10.5 10.5l-5-5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>API usage billing</div>
+        <div class="plan-feature"><svg class="feat-check no" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2"/><path d="M5.5 10.5l5-5M10.5 10.5l-5-5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>AI billing insights</div>
+      </div>
+      <a href="#contact" class="plan-cta outline">Get a quote <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+
+    <!-- GROWTH (FEATURED) -->
+    <div class="plan-card featured">
+      <div class="plan-tier">Tier 02</div>
+      <div class="plan-name">Growth</div>
+      <p class="plan-desc">Multiple apps, cross-platform, with metered API billing and server usage tracking. The most popular choice for growing product companies.</p>
+      <div class="plan-price-block">
+        <div class="plan-price-label">Monthly from</div>
+        <div class="plan-price tbc">TBC</div>
+        <div class="plan-price-note">Per CID · metered usage on top · Billed in ZAR</div>
+      </div>
+      <div class="plan-features">
+        <div class="plan-feature"><svg class="feat-check yes" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Up to 5 apps · Flutter + RN + Web</div>
+        <div class="plan-feature"><svg class="feat-check yes" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Full dependency &amp; store compliance</div>
+        <div class="plan-feature"><svg class="feat-check yes" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Advanced crash &amp; performance monitoring</div>
+        <div class="plan-feature"><svg class="feat-check yes" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Firebase + Azure server management</div>
+        <div class="plan-feature"><svg class="feat-check yes" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Metered API usage billing per CID</div>
+        <div class="plan-feature"><svg class="feat-check yes" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Client portal + CID dashboard</div>
+        <div class="plan-feature"><svg class="feat-check yes" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Itemised PDF invoicing per app</div>
+        <div class="plan-feature"><svg class="feat-check no" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2"/><path d="M5.5 10.5l5-5M10.5 10.5l-5-5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>AI billing insights</div>
+      </div>
+      <a href="#contact" class="plan-cta solid">Get a quote <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+
+    <!-- ENTERPRISE -->
+    <div class="plan-card">
+      <div class="plan-tier">Tier 03</div>
+      <div class="plan-name">Enterprise</div>
+      <p class="plan-desc">Unlimited apps, dedicated infrastructure, AI-powered cost insights, white-label portal and a direct line to your infrastructure lead.</p>
+      <div class="plan-price-block">
+        <div class="plan-price-label">Monthly from</div>
+        <div class="plan-price tbc">TBC</div>
+        <div class="plan-price-note">Custom contract · SLA included · Billed in ZAR</div>
+      </div>
+      <div class="plan-features">
+        <div class="plan-feature"><svg class="feat-check yes" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Unlimited apps · all platforms</div>
+        <div class="plan-feature"><svg class="feat-check yes" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Dedicated server infrastructure</div>
+        <div class="plan-feature"><svg class="feat-check yes" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Priority support + named account lead</div>
+        <div class="plan-feature"><svg class="feat-check yes" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Full metered API + server billing</div>
+        <div class="plan-feature"><svg class="feat-check yes" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>AI billing agent + cost forecasting</div>
+        <div class="plan-feature"><svg class="feat-check yes" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>White-label client portal</div>
+        <div class="plan-feature"><svg class="feat-check yes" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Custom SLA + uptime guarantee</div>
+        <div class="plan-feature"><svg class="feat-check yes" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Custom line items per invoice</div>
+      </div>
+      <a href="#contact" class="plan-cta outline">Talk to us <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+
+  </div>
+  <p class="pricing-note">All plans include a <strong style="color:var(--white)">free infrastructure audit</strong> before commitment. Pricing confirmed post-audit based on your app's actual infrastructure.<br>Questions? <a href="mailto:hello@cinhaus.co.za">hello@cinhaus.co.za</a></p>
+</section>
+
+<!-- PROCESS -->
+<section class="section" id="process">
+  <div class="section-label">How it works</div>
+  <div class="process-list reveal">
+    <div class="process-item"><div class="process-num">Step 01</div><div class="process-content"><div class="process-title">We audit your app</div><div class="process-detail">We map your current infrastructure — platforms, APIs, hosting, dependencies — and assign a CID to each application.</div></div><div class="process-badge">Free assessment</div></div>
+    <div class="process-item"><div class="process-num">Step 02</div><div class="process-content"><div class="process-title">You choose a plan</div><div class="process-detail">Flat monthly maintenance fee plus metered usage for API calls and server compute. No long-term lock-in, cancel any time.</div></div><div class="process-badge">Flexible pricing</div></div>
+    <div class="process-item"><div class="process-num">Step 03</div><div class="process-content"><div class="process-title">We take over the ops</div><div class="process-detail">CinHaus monitors, updates and maintains your apps continuously. You focus on your product, we handle the infrastructure.</div></div><div class="process-badge">Ongoing</div></div>
+    <div class="process-item"><div class="process-num">Step 04</div><div class="process-content"><div class="process-title">Monthly invoice, zero surprises</div><div class="process-detail">Itemised invoice per app per CID — maintenance, server usage, API calls. PDF delivered, payment tracked, all on your portal.</div></div><div class="process-badge">End of month</div></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="cta-glow"></div>
+  <div class="cta-label">Ready to start</div>
+  <h2 class="cta-headline">Let's build something that lasts</h2>
+  <p class="cta-sub">Tell us about your app. We'll scope it, price it fairly, and have your CID active within 48 hours.</p>
+  <div class="cta-actions"><a href="mailto:hello@cinhaus.co.za" class="btn-primary">hello@cinhaus.co.za <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+</section>
+
+<footer>
+  <div class="footer-logo">Cin<span>H</span>aus</div>
+  <div class="footer-copy">© 2026 CinHaus. All rights reserved.</div>
+  <div class="footer-domain">cinhaus<span>.co.za</span></div>
+</footer>
+
+<script>
+  const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
+  (function animateRing(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animateRing);})();
+  document.querySelectorAll('a,button').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{cursor.style.transform='translate(-50%,-50%) scale(2.5)';ring.style.opacity='.3';});
+    el.addEventListener('mouseleave',()=>{cursor.style.transform='translate(-50%,-50%) scale(1)';ring.style.opacity='1';});
+  });
+  const items=['Flutter Maintenance','React Native','API Billing','Azure AI','Firebase Hosting','CID Management','Monthly Invoicing','Server Monitoring','cinhaus.co.za'];
+  const track=document.getElementById('marqueeTrack');
+  [...items,...items,...items,...items].forEach(t=>{const el=document.createElement('div');el.className='marquee-item';el.innerHTML=`<span class="dot"></span>${t}`;track.appendChild(el);});
+  const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:.1});
+  document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
+</script>
+</body>
+</html>

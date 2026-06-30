@@ -3,34 +3,49 @@ import { SITE } from '../data/site';
 
 const username = import.meta.env.PUBLIC_GITHUB_USERNAME || 'nicholasjvr';
 const year = new Date().getFullYear();
+
+// A small "elsewhere on the web" block: the tasteful descendant of the webring.
+const elsewhere = [
+  { label: 'github', href: `https://github.com/${username}` },
+  { label: 'email', href: `mailto:${SITE.email}` },
+];
 ---
 
 <footer class="site-footer mt-auto">
-  <div class="mx-auto max-w-content px-6 py-14">
-    <div class="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
-      <div class="max-w-md">
-        <p class="text-lg font-semibold text-ink">Nicholas van Rensburg</p>
-        <p class="mt-2 text-sm leading-relaxed text-muted">{SITE.tagline}</p>
+  <div class="mx-auto max-w-content px-5 py-12">
+    <div class="term-window">
+      <div class="term-titlebar">
+        <span class="term-dot" style="background:#f85149" aria-hidden="true"></span>
+        <span class="term-dot" style="background:#d2a24c" aria-hidden="true"></span>
+        <span class="term-dot" style="background:#3fb950" aria-hidden="true"></span>
+        <span class="ml-2 text-xs text-muted">~/footer</span>
       </div>
 
-      <div class="flex flex-wrap gap-6 text-sm font-medium">
-        <a href={`mailto:${SITE.email}`} class="text-muted transition hover:text-accent">
-          {SITE.email}
-        </a>
-        <a
-          href={`https://github.com/${username}`}
-          target="_blank"
-          rel="noopener"
-          class="text-muted transition hover:text-accent"
-        >
-          GitHub
-        </a>
-      </div>
-    </div>
+      <div class="space-y-4 p-5 text-sm md:p-6">
+        <p class="prompt text-ink">echo "thanks for scrolling"</p>
+        <p class="max-w-md text-muted">{SITE.tagline}</p>
 
-    <div class="mt-10 flex flex-col items-center justify-between gap-3 border-t border-border pt-6 text-xs text-muted sm:flex-row">
-      <p>© {year} Nicholas van Rensburg</p>
-      <p>Built with Astro + Tailwind</p>
+        <p class="prompt mt-5 text-ink">ls ./elsewhere</p>
+        <div class="flex flex-wrap gap-2">
+          {
+            elsewhere.map((link) => (
+              <a
+                href={link.href}
+                target={link.href.startsWith('http') ? '_blank' : undefined}
+                rel={link.href.startsWith('http') ? 'noopener' : undefined}
+                class="tag tag-accent transition hover:bg-accent/10"
+              >
+                ./{link.label}
+              </a>
+            ))
+          }
+        </div>
+
+        <div class="mt-6 border-t border-border pt-4 text-xs text-muted">
+          <p># {year} {SITE.name} · hand-built with Astro + Tailwind</p>
+          <p class="mt-1"># no analytics, no cookies, no funnel. just a homepage.</p>
+        </div>
+      </div>
     </div>
   </div>
 </footer>

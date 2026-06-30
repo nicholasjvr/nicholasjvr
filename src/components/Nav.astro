@@ -2,28 +2,32 @@
 import { SITE } from '../data/site';
 import ThemeToggle from './ThemeToggle.astro';
 
+// Nav links rendered as shell commands (cd ./projects) to sell the terminal frame.
 const links = [
-  { href: `${import.meta.env.BASE_URL}#projects`, label: 'Projects' },
-  { href: `${import.meta.env.BASE_URL}#stack`, label: 'Stack' },
+  { href: `${import.meta.env.BASE_URL}#projects`, label: 'cd ./projects' },
+  { href: `${import.meta.env.BASE_URL}#stack`, label: 'cat stack.txt' },
 ];
 const githubUrl = `https://github.com/${import.meta.env.PUBLIC_GITHUB_USERNAME || 'nicholasjvr'}`;
 ---
 
 <header class="site-chrome sticky top-0 z-40 backdrop-blur-md">
-  <nav class="mx-auto flex max-w-content items-center justify-between gap-4 px-6 py-4">
-    <a href={import.meta.env.BASE_URL} class="font-semibold tracking-tight text-ink" aria-label={`${SITE.name} home`}>
-      <span class="text-base sm:text-lg">Nicholas van Rensburg</span>
-      <span class="mt-0.5 block text-[10px] font-medium uppercase tracking-[0.18em] text-muted">
-        {SITE.role}
-      </span>
+  <nav class="mx-auto flex max-w-content items-center justify-between gap-4 px-5 py-3">
+    <a
+      href={import.meta.env.BASE_URL}
+      class="flex items-baseline gap-2 text-sm tracking-tight"
+      aria-label={`${SITE.name} home`}
+    >
+      <span class="text-accent">nicholasjvr@portfolio</span>
+      <span class="text-muted">:~$</span>
+      <span class="cursor hidden sm:inline" aria-hidden="true"></span>
     </a>
 
-    <div class="flex items-center gap-1.5 sm:gap-2">
+    <div class="flex items-center gap-1 sm:gap-1.5">
       {
         links.map((l) => (
           <a
             href={l.href}
-            class="hidden rounded-lg px-3 py-2 text-sm font-medium text-muted transition hover:text-ink sm:inline-block"
+            class="hidden rounded px-2.5 py-1.5 text-xs text-muted transition hover:text-accent sm:inline-block"
           >
             {l.label}
           </a>
@@ -33,9 +37,9 @@ const githubUrl = `https://github.com/${import.meta.env.PUBLIC_GITHUB_USERNAME |
         href={githubUrl}
         target="_blank"
         rel="noopener"
-        class="rounded-lg px-3 py-2 text-sm font-medium text-muted transition hover:text-ink"
+        class="rounded px-2.5 py-1.5 text-xs text-muted transition hover:text-accent"
       >
-        GitHub
+        ./github
       </a>
       <ThemeToggle />
     </div>

@@ -1,0 +1,89 @@
+---
+// Live-ish status board. Real build data printed as terminal output, with a
+// deliberately retro hit counter for personality. This is the slot the WebGL
+// orb used to occupy.
+import cache from '../../public/github-cache.json';
+
+const fetchedAt = cache?.fetchedAt ? new Date(cache.fetchedAt) : new Date();
+const lastDeploy = fetchedAt.toISOString().slice(0, 10);
+
+// "Now building" = most recently pushed repo from the cache, if any.
+const recent = [...(cache?.repos ?? [])].sort(
+  (a, b) => new Date(b.pushedAt).getTime() - new Date(a.pushedAt).getTime()
+)[0];
+const nowBuilding = recent ? `${recent.name} (${recent.language ?? 'misc'})` : 'something, probably';
+
+// Uptime since an arbitrary "online since" date, just for flavor.
+const onlineSince = new Date('2024-01-01T00:00:00Z');
+const days = Math.max(0, Math.floor((Date.now() - onlineSince.getTime()) / 86_400_000));
+---
+
+<section id="lab" class="section section-compact section-flow-top">
+  <div class="term-window reveal mx-auto max-w-2xl">
+    <div class="term-titlebar">
+      <span class="term-dot" style="background:#f85149" aria-hidden="true"></span>
+      <span class="term-dot" style="background:#d2a24c" aria-hidden="true"></span>
+      <span class="term-dot" style="background:#3fb950" aria-hidden="true"></span>
+      <span class="ml-2 text-xs text-muted">./status --watch</span>
+    </div>
+
+    <div class="space-y-1.5 p-5 text-sm md:p-6">
+      <p class="text-muted"><span class="text-accent">last_deploy</span> .... {lastDeploy}</p>
+      <p class="text-muted"><span class="text-accent">now_building</span> ... {nowBuilding}</p>
+      <p class="text-muted"><span class="text-accent">uptime</span> ......... {days} days, give or take</p>
+      <p class="text-muted"><span class="text-accent">coffee</span> ......... <span class="text-accent-warm">re-brewing</span></p>
+
+      <div class="mt-4 flex items-center gap-3 border-t border-border pt-4">
+        <span class="text-xs text-muted">hit counter (yes, really):</span>
+        <span
+          id="hit-counter"
+          class="inline-flex gap-px rounded border border-border bg-black px-1.5 py-1 font-bold tracking-widest text-accent"
+          style="text-shadow:0 0 6px rgb(63 185 80 / 0.6)"
+          aria-label="visitor count"
+        >00000</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Retro odometer. Counts up to a base number on load, then bumps once per
+  // browser (localStorage) so it nudges upward on repeat visits. Pure homage,
+  // no backend, no tracking.
+  function initHitCounter() {
+    const el = document.getElementById('hit-counter');
+    if (!el || el.dataset.ready === 'true') return;
+    el.dataset.ready = 'true';
+
+    const BASE = 1337;
+    let stored = 0;
+    try {
+      stored = Number(localStorage.getItem('hits') || '0');
+      stored += 1;
+      localStorage.setItem('hits', String(stored));
+    } catch {
+      // localStorage blocked (private mode); fall back to base only.
+    }
+
+    const target = BASE + stored;
+    const pad = (n: number) => String(n).padStart(5, '0');
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      el.textContent = pad(target);
+      return;
+    }
+
+    const duration = 900;
+    const start = performance.now();
+    function tick(now: number) {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 3); // easeOutCubic
+      el.textContent = pad(Math.floor(eased * target));
+      if (t < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  initHitCounter();
+  document.addEventListener('astro:page-load', initHitCounter);
+</script>

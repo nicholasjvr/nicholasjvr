@@ -1,9 +1,7 @@
 ---
-import EvilOrb from './EvilOrb.astro';
+// The old WebGL orb lived here. Replaced with a live build-status board, which
+// fits the build-log identity far better than a decorative 3D ornament.
+import StatusBoard from './StatusBoard.astro';
 ---
 
-<section id="lab" class="section section-compact section-flow-top">
-  <div class="reveal flex justify-center">
-    <EvilOrb caption="three.js · webgl · orbital curious" />
-  </div>
-</section>
+<StatusBoard />
