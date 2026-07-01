@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Load Planner Demo</title>
+    <!-- Maps bare "three" imports inside OrbitControls (and other addons) to the CDN build. CSP alone cannot fix "Failed to resolve module specifier". -->
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+        }
+      }
+    </script>
+    <link rel="preconnect" href="https://rsms.me/" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    <link rel="stylesheet" href="core/core.css" />
+    <link rel="stylesheet" href="truckcab/truckcab.css" />
+    <link rel="stylesheet" href="deck/deck.css" />
+    <link rel="stylesheet" href="loads/loads.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="app">
+      <!-- ─────────────────────────  PLAN HEADER  ───────────────────────── -->
+      <!-- Single-line chrome: metrics | centered Planning/3D | trip/actions with retractable summary -->
+      <section
+        class="plan-header-bar"
+        id="plan-header-bar"
+        aria-label="Plan summary"
+      >
+        <div class="plan-header-main">
+          <div
+            class="metrics-bar plan-header-metrics plan-header-metrics--cell"
+            id="metrics-bar"
+            aria-label="Planning metrics"
+          >
+            <div class="metric">
+              <span class="metric-label">Deck</span>
+              <span class="metric-value" id="m-deck">—</span>
+            </div>
+            <div class="metric">
+              <span class="metric-label">Placed</span>
+              <span class="metric-value" id="m-placed">0</span>
+            </div>
+            <div class="metric">
+              <span class="metric-label">Remaining</span>
+              <span class="metric-value" id="m-remaining">0</span>
+            </div>
+            <div class="metric metric--gauge">
+              <span class="metric-label">Floor</span>
+              <div class="util-bar">
+                <div class="util-bar__fill" id="m-util-fill"></div>
+              </div>
+              <span class="metric-value" id="m-util">0%</span>
+            </div>
+            <div class="metric metric--end metric--dense">
+              <span class="metric-label">Weight</span>
+              <span class="metric-value" id="m-weight">—</span>
+            </div>
+          </div>
+
+          <div class="plan-header-center" aria-label="View mode">
+            <div
+              class="workspace-tabs workspace-tabs--header workspace-tabs--centered"
+              role="tablist"
+              aria-label="Workspace mode"
+            >
+              <button
+                class="ws-tab ws-tab--active"
+                id="work-mode-plan"
+                data-work-mode="plan"
+                role="tab"
+                aria-selected="true"
+                title="2D top-down planning — drag loads from the strip below"
+              >
+                <svg
+                  class="ws-tab__icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  aria-hidden="true"
+                >
+                  <rect x="3" y="3" width="7" height="7" rx="1" />
+                  <rect x="14" y="3" width="7" height="7" rx="1" />
+                  <rect x="3" y="14" width="7" height="7" rx="1" />
+                  <rect x="14" y="14" width="7" height="7" rx="1" />
+                </svg>
+                <span>Planning</span>
+              </button>
+              <button
+                class="ws-tab"
+                id="work-mode-preview"
+                data-work-mode="preview"
+                role="tab"
+                aria-selected="false"
+                title="3D preview — right-click a load for Move / Rotate / Remove"
+              >
+                <svg
+                  class="ws-tab__icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  aria-hidden="true"
+                >
+                  <path d="M12 3l9 5-9 5-9-5 9-5z" />
+                  <path d="M3 8v8l9 5 9-5V8" />
+                  <path d="M12 13v8" />
+                </svg>
+                <span>3D Preview</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="plan-header-right" aria-label="Scenario and save actions">
+            <div class="plan-header-save-row">
+              <button
+                class="btn btn-ghost btn-sm"
+                id="clear-btn"
+                type="button"
+                title="Remove all placed loads from the deck"
+              >
+                Clear
+              </button>
+              <button
+                class="btn btn-primary btn-sm"
+                id="save-btn"
+                type="button"
+                title="Save layout (see console for payload)"
+              >
+                Save
+              </button>
+            </div>
+            <div class="plan-header-trip" aria-label="Demo scenario picker">
+              <label class="plan-header-trip__label" for="scenario-select"
+                >Scenario</label
+              >
+              <span class="scenario-select-shell" id="scenario-select-shell">
+                <select
+                  id="scenario-select"
+                  class="scenario-select plan-header-trip__select"
+                  title="Pick a demo scenario — truck, trailer, and loads load together"
+                >
+                  <option value="">— Select scenario —</option>
+                </select>
+              </span>
+              <details class="plan-trip-summary-popover">
+                <summary
+                  class="plan-trip-summary-toggle"
+                  title="Show selected scenario summary"
+                >
+                  Info
+                </summary>
+                <div
+                  class="plan-trip-summary-card"
+                  id="plan-summary-chips"
+                  aria-label="Scenario and vehicle summary"
+                >
+                  <p class="fleet-bar__empty">
+                    Choose a scenario in the dropdown — details appear here.
+                  </p>
+                </div>
+              </details>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─────────────────────────  MAIN (workspace)  ───────────────────────── -->
+      <div class="main">
+        <section class="workspace" id="canvas-area">
+          <!-- Hidden anchor keeps .view-btn / data-view hooks for planner state (Top-only UX). -->
+          <div id="plan-view-state-hook" hidden aria-hidden="true">
+            <button
+              type="button"
+              class="view-btn seg-btn seg-btn--active active"
+              data-view="top"
+              tabindex="-1"
+            ></button>
+          </div>
+
+          <div class="canvas-stage">
+            <div class="canvas-wrapper">
+              <div class="dim-label-top" id="dim-label-top"></div>
+              <div class="bed-and-cab bed-and-cab--idle" id="bed-and-cab">
+                <div
+                  class="cab-marker"
+                  id="cab-marker"
+                  title="Cab end of vehicle (front)"
+                  aria-label="Cab end of vehicle"
+                >
+                  <div class="cab-art-slot"></div>
+                </div>
+                <div
+                  class="truck-canvas"
+                  id="truck-canvas"
+                  style="width: 300px; height: 200px"
+                >
+                  <div
+                    id="drop-ghost"
+                    class="drop-ghost"
+                    aria-hidden="true"
+                  ></div>
+                  <div
+                    id="overlap-tooltip"
+                    class="overlap-tooltip hidden"
+                    hidden
+                    aria-live="assertive"
+                  ></div>
+                  <div class="grid-overlay"></div>
+                  <div
+                    class="view-readonly-veil"
+                    id="view-readonly-veil"
+                    hidden
+                    aria-hidden="true"
+                  >
+                    <div class="veil-pill">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        aria-hidden="true"
+                      >
+                        <circle cx="12" cy="12" r="9" />
+                        <path d="M9 12h6M12 9v6" />
+                      </svg>
+                      <span
+                        >Read-only view · switch to <em>Top</em> to edit</span
+                      >
+                    </div>
+                  </div>
+                  <div class="canvas-placeholder" id="canvas-placeholder">
+                    <svg
+                      class="placeholder-icon"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.4"
+                      aria-hidden="true"
+                    >
+                      <rect x="1" y="6" width="22" height="13" rx="2" />
+                      <path d="M1 10h22" />
+                      <circle cx="5" cy="19" r="2" />
+                      <circle cx="19" cy="19" r="2" />
+                    </svg>
+                    <span class="placeholder-title">Ready to plan</span>
+                    <span class="placeholder-hint"
+                      >Select a scenario to load the deck</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <canvas
+                id="iso-canvas"
+                style="display: none"
+                aria-hidden="true"
+              ></canvas>
+              <div
+                class="iso-viewport"
+                id="iso-viewport"
+                hidden
+                aria-label="3D viewport"
+              >
+                <div
+                  id="iso-three"
+                  class="iso-three"
+                  style="display: none"
+                  aria-label="3D isometric view"
+                ></div>
+                <div class="iso-quick-config" id="iso-quick-config" hidden>
+                  <span class="iso-quick-config__label">Cam</span>
+                  <div
+                    class="seg seg--compact iso-quick-config__seg"
+                    id="iso-cam-presets"
+                    role="toolbar"
+                    aria-label="3D camera angle"
+                  >
+                    <button
+                      class="cam-btn seg-btn seg-btn--active cam-btn--active"
+                      data-cam="iso"
+                      type="button"
+                      title="Three-quarter view"
+                    >
+                      3/4
+                    </button>
+                    <button
+                      class="cam-btn seg-btn"
+                      data-cam="top"
+                      type="button"
+                      title="Bird's-eye (3D)"
+                    >
+                      Overhead
+                    </button>
+                    <button
+                      class="cam-btn seg-btn"
+                      data-cam="front"
+                      type="button"
+                      title="Toward cab end"
+                    >
+                      Cab
+                    </button>
+                    <button
+                      class="cam-btn seg-btn"
+                      data-cam="rear"
+                      type="button"
+                      title="Toward trailer tail"
+                    >
+                      Tail
+                    </button>
+                    <button
+                      class="cam-btn seg-btn"
+                      data-cam="side"
+                      type="button"
+                      title="Side profile"
+                    >
+                      Side
+                    </button>
+                  </div>
+                  <label
+                    class="toggle-pill toggle-pill--compact iso-quick-config__labels"
+                    title="Show load name tags on placed meshes in 3D"
+                  >
+                    <input type="checkbox" id="iso-labels-toggle" />
+                    <span class="toggle-pill__track"
+                      ><span class="toggle-pill__thumb"></span
+                    ></span>
+                    <span class="toggle-pill__label">Labels</span>
+                  </label>
+                </div>
+              </div>
+              <div class="dim-label-side" id="dim-label-side"></div>
+            </div>
+          </div>
+
+          <section class="load-strip" id="load-strip" aria-label="Loads">
+            <header class="load-strip__header">
+              <div class="load-strip__header-primary">
+                <h2 class="load-strip__title">Loads</h2>
+                <span
+                  class="load-strip__counts"
+                  id="load-strip-counts"
+                  aria-live="polite"
+                  >0</span
+                >
+              </div>
+              <div class="load-strip__section-row" aria-hidden="false">
+                <span class="load-strip__section-pill" id="load-strip-pill-deck"
+                  >On deck (0 u · 0 loads)</span
+                >
+                <span
+                  class="load-strip__section-pill load-strip__section-pill--avail"
+                  id="load-strip-pill-avail"
+                  >Available (0)</span
+                >
+              </div>
+              <div class="load-strip__toolbar">
+                <div class="search-input">
+                  <svg
+                    class="search-input__icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    aria-hidden="true"
+                  >
+                    <circle cx="11" cy="11" r="7" />
+                    <line x1="16.5" y1="16.5" x2="21" y2="21" />
+                  </svg>
+                  <input
+                    type="search"
+                    id="load-search"
+                    placeholder="Search loads, refs, descriptions…"
+                    autocomplete="off"
+                    spellcheck="false"
+                  />
+                </div>
+                <div
+                  class="filter-chips"
+                  role="tablist"
+                  aria-label="Filter loads by type"
+                >
+                  <button
+                    class="chip chip--active"
+                    data-filter="all"
+                    role="tab"
+                  >
+                    All
+                  </button>
+                  <button class="chip" data-filter="pallets" role="tab">
+                    Pallets
+                  </button>
+                  <button class="chip" data-filter="containers" role="tab">
+                    Containers
+                  </button>
+                  <button class="chip" data-filter="bags" role="tab">
+                    Bags
+                  </button>
+                </div>
+              </div>
+            </header>
+            <div
+              class="load-strip__track"
+              id="load-strip-track"
+              tabindex="0"
+              role="list"
+            >
+              <p class="empty-msg empty-msg--strip">
+                Select a scenario to show available loads.
+              </p>
+            </div>
+          </section>
+
+          <div
+            id="plan-banner"
+            class="plan-banner"
+            role="status"
+            aria-live="polite"
+            hidden
+          ></div>
+
+          <div id="iso-context-menu" class="iso-ctx-menu" role="menu" hidden>
+            <div class="iso-ctx-menu__header" id="iso-ctx-header">Load</div>
+            <button type="button" class="iso-ctx-item" data-action="move">
+              <span class="iso-ctx-item__icon">⤢</span><span>Move</span>
+            </button>
+            <button type="button" class="iso-ctx-item" data-action="rotate">
+              <span class="iso-ctx-item__icon">↻</span><span>Rotate</span>
+            </button>
+            <div class="iso-ctx-menu__divider"></div>
+            <button
+              type="button"
+              class="iso-ctx-item iso-ctx-item--danger"
+              data-action="remove"
+            >
+              <span class="iso-ctx-item__icon">✕</span><span>Remove</span>
+            </button>
+          </div>
+
+          <div id="app-modal" class="app-modal" hidden aria-hidden="true">
+            <div class="app-modal__backdrop" data-modal-close="1"></div>
+            <div
+              class="app-modal__card"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="app-modal-title"
+            >
+              <div class="app-modal__head">
+                <h3 id="app-modal-title" class="app-modal__title">
+                  Confirm action
+                </h3>
+              </div>
+              <div id="app-modal-message" class="app-modal__message"></div>
+              <div class="app-modal__actions">
+                <button
+                  id="app-modal-cancel"
+                  type="button"
+                  class="btn btn-ghost btn-sm"
+                >
+                  Cancel
+                </button>
+                <button
+                  id="app-modal-ok"
+                  type="button"
+                  class="btn btn-primary btn-sm"
+                >
+                  OK
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script type="module" src="planner.js"></script>
+  </body>
+</html>

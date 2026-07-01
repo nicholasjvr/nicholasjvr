@@ -23,7 +23,7 @@ const resolve = (s: string) => (/^https?:\/\//.test(s) ? s : withBase(s));
     <span class="term-dot" style="background:#f85149" aria-hidden="true"></span>
     <span class="term-dot" style="background:#d2a24c" aria-hidden="true"></span>
     <span class="term-dot" style="background:#3fb950" aria-hidden="true"></span>
-    <span class="ml-2 truncate text-xs text-muted">~/games/{slug} — live</span>
+    <span class="ml-2 truncate text-xs text-muted">~/games/{slug} - live</span>
 
     <button
       type="button"
@@ -37,7 +37,7 @@ const resolve = (s: string) => (/^https?:\/\//.test(s) ? s : withBase(s));
   <div class="relative bg-surface-2">
     <iframe
       src={resolve(play.src)}
-      title={`${title} — playable`}
+      title={`${title} - playable`}
       loading="lazy"
       class="aspect-[16/10] w-full"
       data-game-frame

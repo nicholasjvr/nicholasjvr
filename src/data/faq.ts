@@ -20,7 +20,7 @@ export const FAQ: FaqItem[] = [
   },
   {
     q: 'What is this site?',
-    a: 'A personal portfolio of side projects Nicholas has built outside of work — trading tools, SaaS experiments, automations, and other experiments. Each project has a case study write-up.',
+    a: 'A personal portfolio of side projects Nicholas has built outside of work - trading tools, SaaS experiments, automations, and other experiments. Each project has a case study write-up.',
     tags: ['identity', 'about'],
   },
   {

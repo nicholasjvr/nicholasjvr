@@ -1,0 +1,26 @@
+/* ============================================================================
+   truckcab.css — owns #bed-and-cab + #cab-marker + .cab-art.
+   No other folder should override these rules.
+   ============================================================================ */
+
+.bed-and-cab {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  position: relative;
+}
+.bed-and-cab--idle .cab-marker { opacity: .35; }
+.cab-on-trailer-end { flex-direction: row-reverse; }
+
+.cab-marker {
+  flex-shrink: 0;
+  width: 100px;          /* placeholder; cabMarker.js overrides per-view */
+  align-self: stretch;   /* match deck pixel height so cab/trailer stay proportional */
+  display: grid;
+  place-items: center;
+  transition: opacity var(--dur) var(--ease);
+}
+.cab-art-slot { width: 100%; height: 100%; display: grid; place-items: center; }
+.cab-art { width: 100%; height: 100%; display: none; filter: drop-shadow(0 6px 14px rgba(15,23,42,.18)); }
+.cab-marker--top  .cab-art--top  { display: block; }
+.cab-marker--side .cab-art--side { display: block; }

@@ -55,7 +55,7 @@ const iframeSources: IframeSource[] =
         <span class="term-dot" style="background:#f85149" aria-hidden="true" />
         <span class="term-dot" style="background:#d2a24c" aria-hidden="true" />
         <span class="term-dot" style="background:#3fb950" aria-hidden="true" />
-        <span class="ml-2 truncate text-xs text-muted">{title} — live preview</span>
+        <span class="ml-2 truncate text-xs text-muted">{title} - live preview</span>
 
         {iframeSources.length > 1 && (
           <div class="ml-auto flex gap-1" role="tablist" aria-label={`${title} demo pages`}>
@@ -79,7 +79,7 @@ const iframeSources: IframeSource[] =
         {iframeSources.map((s, i) => (
           <iframe
             src={resolve(s.src)}
-            title={`${title} — ${s.label}`}
+            title={`${title} - ${s.label}`}
             loading="lazy"
             class="aspect-[16/10] w-full data-[active=false]:hidden"
             data-demo-frame={i}
@@ -88,6 +88,15 @@ const iframeSources: IframeSource[] =
           />
         ))}
       </div>
+    </div>
+  )
+}
+
+{
+  demo.kind === 'iframe' && gallery.length > 0 && (
+    <div class="mt-6">
+      <p class="mb-3 text-sm text-muted">Static captures (the live preview above is interactive):</p>
+      <Gallery items={gallery} />
     </div>
   )
 }

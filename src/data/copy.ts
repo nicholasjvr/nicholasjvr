@@ -4,7 +4,7 @@
 export const HERO = {
   name: 'Nicholas van Rensburg',
   role: 'Side Projects Portfolio',
-  line: 'Things I build outside of work — apps, tools, automations, and experiments.',
+  line: 'Things I build outside of work - apps, tools, automations, and experiments.',
   signatureBefore: 'Mostly for fun.',
   signatureAccent: 'Occasionally useful.',
   ctaPrimary: { label: 'View Projects', href: '#projects' },
@@ -18,12 +18,12 @@ export const PROJECTS_SECTION = {
 
 export const GAMES_SECTION = {
   eyebrow: 'Web games',
-  title: 'Small platformers and time wasters — playable in-browser.',
+  title: 'Small platformers and time wasters - playable in-browser.',
 } as const;
 
 export const WHAT_I_DO = {
   eyebrow: 'About this site',
-  title: 'A personal build log — not a pitch deck.',
+  title: 'A personal build log - not a pitch deck.',
   body: 'These are projects I work on after hours: trading tools, automation hacks, SaaS experiments, and whatever problem catches my interest next. Each one has a write-up with the objective, approach, and outcome.',
   pillars: ['Built to learn.', 'Shipped for real.', 'Documented here.'],
 } as const;

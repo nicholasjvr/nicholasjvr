@@ -2,7 +2,7 @@
 export const ABOUT = {
   name: 'Nicholas van Rensburg',
   headline:
-    'Developer with a portfolio of side projects — apps, tools, automations, and experiments built outside of work.',
+    'Developer with a portfolio of side projects - apps, tools, automations, and experiments built outside of work.',
   summary:
     'This site documents personal projects Nicholas works on after hours: trading tools, ' +
     'automation hacks, SaaS experiments, and whatever problem catches his interest next. ' +

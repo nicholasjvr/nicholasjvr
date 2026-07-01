@@ -1,6 +1,6 @@
 ---
 title: Truckloader
-tagline: Three.js frontend for truck loading mechanics — visualise cargo placement, weight distribution, and load plans in 3D.
+tagline: Three.js frontend for truck loading mechanics - visualise cargo placement, weight distribution, and load plans in 3D.
 status: wip
 featured: true
 order: 6
@@ -52,20 +52,21 @@ highlights:
       Side panel for item catalogue, dimensions, and export-friendly summary
       views (top-down and elevation) alongside the live 3D scene.
 gallery:
-  - src: /projects/truckloader/scene.svg
-    alt: Three.js truck trailer 3D scene
-    caption: "Scene: trailer interior with orbit camera (placeholder)."
-  - src: /projects/truckloader/placement.svg
-    alt: Cargo placement with snap grid
-    caption: "Placement: drag-and-drop pallets with collision hints (placeholder)."
-  - src: /projects/truckloader/weight.svg
-    alt: Weight distribution panel
-    caption: "Weight: axle totals and balance indicators (placeholder)."
-  - src: /projects/truckloader/catalog.svg
-    alt: Cargo catalogue sidebar
-    caption: "Catalogue: item list and dimensions for load planning (placeholder)."
+  - src: /projects/truckloader/scene.png
+    alt: Three.js truck trailer 3D scene with placed cargo
+    caption: "Scene: 3D tractor + flatbed with orbit camera and load meshes."
+  - src: /projects/truckloader/placement.png
+    alt: 2D top-down deck with snap grid and placed loads
+    caption: "Placement: top-down deck, snap grid, and drag-and-drop pallets."
+  - src: /projects/truckloader/weight.png
+    alt: Load metrics readout with floor utilisation
+    caption: "Metrics: deck dimensions, placed count, and floor utilisation."
+  - src: /projects/truckloader/catalog.png
+    alt: Cargo catalogue strip with consignment cards
+    caption: "Catalogue: consignment cards with units and dimensions to load."
 demo:
-  kind: screenshots
+  kind: iframe
+  src: /projects/truckloader/app/widget.html
 ---
 
 ## What it is
@@ -93,9 +94,10 @@ loops, and a UI shell around the renderer rather than ambient background FX.
 
 ## Status
 
-**WIP.** Scene bootstrap, camera controls, and placeholder procedural trailer
-geometry are scaffolded. Next: cargo catalogue, snap/collision rules, weight
-math, and optional `demo.kind: iframe` once a hosted build exists.
+**WIP, but playable.** The live preview above embeds the actual planner: pick a
+demo scenario, drag consignments onto the deck in the 2D top-down view, then flip
+to **3D Preview** for the Three.js scene with orbit camera and load meshes. Next:
+axle-weight math, richer collision feedback, and load-plan export.
 
-> Flip `demo.kind` to `iframe` when a public demo URL is deployed.
-> Replace SVG placeholders with WebGL capture screenshots or a short screen recording.
+> The embed is a self-contained static build under `public/projects/truckloader/app/`
+> (ES modules + Three.js from CDN). Screenshots are real captures of that build.

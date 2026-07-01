@@ -1,0 +1,47 @@
+/* ============================================================================
+   loads.css — currently only the additions needed for the unit-cap UI:
+     - .units-progress  : the "X / Y units" badge on each card
+     - .load-card--full : disabled state when every unit is placed
+     - .full-pill       : "All placed" pill shown in the disabled state
+   Existing .load-card rules still live in style.css for now; they'll migrate
+   here when the rest of the loads/ extraction lands.
+   ============================================================================ */
+
+.units-progress {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum';
+  font-weight: 600;
+  color: var(--ink-700);
+}
+
+.load-card--full {
+  opacity: .55;
+  cursor: not-allowed;
+  filter: grayscale(.35);
+}
+.load-card--full:hover {
+  transform: none;
+  box-shadow: var(--shadow-xs);
+  border-color: var(--line);
+}
+.load-card--full .load-card-hint { color: var(--ink-500); }
+
+/* Cards reflow flush-left when placements change — subtle motion for continuity */
+.load-strip__track > .load-card {
+  transition: transform var(--dur) var(--ease),
+              box-shadow var(--dur) var(--ease),
+              border-color var(--dur) var(--ease);
+}
+
+.full-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 8px;
+  border-radius: var(--r-full);
+  background: var(--ok-bg);
+  color: var(--ok);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}

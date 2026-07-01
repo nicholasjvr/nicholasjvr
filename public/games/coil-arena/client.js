@@ -121,7 +121,7 @@
         if (me) {
           scoreEl.textContent = String(me.score ?? 0);
           const idx = msg.board?.findIndex((r) => r.id === myId);
-          rankEl.textContent = idx >= 0 ? `#${idx + 1}` : '—';
+          rankEl.textContent = idx >= 0 ? `#${idx + 1}` : '-';
         }
       }
     });

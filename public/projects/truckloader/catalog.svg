@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="Cargo catalogue placeholder">
-  <rect width="1600" height="900" fill="#1c1917"/>
-  <rect x="80" y="100" width="380" height="700" rx="12" fill="#292524"/>
-  <rect x="120" y="160" width="300" height="60" rx="8" fill="#422006"/>
-  <rect x="120" y="250" width="300" height="60" rx="8" fill="#422006"/>
-  <rect x="120" y="340" width="300" height="60" rx="8" fill="#422006"/>
-  <text x="800" y="820" fill="#a16207" font-family="JetBrains Mono, monospace" font-size="16" text-anchor="middle">Cargo catalogue  placeholder screenshot</text>
-</svg>

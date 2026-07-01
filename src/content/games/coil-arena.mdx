@@ -1,6 +1,6 @@
 ---
 title: Coil Arena
-tagline: Slither through a crowded terminal arena — eat pellets, outgrow bots, climb the board.
+tagline: Slither through a crowded terminal arena - eat pellets, outgrow bots, climb the board.
 status: wip
 featured: true
 order: 2
@@ -37,14 +37,14 @@ npm run dev
 npm run dev:all
 ```
 
-Open `/games/coil-arena`, enter a name, and hit **Play**. One tab is enough — bots
+Open `/games/coil-arena`, enter a name, and hit **Play**. One tab is enough - bots
 fill the arena immediately. Open a second tab to test real multiplayer.
 
 ## Architecture
 
-- **Client** — self-contained Canvas page under `public/games/coil-arena/`
-- **Server** — `server/coil-arena/` Node process with authoritative 20 Hz tick loop
-- **Bots** — server-side AI snakes using the same movement and collision rules as humans
+- **Client** - self-contained Canvas page under `public/games/coil-arena/`
+- **Server** - `server/coil-arena/` Node process with authoritative 20 Hz tick loop
+- **Bots** - server-side AI snakes using the same movement and collision rules as humans
 
 ## Azure deploy (later)
 
@@ -55,5 +55,5 @@ When you move the portfolio to your Azure VM + custom domain:
 3. nginx reverse proxy `wss://game.yourdomain.com` → `:8765`
 4. Point the client at production WS via `?ws=wss://game.yourdomain.com`
 
-No Astro schema changes required — the iframe client just needs the production
+No Astro schema changes required - the iframe client just needs the production
 WebSocket URL instead of `localhost`.
