@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Coil Arena</title>
+    <style>
+      :root {
+        --bg: #0d1117;
+        --grid: #161b22;
+        --accent: #3fb950;
+        --warm: #d2a24c;
+        --hazard: #f85149;
+        --ink: #e6edf3;
+        --muted: #7d8590;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo,
+          Consolas, monospace;
+        overflow: hidden;
+      }
+      #wrap {
+        position: absolute;
+        inset: 0;
+      }
+      canvas {
+        width: 100%;
+        height: 100%;
+        display: block;
+        touch-action: none;
+        cursor: crosshair;
+      }
+      #hud {
+        position: absolute;
+        top: 0.75rem;
+        left: 0.75rem;
+        right: 0.75rem;
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        pointer-events: none;
+        font-size: 0.75rem;
+        z-index: 2;
+      }
+      #hud .panel {
+        background: rgba(13, 17, 23, 0.78);
+        border: 1px solid var(--grid);
+        padding: 0.5rem 0.75rem;
+        border-radius: 4px;
+        min-width: 8rem;
+      }
+      #hud .label {
+        color: var(--muted);
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      #hud .value {
+        color: var(--accent);
+        font-size: 1rem;
+        font-weight: 700;
+      }
+      #board {
+        list-style: none;
+        margin: 0.35rem 0 0;
+        padding: 0;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+      #board li span.score {
+        color: var(--warm);
+        float: right;
+      }
+      #status-dot {
+        display: inline-block;
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 50%;
+        background: var(--hazard);
+        margin-right: 0.35rem;
+        vertical-align: middle;
+      }
+      #status-dot.ok {
+        background: var(--accent);
+      }
+      #overlay,
+      #disconnect {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        text-align: center;
+        background: rgba(13, 17, 23, 0.88);
+        padding: 1.5rem;
+        z-index: 5;
+      }
+      #overlay.hidden,
+      #disconnect.hidden {
+        display: none;
+      }
+      #overlay h1 {
+        margin: 0;
+        font-size: clamp(1.25rem, 4vw, 2rem);
+        color: var(--accent);
+        letter-spacing: 0.04em;
+      }
+      #overlay p,
+      #disconnect p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.85rem;
+        line-height: 1.6;
+        max-width: 40ch;
+      }
+      #overlay input {
+        margin-top: 0.5rem;
+        padding: 0.55rem 0.75rem;
+        background: var(--grid);
+        border: 1px solid var(--muted);
+        color: var(--ink);
+        font: inherit;
+        border-radius: 4px;
+        width: min(16rem, 80vw);
+        text-align: center;
+      }
+      #overlay button,
+      #disconnect code {
+        margin-top: 0.25rem;
+      }
+      #overlay button {
+        cursor: pointer;
+        border: 1px solid var(--accent);
+        background: rgba(63, 185, 80, 0.1);
+        color: var(--accent);
+        font: inherit;
+        padding: 0.55rem 1.25rem;
+        border-radius: 4px;
+      }
+      #overlay button:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+      }
+      #disconnect code {
+        color: var(--warm);
+        background: var(--grid);
+        padding: 0.35rem 0.6rem;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrap">
+      <canvas id="game" aria-label="Coil Arena game canvas"></canvas>
+
+      <div id="hud">
+        <div class="panel">
+          <div class="label"><span id="status-dot"></span>connection</div>
+          <div class="value" id="score">0</div>
+          <div class="label" style="margin-top: 0.35rem">rank</div>
+          <div class="value" id="rank">—</div>
+        </div>
+        <div class="panel" style="margin-left: auto; max-width: 12rem">
+          <div class="label">leaderboard</div>
+          <ol id="board"></ol>
+        </div>
+      </div>
+
+      <div id="disconnect">
+        <h1 style="margin: 0; color: var(--hazard)">server offline</h1>
+        <p>Start the game server, then refresh:</p>
+        <code>npm run dev:arena</code>
+      </div>
+
+      <div id="overlay" class="hidden">
+        <h1 id="overlay-title">Coil Arena</h1>
+        <p id="overlay-msg">Steer with mouse or touch. Eat pellets, outgrow bots, don't crash.</p>
+        <input id="name" type="text" maxlength="16" placeholder="your name" autocomplete="off" />
+        <button id="play" type="button" disabled>Play</button>
+      </div>
+    </div>
+    <script src="client.js"></script>
+  </body>
+</html>

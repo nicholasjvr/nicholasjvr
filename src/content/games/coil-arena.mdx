@@ -1,0 +1,59 @@
+---
+title: Coil Arena
+tagline: Slither through a crowded terminal arena — eat pellets, outgrow bots, climb the board.
+status: wip
+featured: true
+order: 2
+genres:
+  - arcade
+  - multiplayer
+controls: 'Mouse / touch to steer · ← → to nudge · enter name to join · R respawn via Play'
+techStack:
+  - HTML5 Canvas
+  - WebSocket
+  - Node.js
+play:
+  kind: iframe
+  src: /games/coil-arena/play.html
+cover: /games/coil-arena/cover.svg
+---
+
+**Play vs bots now · real players when the server is live.**
+
+Coil Arena is a Slither.io-style crowd-eater: spawn into a circular arena with AI
+snakes already slithering, eat glowing pellets to grow, and avoid crashing into
+bigger coils. When humans connect to the same server, everyone shares one room.
+
+## Run locally
+
+```bash
+# game server (WebSocket on :8765)
+npm run dev:arena
+
+# portfolio + iframe embed
+npm run dev
+
+# or both at once
+npm run dev:all
+```
+
+Open `/games/coil-arena`, enter a name, and hit **Play**. One tab is enough — bots
+fill the arena immediately. Open a second tab to test real multiplayer.
+
+## Architecture
+
+- **Client** — self-contained Canvas page under `public/games/coil-arena/`
+- **Server** — `server/coil-arena/` Node process with authoritative 20 Hz tick loop
+- **Bots** — server-side AI snakes using the same movement and collision rules as humans
+
+## Azure deploy (later)
+
+When you move the portfolio to your Azure VM + custom domain:
+
+1. `astro build` → nginx serves static `dist/`
+2. `node server/coil-arena` via PM2/systemd on localhost
+3. nginx reverse proxy `wss://game.yourdomain.com` → `:8765`
+4. Point the client at production WS via `?ws=wss://game.yourdomain.com`
+
+No Astro schema changes required — the iframe client just needs the production
+WebSocket URL instead of `localhost`.

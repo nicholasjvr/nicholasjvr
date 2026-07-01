@@ -8,7 +8,9 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "dev:arena": "npm run dev --prefix server/coil-arena",
+    "dev:all": "concurrently \"npm run dev\" \"npm run dev:arena\""
   },
   "dependencies": {
     "@astrojs/mdx": "^3.1.9",
@@ -19,6 +21,7 @@
     "three": "^0.184.0"
   },
   "devDependencies": {
-    "@types/three": "^0.184.1"
+    "@types/three": "^0.184.1",
+    "concurrently": "^9.1.2"
   }
 }
