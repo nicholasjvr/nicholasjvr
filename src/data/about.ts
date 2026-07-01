@@ -20,7 +20,7 @@ export const ABOUT = {
 
   contact: {
     email: 'nicholas241cut@gmail.com',
-    website: 'https://nicholasjvr.github.io/nicholasjvr/',
+    website: 'https://nicholas.cinhaus.co.za/',
     github: 'https://github.com/nicholasjvr',
   },
 
