@@ -1,0 +1,111 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GamePlayer from '../../components/GamePlayer.astro';
+import { withBase } from '../../lib/paths';
+
+export async function getStaticPaths() {
+  const games = await getCollection('games');
+  return games.map((game) => ({
+    params: { slug: game.slug },
+    props: { game },
+  }));
+}
+
+const { game } = Astro.props;
+const { data } = game;
+const { Content } = await game.render();
+
+const statusLabel: Record<string, string> = {
+  live: 'Live',
+  wip: 'In progress',
+  archived: 'Archived',
+};
+---
+
+<BaseLayout title={`${data.title} | Nicholas van Rensburg`} description={data.tagline}>
+  <article class="section">
+    <a href={withBase('/games')} class="text-sm font-medium text-muted hover:text-ink">← All games</a>
+
+    <!-- Header -->
+    <header class="mt-6">
+      <div class="flex flex-wrap items-center gap-3">
+        <h1 class="text-4xl font-extrabold tracking-tight text-ink md:text-5xl">{data.title}</h1>
+        <span class="rounded-full border border-border bg-surface-2 px-2.5 py-1 text-xs font-semibold text-muted">
+          {statusLabel[data.status]}
+        </span>
+      </div>
+      <p class="mt-4 max-w-2xl text-lg text-muted">{data.tagline}</p>
+
+      {
+        data.genres.length > 0 && (
+          <div class="mt-4 flex flex-wrap gap-2">
+            {data.genres.map((g) => (
+              <span class="tag tag-accent">{g}</span>
+            ))}
+          </div>
+        )
+      }
+
+      {
+        data.repo && (
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href={data.repo} target="_blank" rel="noopener" class="btn-primary px-4 py-2">
+              View on GitHub →
+            </a>
+          </div>
+        )
+      }
+    </header>
+
+    <!-- Playable embed : the game is the hero -->
+    <section class="mt-10">
+      <GamePlayer play={data.play} title={data.title} slug={game.slug} controls={data.controls} />
+    </section>
+
+    <!-- Optional dev-notes / flavor from MDX body -->
+    <div class="prose-portfolio mt-14 max-w-none">
+      <Content />
+    </div>
+
+    <!-- Tech stack -->
+    {
+      data.techStack.length > 0 && (
+        <section class="mt-14 border-t border-border pt-10">
+          <h2 class="text-sm font-semibold uppercase tracking-wide text-muted">Built with</h2>
+          <div class="mt-4 flex flex-wrap gap-2">
+            {data.techStack.map((t) => (
+              <span class="rounded-md border border-border bg-surface-2 px-3 py-1.5 text-sm font-medium text-ink">
+                {t}
+              </span>
+            ))}
+          </div>
+        </section>
+      )
+    }
+  </article>
+</BaseLayout>
+
+<style is:global>
+  .prose-portfolio h2 {
+    @apply mt-10 mb-3 text-2xl font-bold tracking-tight text-ink;
+  }
+  .prose-portfolio h3 {
+    @apply mt-6 mb-2 text-lg font-semibold text-ink;
+  }
+  .prose-portfolio p {
+    @apply mb-4 leading-relaxed text-muted;
+  }
+  .prose-portfolio ul {
+    @apply mb-4 list-disc space-y-1.5 pl-5 text-muted;
+  }
+  .prose-portfolio li > strong {
+    @apply text-ink;
+  }
+  .prose-portfolio code {
+    @apply rounded bg-surface-2 px-1.5 py-0.5 font-mono text-sm text-ink;
+  }
+  .prose-portfolio a {
+    @apply font-medium text-accent underline underline-offset-2;
+  }
+</style>

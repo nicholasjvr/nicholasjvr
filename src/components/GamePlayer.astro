@@ -1,0 +1,74 @@
+---
+import { withBase } from '../lib/paths';
+
+// Focused playable embed. Reuses the terminal-window chrome from the project
+// demo, but the game is the hero : one sandboxed frame plus a controls hint.
+interface Props {
+  play: {
+    kind: 'iframe';
+    src: string;
+  };
+  title: string;
+  slug: string;
+  controls?: string;
+}
+const { play, title, slug, controls } = Astro.props;
+
+// Local public assets need the base path; external URLs pass through untouched.
+const resolve = (s: string) => (/^https?:\/\//.test(s) ? s : withBase(s));
+---
+
+<div class="term-window" data-game-player>
+  <div class="term-titlebar">
+    <span class="term-dot" style="background:#f85149" aria-hidden="true"></span>
+    <span class="term-dot" style="background:#d2a24c" aria-hidden="true"></span>
+    <span class="term-dot" style="background:#3fb950" aria-hidden="true"></span>
+    <span class="ml-2 truncate text-xs text-muted">~/games/{slug} — live</span>
+
+    <button
+      type="button"
+      class="tag ml-auto shrink-0 transition hover:text-accent"
+      data-game-focus
+    >
+      focus game
+    </button>
+  </div>
+
+  <div class="relative bg-surface-2">
+    <iframe
+      src={resolve(play.src)}
+      title={`${title} — playable`}
+      loading="lazy"
+      class="aspect-[16/10] w-full"
+      data-game-frame
+      sandbox="allow-scripts allow-same-origin allow-pointer-lock allow-popups"
+    ></iframe>
+  </div>
+
+  {
+    controls && (
+      <div class="border-t border-border px-4 py-2.5 text-xs text-muted">
+        <span class="text-accent">controls</span> :: {controls}
+      </div>
+    )
+  }
+</div>
+
+<script>
+  function initGamePlayers() {
+    document.querySelectorAll<HTMLElement>('[data-game-player]').forEach((root) => {
+      if (root.dataset.playerReady === 'true') return;
+      root.dataset.playerReady = 'true';
+
+      const frame = root.querySelector<HTMLIFrameElement>('[data-game-frame]');
+      const focusBtn = root.querySelector<HTMLButtonElement>('[data-game-focus]');
+
+      // Keyboard-driven games need focus inside the frame before input registers.
+      focusBtn?.addEventListener('click', () => frame?.focus());
+      frame?.addEventListener('load', () => frame.focus());
+    });
+  }
+
+  initGamePlayers();
+  document.addEventListener('astro:page-load', initGamePlayers);
+</script>

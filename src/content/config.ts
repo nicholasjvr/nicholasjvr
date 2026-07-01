@@ -67,4 +67,35 @@ const projects = defineCollection({
   }),
 });
 
-export const collections = { projects };
+// The games collection : playable web games (platformers, arcade, time
+// wasters). Intentionally lighter than projects : no case-study spine, just
+// enough to render a card and an embedded, playable frame.
+const games = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    tagline: z.string(),
+    status: z.enum(['live', 'wip', 'archived']),
+    featured: z.boolean().default(false),
+    order: z.number().default(100),
+
+    // Free-text genre chips used for the listing filter (e.g. platformer, arcade).
+    genres: z.array(z.string()).default([]),
+    // Human-readable controls hint shown under the player (e.g. "← → to move").
+    controls: z.string().optional(),
+
+    techStack: z.array(z.string()).default([]),
+    repo: z.string().url().optional(),
+
+    cover: z.string(),
+
+    // The playable embed. v1 ships a sandboxed iframe pointing at a
+    // self-contained page under public/games/<slug>/.
+    play: z.object({
+      kind: z.enum(['iframe']),
+      src: z.string(),
+    }),
+  }),
+});
+
+export const collections = { projects, games };

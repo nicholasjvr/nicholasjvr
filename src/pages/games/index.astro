@@ -1,0 +1,89 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GameCard from '../../components/GameCard.astro';
+
+const games = (await getCollection('games')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+
+// Build the filter chip set from genres actually present across games.
+const genres = [...new Set(games.flatMap((g) => g.data.genres))].sort((a, b) =>
+  a.localeCompare(b)
+);
+---
+
+<BaseLayout title="Web Games | Nicholas" description="Small web games and playable experiments — platformers, arcade builds, and time wasters, playable in-browser.">
+  <section class="section">
+    <p class="eyebrow reveal">Web games</p>
+    <h1 class="reveal mt-3 text-4xl font-extrabold tracking-tight text-ink md:text-5xl">
+      All games
+    </h1>
+    <p class="reveal mt-3 max-w-2xl text-muted">
+      Small platformers, arcade builds, and time wasters — each one playable right here in
+      the browser. Filter by genre below.
+    </p>
+
+    <!-- Genre filter chips (client-side, no framework) -->
+    <div id="filters" class="reveal mt-8 flex flex-wrap gap-2">
+      <button
+        type="button"
+        data-filter="all"
+        class="filter-chip is-active rounded-full border border-accent/40 bg-accent/10 px-3 py-1.5 text-sm font-medium text-accent"
+      >
+        All
+      </button>
+      {
+        genres.map((g) => (
+          <button
+            type="button"
+            data-filter={g}
+            class="filter-chip rounded-full border border-border bg-surface px-3 py-1.5 text-sm font-medium text-muted transition-colors hover:text-ink"
+          >
+            {g}
+          </button>
+        ))
+      }
+    </div>
+
+    <div id="game-grid" class="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      {games.map((game) => <GameCard game={game} />)}
+    </div>
+
+    <p id="empty" class="mt-10 hidden text-center text-muted">No games match that genre yet.</p>
+  </section>
+</BaseLayout>
+
+<script>
+  const chips = document.querySelectorAll<HTMLButtonElement>('.filter-chip');
+  const cards = document.querySelectorAll<HTMLAnchorElement>('#game-grid > a');
+  const empty = document.getElementById('empty');
+
+  const setActive = (active: HTMLButtonElement) => {
+    chips.forEach((c) => {
+      const on = c === active;
+      c.classList.toggle('is-active', on);
+      c.classList.toggle('border-accent', on);
+      c.classList.toggle('bg-accent-soft', on);
+      c.classList.toggle('text-accent', on);
+      c.classList.toggle('border-border', !on);
+      c.classList.toggle('bg-surface', !on);
+      c.classList.toggle('text-muted', !on);
+    });
+  };
+
+  chips.forEach((chip) => {
+    chip.addEventListener('click', () => {
+      setActive(chip);
+      const filter = chip.dataset.filter;
+      let visible = 0;
+      cards.forEach((card) => {
+        const genres = (card.dataset.genres || '').split(',');
+        const show = filter === 'all' || genres.includes(filter!);
+        card.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+      empty?.classList.toggle('hidden', visible > 0);
+    });
+  });
+</script>

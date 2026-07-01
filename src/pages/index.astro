@@ -5,12 +5,17 @@ import Hero from '../components/Hero.astro';
 import WhatIDo from '../components/WhatIDo.astro';
 import HowIWork from '../components/HowIWork.astro';
 import ProjectCard from '../components/ProjectCard.astro';
+import GameCard from '../components/GameCard.astro';
 import TechStack from '../components/TechStack.astro';
-import { PROJECTS_SECTION, CONTACT_CTA } from '../data/copy';
+import { PROJECTS_SECTION, GAMES_SECTION, CONTACT_CTA } from '../data/copy';
 import { withBase } from '../lib/paths';
 
 const featured = (await getCollection('projects'))
   .filter((p) => p.data.featured)
+  .sort((a, b) => a.data.order - b.data.order);
+
+const featuredGames = (await getCollection('games'))
+  .filter((g) => g.data.featured)
   .sort((a, b) => a.data.order - b.data.order);
 
 const githubUrl = `https://github.com/${import.meta.env.PUBLIC_GITHUB_USERNAME || 'nicholasjvr'}`;
@@ -40,6 +45,32 @@ const githubUrl = `https://github.com/${import.meta.env.PUBLIC_GITHUB_USERNAME |
       <a href={withBase('/projects')} class="text-sm font-semibold text-accent hover:underline">All projects →</a>
     </div>
   </section>
+
+  {
+    featuredGames.length > 0 && (
+      <section id="games" class="section">
+        <div class="flex items-end justify-between">
+          <div>
+            <p class="eyebrow reveal">{GAMES_SECTION.eyebrow}</p>
+            <h2 class="reveal mt-4 text-3xl font-semibold tracking-tight text-ink md:text-4xl">
+              {GAMES_SECTION.title}
+            </h2>
+          </div>
+          <a href={withBase('/games')} class="reveal hidden text-sm font-semibold text-accent hover:underline sm:inline">
+            All games →
+          </a>
+        </div>
+
+        <div class="reveal mt-12 grid gap-8 md:grid-cols-2">
+          {featuredGames.map((game) => <GameCard game={game} />)}
+        </div>
+
+        <div class="mt-8 sm:hidden">
+          <a href={withBase('/games')} class="text-sm font-semibold text-accent hover:underline">All games →</a>
+        </div>
+      </section>
+    )
+  }
 
   <WhatIDo />
   <HowIWork />

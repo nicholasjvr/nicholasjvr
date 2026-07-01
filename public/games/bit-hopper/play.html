@@ -1,0 +1,632 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bit Hopper</title>
+    <style>
+      :root {
+        --bg: #0d1117;
+        --grid: #161b22;
+        --accent: #3fb950;
+        --warm: #d2a24c;
+        --hazard: #f85149;
+        --ink: #e6edf3;
+        --muted: #7d8590;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo,
+          Consolas, monospace;
+        overflow: hidden;
+      }
+      #wrap {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      canvas {
+        width: 100%;
+        height: 100%;
+        display: block;
+        image-rendering: pixelated;
+        cursor: pointer;
+        touch-action: manipulation;
+      }
+      #overlay {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        text-align: center;
+        background: rgba(13, 17, 23, 0.82);
+        padding: 1.5rem;
+      }
+      #overlay.hidden {
+        display: none;
+      }
+      #overlay h1 {
+        margin: 0;
+        font-size: clamp(1.25rem, 4vw, 2rem);
+        color: var(--accent);
+        letter-spacing: 0.04em;
+      }
+      #overlay p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.85rem;
+        line-height: 1.6;
+        max-width: 34ch;
+      }
+      #overlay .key {
+        color: var(--warm);
+      }
+      #overlay button {
+        margin-top: 0.5rem;
+        cursor: pointer;
+        border: 1px solid var(--accent);
+        background: rgba(63, 185, 80, 0.1);
+        color: var(--accent);
+        font: inherit;
+        font-size: 0.85rem;
+        padding: 0.55rem 1.1rem;
+        border-radius: 6px;
+      }
+      #overlay button:hover {
+        background: rgba(63, 185, 80, 0.2);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrap">
+      <canvas id="game" width="640" height="400" tabindex="0"></canvas>
+      <div id="overlay">
+        <h1>BIT HOPPER</h1>
+        <p>
+          <span class="key">Space</span> / <span class="key">↑</span> / click to jump
+          &middot; double-jump in air
+        </p>
+        <p>
+          Dodge <span style="color: var(--hazard)">▲</span> spikes, clear
+          <span style="color: var(--accent)">■</span> blocks, hit
+          <span style="color: var(--warm)">▲</span> pads for a boost.
+        </p>
+        <button id="start" type="button">./run</button>
+      </div>
+    </div>
+
+    <script>
+      "use strict";
+
+      const canvas = document.getElementById("game");
+      const ctx = canvas.getContext("2d");
+      const overlay = document.getElementById("overlay");
+      const startBtn = document.getElementById("start");
+      const W = canvas.width;
+      const H = canvas.height;
+
+      const COLORS = {
+        bg: "#0d1117",
+        grid: "#161b22",
+        accent: "#3fb950",
+        warm: "#d2a24c",
+        hazard: "#f85149",
+        ink: "#e6edf3",
+        muted: "#7d8590",
+      };
+
+      const reducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+
+      // Physics constants
+      const GRAVITY = 0.65;
+      const JUMP_VEL = 11.5;
+      const PAD_LAUNCH = 16.5;
+      const MAX_FALL = 14;
+      const BASE_SPEED = 3.2;
+      const SPEED_RAMP_DIV = 800;
+      const MAX_SPEED_BONUS = 4.5;
+      const FLOOR_Y = H - 48;
+      const SEG_W = 220;
+      const CUBE = 22;
+
+      let state = "menu";
+      let scrollX = 0;
+      let score = 0;
+      let best = 0;
+      let runSpeed = BASE_SPEED;
+      let distance = 0;
+      let frame = 0;
+
+      const player = {
+        x: 90,
+        y: 0,
+        vy: 0,
+        w: CUBE,
+        h: CUBE,
+        onGround: false,
+        jumpsLeft: 2,
+        rotation: 0,
+        prevBottom: 0,
+      };
+
+      let floorSegs = [];
+      let obstacles = [];
+      let tokens = [];
+      let generatedUpTo = 0;
+
+      function rngFor(i) {
+        const x = Math.sin(i * 127.1 + 311.7) * 43758.5453;
+        return x - Math.floor(x);
+      }
+
+      function addFloor(x, w) {
+        if (w <= 0) return;
+        const last = floorSegs[floorSegs.length - 1];
+        if (last && last.x + last.w >= x - 1) {
+          last.w = Math.max(last.w, x + w - last.x);
+          return;
+        }
+        floorSegs.push({ x, w });
+      }
+
+      function generateSegment(i) {
+        const segX = i * SEG_W;
+
+        // Opening runway : solid floor, no hazards.
+        if (i < 3) {
+          addFloor(segX, SEG_W);
+          if (i === 1) {
+            tokens.push({
+              x: segX + SEG_W * 0.5,
+              y: FLOOR_Y - 55,
+              r: 8,
+              got: false,
+            });
+          }
+          return;
+        }
+
+        const r = rngFor(i);
+        const r2 = rngFor(i * 2.17);
+        const r3 = rngFor(i * 5.43);
+
+        // ~18 % chance of a pit (gap in the floor).
+        if (r > 0.82 && i > 5) {
+          const leadW = 60 + Math.floor(r2 * 80);
+          const gapW = 70 + Math.floor(r3 * 50);
+          const tailW = SEG_W - leadW - gapW;
+          addFloor(segX, leadW);
+          if (tailW > 20) addFloor(segX + leadW + gapW, tailW);
+          return;
+        }
+
+        addFloor(segX, SEG_W);
+
+        const placeX = segX + 50 + Math.floor(r2 * (SEG_W - 100));
+        const kind = r3;
+
+        if (kind < 0.3) {
+          const count = 1 + Math.floor(rngFor(i * 9.1) * 2);
+          for (let s = 0; s < count; s++) {
+            obstacles.push({
+              type: "spike",
+              x: placeX + s * 22,
+              y: FLOOR_Y,
+              w: 20,
+              h: 22,
+            });
+          }
+        } else if (kind < 0.52) {
+          const bh = 36 + Math.floor(rngFor(i * 4.7) * 48);
+          obstacles.push({
+            type: "block",
+            x: placeX,
+            y: FLOOR_Y - bh,
+            w: 34,
+            h: bh,
+          });
+        } else if (kind < 0.64) {
+          obstacles.push({
+            type: "pad",
+            x: placeX,
+            y: FLOOR_Y - 10,
+            w: 36,
+            h: 10,
+          });
+        } else if (kind < 0.78) {
+          tokens.push({
+            x: placeX,
+            y: FLOOR_Y - 50 - Math.floor(rngFor(i * 3.3) * 40),
+            r: 8,
+            got: false,
+          });
+        }
+      }
+
+      function ensureWorld(untilX) {
+        while (generatedUpTo * SEG_W < untilX + W * 2) {
+          generateSegment(generatedUpTo);
+          generatedUpTo++;
+        }
+      }
+
+      function reset() {
+        floorSegs = [];
+        obstacles = [];
+        tokens = [];
+        generatedUpTo = 0;
+        scrollX = 0;
+        score = 0;
+        distance = 0;
+        runSpeed = BASE_SPEED;
+        frame = 0;
+        player.x = 90;
+        player.y = FLOOR_Y - player.h;
+        player.vy = 0;
+        player.onGround = true;
+        player.jumpsLeft = 2;
+        player.rotation = 0;
+        player.prevBottom = player.y + player.h;
+        ensureWorld(0);
+      }
+
+      function startGame() {
+        reset();
+        state = "playing";
+        overlay.classList.add("hidden");
+        canvas.focus();
+      }
+
+      function gameOver() {
+        state = "dead";
+        best = Math.max(best, score);
+        overlay.querySelector("h1").textContent = "GAME OVER";
+        const ps = overlay.querySelectorAll("p");
+        ps[0].innerHTML =
+          "score: <span style='color:var(--warm)'>" +
+          score +
+          "</span> &middot; best: <span style='color:var(--accent)'>" +
+          best +
+          "</span>";
+        ps[1].textContent = "Space / click to restart";
+        startBtn.textContent = "./run --again";
+        overlay.classList.remove("hidden");
+      }
+
+      function jump() {
+        if (state === "menu" || state === "dead") {
+          startGame();
+          return;
+        }
+        if (state !== "playing") return;
+        if (player.jumpsLeft <= 0) return;
+        player.vy = -JUMP_VEL;
+        player.onGround = false;
+        player.jumpsLeft--;
+      }
+
+      function overlaps(a, b) {
+        return (
+          a.x < b.x + b.w &&
+          a.x + a.w > b.x &&
+          a.y < b.y + b.h &&
+          a.y + a.h > b.y
+        );
+      }
+
+      function playerBox() {
+        return { x: player.x, y: player.y, w: player.w, h: player.h };
+      }
+
+      function onFloorAt(px) {
+        const feet = px + player.w * 0.5;
+        for (const f of floorSegs) {
+          if (feet >= f.x && feet <= f.x + f.w) return true;
+        }
+        return false;
+      }
+
+      function resolveLandings(solids) {
+        const pb = playerBox();
+        const bottom = pb.y + pb.h;
+
+        for (const s of solids) {
+          const top = s.y;
+          const horiz =
+            pb.x + pb.w > s.x + 2 &&
+            pb.x < s.x + s.w - 2;
+
+          if (
+            horiz &&
+            player.vy >= 0 &&
+            player.prevBottom <= top + 2 &&
+            bottom >= top - 1
+          ) {
+            player.y = top - player.h;
+            player.vy = 0;
+            player.onGround = true;
+            player.jumpsLeft = 2;
+            player.rotation = Math.round(player.rotation / (Math.PI / 2)) * (Math.PI / 2);
+            return true;
+          }
+        }
+        return false;
+      }
+
+      function update() {
+        if (state !== "playing") return;
+        frame++;
+
+        distance = Math.max(distance, player.x);
+        runSpeed =
+          BASE_SPEED +
+          Math.min(distance / SPEED_RAMP_DIV, MAX_SPEED_BONUS);
+
+        player.prevBottom = player.y + player.h;
+        player.onGround = false;
+
+        player.x += runSpeed;
+        player.vy = Math.min(player.vy + GRAVITY, MAX_FALL);
+        player.y += player.vy;
+
+        if (!player.onGround) {
+          player.rotation += 0.12;
+        }
+
+        ensureWorld(player.x);
+
+        const solids = [];
+        for (const f of floorSegs) {
+          solids.push({ x: f.x, y: FLOOR_Y, w: f.w, h: 8, kind: "floor" });
+        }
+        for (const o of obstacles) {
+          if (o.type === "block") {
+            solids.push({ x: o.x, y: o.y, w: o.w, h: o.h, kind: "block", ref: o });
+          }
+        }
+
+        resolveLandings(solids);
+
+        const pb = playerBox();
+
+        for (const o of obstacles) {
+          if (o.type === "spike") {
+            const inset = 5;
+            const spikeBox = {
+              x: o.x + inset,
+              y: o.y - o.h + inset,
+              w: o.w - inset * 2,
+              h: o.h - inset,
+            };
+            if (overlaps(pb, spikeBox)) {
+              gameOver();
+              return;
+            }
+          }
+
+          if (o.type === "block") {
+            const blockBox = { x: o.x, y: o.y, w: o.w, h: o.h };
+            if (overlaps(pb, blockBox) && !player.onGround) {
+              const hitSide =
+                player.prevBottom > o.y + 4 &&
+                pb.y + pb.h > o.y + 8;
+              if (hitSide) {
+                gameOver();
+                return;
+              }
+            }
+            if (overlaps(pb, blockBox) && player.onGround && pb.y + pb.h > o.y + o.h * 0.5) {
+              gameOver();
+              return;
+            }
+          }
+
+          if (o.type === "pad") {
+            const padBox = { x: o.x, y: o.y, w: o.w, h: o.h + 6 };
+            if (
+              overlaps(pb, padBox) &&
+              player.vy >= 0 &&
+              player.prevBottom <= o.y + 2
+            ) {
+              player.vy = -PAD_LAUNCH;
+              player.onGround = false;
+              player.jumpsLeft = 2;
+            }
+          }
+        }
+
+        for (const t of tokens) {
+          if (t.got) continue;
+          const dx = player.x + player.w / 2 - t.x;
+          const dy = player.y + player.h / 2 - t.y;
+          if (dx * dx + dy * dy < (t.r + 12) * (t.r + 12)) {
+            t.got = true;
+            score += 25;
+          }
+        }
+
+        if (!onFloorAt(player.x) && player.y + player.h > FLOOR_Y + 30) {
+          gameOver();
+          return;
+        }
+
+        if (player.y > H + 60) {
+          gameOver();
+          return;
+        }
+
+        score = Math.max(score, Math.floor(player.x / 15));
+        scrollX = Math.max(0, player.x - 180);
+      }
+
+      function drawBackground() {
+        ctx.fillStyle = COLORS.bg;
+        ctx.fillRect(0, 0, W, H);
+
+        ctx.strokeStyle = COLORS.grid;
+        ctx.lineWidth = 1;
+        const step = 40;
+        const offset = -(scrollX % step);
+        for (let x = offset; x < W; x += step) {
+          ctx.beginPath();
+          ctx.moveTo(x, 0);
+          ctx.lineTo(x, H);
+          ctx.stroke();
+        }
+        for (let y = 0; y < H; y += step) {
+          ctx.beginPath();
+          ctx.moveTo(0, y);
+          ctx.lineTo(W, y);
+          ctx.stroke();
+        }
+      }
+
+      function drawSpike(o) {
+        ctx.fillStyle = COLORS.hazard;
+        ctx.beginPath();
+        ctx.moveTo(o.x + o.w / 2, o.y - o.h);
+        ctx.lineTo(o.x, o.y);
+        ctx.lineTo(o.x + o.w, o.y);
+        ctx.closePath();
+        ctx.fill();
+      }
+
+      function drawBlock(o) {
+        ctx.fillStyle = COLORS.accent;
+        ctx.fillRect(o.x, o.y, o.w, o.h);
+        ctx.fillStyle = "rgba(63,185,80,0.25)";
+        ctx.fillRect(o.x + 3, o.y + 3, o.w - 6, o.h - 6);
+      }
+
+      function drawPad(o) {
+        ctx.fillStyle = COLORS.warm;
+        ctx.beginPath();
+        ctx.moveTo(o.x, o.y + o.h);
+        ctx.lineTo(o.x + o.w / 2, o.y - 14);
+        ctx.lineTo(o.x + o.w, o.y + o.h);
+        ctx.closePath();
+        ctx.fill();
+        ctx.fillStyle = "rgba(210,162,76,0.35)";
+        ctx.fillRect(o.x, o.y, o.w, o.h);
+      }
+
+      function drawPlayer() {
+        const cx = player.x + player.w / 2;
+        const cy = player.y + player.h / 2;
+
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.rotate(player.rotation);
+        ctx.fillStyle = COLORS.ink;
+        ctx.fillRect(-player.w / 2, -player.h / 2, player.w, player.h);
+        ctx.fillStyle = COLORS.accent;
+        ctx.fillRect(-player.w / 2 + 4, -player.h / 2 + 5, 5, 5);
+        ctx.fillRect(player.w / 2 - 9, -player.h / 2 + 5, 5, 5);
+        ctx.strokeStyle = COLORS.accent;
+        ctx.lineWidth = 1.5;
+        ctx.strokeRect(-player.w / 2, -player.h / 2, player.w, player.h);
+        ctx.restore();
+      }
+
+      function draw() {
+        drawBackground();
+        ctx.save();
+        ctx.translate(-scrollX, 0);
+
+        for (const f of floorSegs) {
+          if (f.x + f.w < scrollX || f.x > scrollX + W) continue;
+          ctx.fillStyle = COLORS.accent;
+          ctx.fillRect(f.x, FLOOR_Y, f.w, 8);
+          ctx.fillStyle = "rgba(63,185,80,0.1)";
+          ctx.fillRect(f.x, FLOOR_Y + 8, f.w, H - FLOOR_Y);
+        }
+
+        ctx.font = "16px monospace";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        for (const t of tokens) {
+          if (t.got) continue;
+          if (t.x < scrollX || t.x > scrollX + W) continue;
+          ctx.fillStyle = COLORS.warm;
+          ctx.fillText("$", t.x, t.y);
+        }
+
+        for (const o of obstacles) {
+          if (o.x + (o.w || 0) < scrollX || o.x > scrollX + W) continue;
+          if (o.type === "spike") drawSpike(o);
+          else if (o.type === "block") drawBlock(o);
+          else if (o.type === "pad") drawPad(o);
+        }
+
+        drawPlayer();
+        ctx.restore();
+
+        ctx.fillStyle = COLORS.muted;
+        ctx.font = "14px monospace";
+        ctx.textAlign = "left";
+        ctx.textBaseline = "top";
+        ctx.fillText("score: " + score, 14, 14);
+        ctx.fillText("spd: " + runSpeed.toFixed(1), 14, 32);
+      }
+
+      function loop() {
+        update();
+        draw();
+        requestAnimationFrame(loop);
+      }
+
+      function onKeyDown(e) {
+        switch (e.key) {
+          case " ":
+          case "ArrowUp":
+          case "w":
+          case "W":
+            e.preventDefault();
+            jump();
+            break;
+          case "r":
+          case "R":
+            startGame();
+            break;
+        }
+      }
+
+      window.addEventListener("keydown", onKeyDown);
+      canvas.addEventListener("mousedown", (e) => {
+        e.preventDefault();
+        jump();
+      });
+      canvas.addEventListener(
+        "touchstart",
+        (e) => {
+          e.preventDefault();
+          jump();
+        },
+        { passive: false }
+      );
+      startBtn.addEventListener("click", startGame);
+
+      reset();
+      if (reducedMotion) {
+        draw();
+      } else {
+        draw();
+        loop();
+      }
+    </script>
+  </body>
+</html>

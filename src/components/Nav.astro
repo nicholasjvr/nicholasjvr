@@ -5,6 +5,7 @@ import ThemeToggle from './ThemeToggle.astro';
 // Nav links rendered as shell commands (cd ./projects) to sell the terminal frame.
 const links = [
   { href: `${import.meta.env.BASE_URL}#projects`, label: 'cd ./projects' },
+  { href: `${import.meta.env.BASE_URL}#games`, label: 'cd ./games' },
   { href: `${import.meta.env.BASE_URL}#stack`, label: 'cat stack.txt' },
 ];
 const githubUrl = `https://github.com/${import.meta.env.PUBLIC_GITHUB_USERNAME || 'nicholasjvr'}`;

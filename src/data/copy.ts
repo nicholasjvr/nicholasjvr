@@ -16,6 +16,11 @@ export const PROJECTS_SECTION = {
   title: "Things I've shipped on my own time.",
 } as const;
 
+export const GAMES_SECTION = {
+  eyebrow: 'Web games',
+  title: 'Small platformers and time wasters — playable in-browser.',
+} as const;
+
 export const WHAT_I_DO = {
   eyebrow: 'About this site',
   title: 'A personal build log — not a pitch deck.',
