@@ -18,23 +18,35 @@ const { play, title, slug, controls } = Astro.props;
 const resolve = (s: string) => (/^https?:\/\//.test(s) ? s : withBase(s));
 ---
 
-<div class="term-window" data-game-player>
+<div class="term-window" data-game-player data-fs-root>
   <div class="term-titlebar">
     <span class="term-dot" style="background:#f85149" aria-hidden="true"></span>
     <span class="term-dot" style="background:#d2a24c" aria-hidden="true"></span>
     <span class="term-dot" style="background:#3fb950" aria-hidden="true"></span>
     <span class="ml-2 truncate text-xs text-muted">~/games/{slug} - live</span>
 
-    <button
-      type="button"
-      class="tag ml-auto shrink-0 transition hover:text-accent"
-      data-game-focus
-    >
-      focus game
-    </button>
+    <div class="ml-auto flex shrink-0 items-center gap-1">
+      <button type="button" class="tag transition hover:text-accent" data-game-focus>
+        focus game
+      </button>
+      <button
+        type="button"
+        class="tag transition hover:text-accent"
+        data-fs-toggle
+        aria-expanded="false"
+        title="Expand the game to fullscreen"
+      >
+        <span data-fs-open>⛶ fullscreen</span>
+        <span data-fs-close hidden>✕ exit</span>
+      </button>
+    </div>
   </div>
 
-  <div class="relative bg-surface-2">
+  <p class="fs-rotate-hint" aria-hidden="true">
+    Tip: rotate your phone sideways for the best view.
+  </p>
+
+  <div class="relative bg-surface-2" data-fs-frames>
     <iframe
       src={resolve(play.src)}
       title={`${title} - playable`}
@@ -55,6 +67,8 @@ const resolve = (s: string) => (/^https?:\/\//.test(s) ? s : withBase(s));
 </div>
 
 <script>
+  import { initFullscreen } from '../lib/fullscreen';
+
   function initGamePlayers() {
     document.querySelectorAll<HTMLElement>('[data-game-player]').forEach((root) => {
       if (root.dataset.playerReady === 'true') return;
@@ -70,5 +84,9 @@ const resolve = (s: string) => (/^https?:\/\//.test(s) ? s : withBase(s));
   }
 
   initGamePlayers();
-  document.addEventListener('astro:page-load', initGamePlayers);
+  initFullscreen();
+  document.addEventListener('astro:page-load', () => {
+    initGamePlayers();
+    initFullscreen();
+  });
 </script>

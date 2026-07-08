@@ -1,100 +1,113 @@
 ---
-title: WakaTime Alarm
-tagline: React Native NFC alarm app that ties physical tags to coding-time goals and WakaTime stats.
+title: WakaTime
+tagline: NFC-powered alarm app - you have to physically tap a tag to dismiss the alarm and get out of bed.
 status: wip
 featured: true
 order: 4
 accentTheme: wakatime
 timeframe: Jun 2026 to present
-role: Solo build (React Native app, NFC hardware, WakaTime API, iOS + Android store pipelines)
+role: Solo build (Expo/React Native app, NFC integration, Firebase auth, EAS release pipeline)
 objective: >-
-  Build a cross-platform mobile alarm that uses NFC tags as physical triggers,
-  syncs with WakaTime for real coding-time context, and ships to both the App
-  Store and Google Play as a polished consumer app.
+  Build a mobile alarm app that makes oversleeping hard: the alarm can only be
+  dismissed by physically tapping an NFC tag placed away from the bed, turning
+  the snooze habit into a wake-up routine with streaks to keep it going.
 outcome: >-
-  A React Native app in active development: NFC read/write flows for arming and
-  dismissing alarms, WakaTime API integration for daily/weekly coding stats,
-  local notifications with snooze and repeat rules, and store-ready builds for
-  iOS and Android. Proves mobile hardware integration, third-party API auth, and
-  dual-platform release discipline.
+  A working Expo / React Native app with the full core flow: onboarding, local
+  profile setup, NFC tag binding, alarm creation, tap-to-dismiss, and streak
+  tracking. Data is local-first on-device, sign-in is optional via Firebase and
+  Google, and dev/preview/production builds ship through EAS with GitHub
+  Actions workflows for build and store submission.
 skills:
   - typescript
   - react-native
   - nfc
-  - rest-api
   - firebase
+  - oauth
 techStack:
+  - Expo
+  - Expo Router
   - React Native
   - TypeScript
-  - Expo (NFC module)
-  - WakaTime API
-  - iOS (App Store)
-  - Android (Google Play)
-  - Push notifications
+  - react-native-nfc-manager
+  - expo-notifications
+  - AsyncStorage
+  - Firebase Auth + Google Sign-In
+  - EAS Build / Submit
+liveUrl: https://www.wakatime.co.za/
 cover: /projects/wakatime/cover.svg
 metrics:
   - { label: "Platforms", value: "iOS · Android" }
-  - { label: "Trigger", value: "NFC tags" }
-  - { label: "Data source", value: "WakaTime API" }
-  - { label: "Distribution", value: "App Store · Play Store" }
+  - { label: "Dismissal", value: "NFC tag tap" }
+  - { label: "Data", value: "Local-first, on-device" }
+  - { label: "Pipeline", value: "EAS + GitHub Actions" }
 highlights:
-  - title: NFC arm / dismiss flow
+  - title: Tap-to-dismiss alarms
     body: >-
-      Tap an NFC tag to arm or dismiss alarms. Tags are registered in-app so
-      each physical sticker maps to a routine (wake, focus block, end-of-day).
-  - title: WakaTime-aware scheduling
+      The alarm won't stop from the lock screen. Each alarm is tied to a
+      physical NFC tag - stick it in the bathroom or kitchen and you have to
+      get up and tap it to dismiss, which is the whole product.
+  - title: Streak tracking
     body: >-
-      Pull daily and weekly coding totals from the WakaTime API so alarm
-      thresholds and reminders reflect actual dev time, not just clock time.
-  - title: Cross-platform React Native
+      Completing the wake-up flow builds a streak, so the incentive shifts from
+      "avoid the alarm" to "keep the run alive". A quick toggle enables or
+      disables the next alarm without breaking the setup.
+  - title: Local-first with optional sign-in
     body: >-
-      One TypeScript codebase with platform-specific NFC and notification
-      handling. Shared UI, navigation, and API layer; native modules where
-      required.
-  - title: Store release pipeline
+      Alarms, streaks, and profile data live on-device in AsyncStorage - the
+      app works fully offline with no account. Firebase Auth with Google
+      Sign-In is there for users who want one.
+  - title: EAS release pipeline
     body: >-
-      iOS provisioning, Android signing, and Play Console / App Store Connect
-      metadata scaffolded for TestFlight and internal testing tracks.
+      Development, preview, and production build profiles on EAS, with GitHub
+      Actions workflows that queue cloud builds (including iOS from Windows)
+      and submit to the Play Store and App Store non-interactively.
 gallery:
   - src: /projects/wakatime/home.svg
-    alt: WakaTime Alarm home screen with today's coding stats
-    caption: "Home: today's WakaTime summary and next alarm state (placeholder)."
+    alt: WakaTime home screen with next alarm and streak
+    caption: "Home: next alarm, quick enable/disable, and current streak (placeholder)."
   - src: /projects/wakatime/nfc-scan.svg
-    alt: NFC tag scan screen
-    caption: "NFC: scan-to-arm flow with tag registration (placeholder)."
+    alt: NFC tag binding screen
+    caption: "NFC: bind a physical tag to your profile - the tag that dismisses your alarms (placeholder)."
   - src: /projects/wakatime/alarm-setup.svg
-    alt: Alarm configuration screen
-    caption: "Alarms: schedule, repeat rules, and WakaTime-linked thresholds (placeholder)."
+    alt: Alarm creation screen
+    caption: "Alarms: create an alarm tied to your NFC tag, with repeat rules (placeholder)."
   - src: /projects/wakatime/settings.svg
-    alt: Settings and WakaTime API connection
-    caption: "Settings: WakaTime OAuth/API key and notification preferences (placeholder)."
+    alt: Settings and profile screen
+    caption: "Settings: profile, optional Google sign-in, and notification preferences (placeholder)."
 demo:
   kind: screenshots
 ---
 
 ## What it is
 
-WakaTime Alarm is a **React Native** mobile app that combines **NFC hardware**
-with **WakaTime coding analytics**. Physical NFC tags act as alarm triggers;
-the app layers WakaTime stats so reminders and goals are grounded in how much
-you actually coded, not just what time it is on the clock.
+WakaTime is an **NFC-powered alarm app** built with **Expo, React Native, and
+Expo Router**. The idea is simple: switching off an alarm from bed is too easy,
+so WakaTime makes you physically get up. Each alarm is bound to an NFC tag -
+place it across the room and the only way to silence the alarm is to walk over
+and tap it.
 
 ## How it works
 
-- **Register tags.** Pair NFC stickers in-app; each tag gets a label and
-  action (arm alarm, dismiss, toggle focus mode).
-- **Connect WakaTime.** OAuth or API key flow pulls heartbeats, languages, and
-  daily totals into the home dashboard.
-- **Schedule alarms.** Local notifications with repeat rules; optional
-  WakaTime-linked conditions (e.g. nudge when below a daily hour target).
-- **Ship.** Separate iOS and Android build profiles, store listings, and
-  privacy-policy pages for App Store and Play Store submission.
+- **Onboard.** Create a local profile on-device; signing in with Google via
+  Firebase Auth is optional, not required.
+- **Bind a tag.** Pair a physical NFC tag to your profile with
+  `react-native-nfc-manager` - this tag becomes your dismiss key.
+- **Set alarms.** Create alarms tied to that tag, delivered through
+  `expo-notifications`. A quick toggle turns the next alarm on or off.
+- **Wake up properly.** When the alarm fires, only tapping the bound tag
+  dismisses it. Completing the flow grows your wake-up streak.
+
+Everything is **local-first**: alarms, streaks, and profile data persist in
+AsyncStorage on the device rather than a remote backend.
 
 ## Status
 
-**WIP.** Core navigation, NFC scan UI, and WakaTime API client are scaffolded.
-Next: end-to-end NFC write on device, notification reliability on both OSes,
-and first TestFlight / internal testing upload.
+**WIP.** The core product flow is built end-to-end: onboarding, profile setup,
+optional sign-in, NFC tag binding, alarm creation, and basic stats and settings
+screens. Expanded stats, account editing, and notification settings are marked
+"coming soon". NFC and native auth need real device builds, so testing runs
+through EAS development builds; release builds and store submission are wired
+up via GitHub Actions.
 
-> Replace SVG placeholders with device screenshots once builds run on hardware.
-> Add `repo` and `liveUrl` (store links) to frontmatter when published.
+> Replace SVG placeholders with device screenshots from a development build.
+> Add store links once the app is live on the Play Store / App Store.

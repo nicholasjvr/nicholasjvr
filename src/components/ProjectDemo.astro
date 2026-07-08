@@ -50,32 +50,48 @@ const iframeSources: IframeSource[] =
 
 {
   demo.kind === 'iframe' && iframeSources.length > 0 && (
-    <div class="term-window" data-demo>
+    <div class="term-window" data-demo data-fs-root>
       <div class="term-titlebar">
         <span class="term-dot" style="background:#f85149" aria-hidden="true" />
         <span class="term-dot" style="background:#d2a24c" aria-hidden="true" />
         <span class="term-dot" style="background:#3fb950" aria-hidden="true" />
         <span class="ml-2 truncate text-xs text-muted">{title} - live preview</span>
 
-        {iframeSources.length > 1 && (
-          <div class="ml-auto flex gap-1" role="tablist" aria-label={`${title} demo pages`}>
-            {iframeSources.map((s, i) => (
-              <button
-                type="button"
-                class="tag transition hover:text-accent data-[active=true]:border-accent/40 data-[active=true]:text-accent"
-                data-demo-tab={i}
-                data-active={i === 0 ? 'true' : 'false'}
-                role="tab"
-                aria-selected={i === 0 ? 'true' : 'false'}
-              >
-                {s.label}
-              </button>
-            ))}
-          </div>
-        )}
+        <div class="ml-auto flex items-center gap-1">
+          {iframeSources.length > 1 && (
+            <div class="flex gap-1" role="tablist" aria-label={`${title} demo pages`}>
+              {iframeSources.map((s, i) => (
+                <button
+                  type="button"
+                  class="tag transition hover:text-accent data-[active=true]:border-accent/40 data-[active=true]:text-accent"
+                  data-demo-tab={i}
+                  data-active={i === 0 ? 'true' : 'false'}
+                  role="tab"
+                  aria-selected={i === 0 ? 'true' : 'false'}
+                >
+                  {s.label}
+                </button>
+              ))}
+            </div>
+          )}
+          <button
+            type="button"
+            class="tag transition hover:text-accent"
+            data-fs-toggle
+            aria-expanded="false"
+            title="Expand the demo to fullscreen"
+          >
+            <span data-fs-open>⛶ fullscreen</span>
+            <span data-fs-close hidden>✕ exit</span>
+          </button>
+        </div>
       </div>
 
-      <div class="relative bg-surface-2">
+      <p class="fs-rotate-hint" aria-hidden="true">
+        Tip: rotate your phone sideways for the best view.
+      </p>
+
+      <div class="relative bg-surface-2" data-fs-frames>
         {iframeSources.map((s, i) => (
           <iframe
             src={resolve(s.src)}
@@ -113,8 +129,10 @@ const iframeSources: IframeSource[] =
 }
 
 {
-  iframeSources.length > 1 && (
+  iframeSources.length > 0 && (
     <script>
+      import { initFullscreen } from '../lib/fullscreen';
+
       function initDemoTabs() {
         document.querySelectorAll<HTMLElement>('[data-demo]').forEach((root) => {
           if (root.dataset.tabsReady === 'true') return;
@@ -140,7 +158,11 @@ const iframeSources: IframeSource[] =
       }
 
       initDemoTabs();
-      document.addEventListener('astro:page-load', initDemoTabs);
+      initFullscreen();
+      document.addEventListener('astro:page-load', () => {
+        initDemoTabs();
+        initFullscreen();
+      });
     </script>
   )
 }

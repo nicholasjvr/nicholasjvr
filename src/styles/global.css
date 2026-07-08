@@ -121,6 +121,52 @@ body {
   border: 1px solid rgb(0 0 0 / 0.25);
 }
 
+/* Fullscreen embed mode (shared convention — see src/lib/fullscreen.ts).
+   Any [data-fs-root] container expands in place via a fixed overlay — never
+   reparented, so the iframe keeps its state. This is the universal fallback
+   on iPhone Safari, and doubles as the layout when the native Fullscreen API
+   is active on the same element (Android). */
+[data-fs-root].is-fs {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0;
+  border: 0;
+  background: rgb(var(--c-surface));
+  padding-top: env(safe-area-inset-top, 0);
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+[data-fs-root].is-fs [data-fs-frames] {
+  flex: 1;
+  min-height: 0;
+}
+[data-fs-root].is-fs [data-fs-frames] iframe {
+  aspect-ratio: auto;
+  height: 100%;
+}
+body.fs-open {
+  overflow: hidden;
+}
+
+/* Rotate hint: only while fullscreen, only on portrait phones. Turning the
+   phone sideways makes it disappear on its own. */
+.fs-rotate-hint {
+  display: none;
+  margin: 0;
+  padding: 0.4rem 1rem;
+  font-size: 0.75rem;
+  color: rgb(var(--c-muted));
+  border-bottom: 1px solid rgb(var(--c-border));
+  background: rgb(var(--c-surface-2) / 0.8);
+}
+@media (orientation: portrait) and (max-width: 820px) {
+  [data-fs-root].is-fs .fs-rotate-hint {
+    display: block;
+  }
+}
+
 .prompt::before {
   content: '$ ';
   color: rgb(var(--c-accent));

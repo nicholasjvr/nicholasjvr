@@ -41,7 +41,7 @@ export const ACCENT_THEMES: Record<AccentTheme, AccentThemeTokens> = {
     glow: '200 240 74',
   },
   wakatime: {
-    label: 'WakaTime Alarm',
+    label: 'WakaTime',
     accent: '0 173 131',
     accent2: '52 211 153',
     glow: '16 185 129',
