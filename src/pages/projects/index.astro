@@ -4,7 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
 import { getSkill } from '../../data/skills';
 
-const projects = (await getCollection('projects')).sort(
+const projects = (await getCollection('projects', ({ data }) => data.published)).sort(
   (a, b) => a.data.order - b.data.order
 );
 
@@ -53,6 +53,24 @@ const filters = skillKeys
     </div>
 
     <p id="empty" class="mt-10 hidden text-center text-muted">No projects match that skill yet.</p>
+
+    <!-- Community hub on cinhaus.co.za — uploads + gallery live there. -->
+    <div class="card-surface reveal mt-12 flex flex-wrap items-center justify-between gap-4 rounded-2xl p-6">
+      <div>
+        <p class="prompt font-semibold text-ink">community projects &amp; games</p>
+        <p class="mt-1 text-sm text-muted">
+          Showcases and playable games uploaded by the community on CinHaus.
+        </p>
+      </div>
+      <a
+        href="https://cinhaus.co.za/explore"
+        target="_blank"
+        rel="noopener"
+        class="btn-primary px-4 py-2"
+      >
+        cinhaus.co.za/explore →
+      </a>
+    </div>
   </section>
 </BaseLayout>
 

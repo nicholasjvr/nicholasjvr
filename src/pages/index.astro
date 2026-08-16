@@ -10,7 +10,7 @@ import TechStack from '../components/TechStack.astro';
 import { PROJECTS_SECTION, GAMES_SECTION, CONTACT_CTA } from '../data/copy';
 import { withBase } from '../lib/paths';
 
-const featured = (await getCollection('projects'))
+const featured = (await getCollection('projects', ({ data }) => data.published))
   .filter((p) => p.data.featured)
   .sort((a, b) => a.data.order - b.data.order);
 

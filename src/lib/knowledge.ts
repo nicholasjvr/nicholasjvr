@@ -18,7 +18,7 @@ import { ABOUT } from '../data/about';
 
 /** Assemble all curated context into one markdown string for grounding. */
 export async function buildKnowledgeCorpus(): Promise<string> {
-  const projects = (await getCollection('projects')).sort(
+  const projects = (await getCollection('projects', ({ data }) => data.published)).sort(
     (a, b) => a.data.order - b.data.order
   );
 

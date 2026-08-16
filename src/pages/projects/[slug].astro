@@ -8,7 +8,7 @@ import ProjectDemo from '../../components/ProjectDemo.astro';
 import { withBase } from '../../lib/paths';
 
 export async function getStaticPaths() {
-  const projects = await getCollection('projects');
+  const projects = await getCollection('projects', ({ data }) => data.published);
   return projects.map((project) => ({
     params: { slug: project.slug },
     props: { project },

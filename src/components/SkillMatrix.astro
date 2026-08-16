@@ -4,7 +4,7 @@ import { SKILLS, CATEGORY_ORDER, getSkill, type SkillCategory } from '../data/sk
 
 // Reverse-map: which projects demonstrate each skill. Only show skills that are
 // actually used by at least one project, grouped by category.
-const projects = await getCollection('projects');
+const projects = await getCollection('projects', ({ data }) => data.published);
 
 const usage = new Map<string, { title: string; slug: string }[]>();
 for (const p of projects) {
