@@ -80,6 +80,10 @@ const games = defineCollection({
     title: z.string(),
     tagline: z.string(),
     status: z.enum(['live', 'wip', 'archived']),
+    // Vaulted games (published: false) are excluded from every listing AND
+    // never get a [slug] page built, so the URL 404s rather than just being
+    // unlinked. Flip back to true to republish.
+    published: z.boolean().default(true),
     featured: z.boolean().default(false),
     order: z.number().default(100),
 

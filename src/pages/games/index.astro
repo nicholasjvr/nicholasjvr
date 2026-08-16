@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import GameCard from '../../components/GameCard.astro';
 
-const games = (await getCollection('games')).sort(
+const games = (await getCollection('games', ({ data }) => data.published)).sort(
   (a, b) => a.data.order - b.data.order
 );
 
@@ -51,6 +51,24 @@ const genres = [...new Set(games.flatMap((g) => g.data.genres))].sort((a, b) =>
     </div>
 
     <p id="empty" class="mt-10 hidden text-center text-muted">No games match that genre yet.</p>
+
+    <!-- Community hub on cinhaus.co.za — uploads + gallery live there. -->
+    <div class="card-surface reveal mt-12 flex flex-wrap items-center justify-between gap-4 rounded-2xl p-6">
+      <div>
+        <p class="prompt font-semibold text-ink">explore the community arcade</p>
+        <p class="mt-1 text-sm text-muted">
+          Games uploaded by the community on CinHaus — plus invite-only uploads for your own.
+        </p>
+      </div>
+      <a
+        href="https://cinhaus.co.za/explore"
+        target="_blank"
+        rel="noopener"
+        class="btn-primary px-4 py-2"
+      >
+        cinhaus.co.za/explore →
+      </a>
+    </div>
   </section>
 </BaseLayout>
 

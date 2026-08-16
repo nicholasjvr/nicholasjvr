@@ -14,7 +14,7 @@ const featured = (await getCollection('projects', ({ data }) => data.published))
   .filter((p) => p.data.featured)
   .sort((a, b) => a.data.order - b.data.order);
 
-const featuredGames = (await getCollection('games'))
+const featuredGames = (await getCollection('games', ({ data }) => data.published))
   .filter((g) => g.data.featured)
   .sort((a, b) => a.data.order - b.data.order);
 
