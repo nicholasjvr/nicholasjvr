@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Nicholas van Rensburg, Fullstack JavaScript Developer">
-  <rect width="1200" height="630" fill="#0B0F19"/>
-  <text x="80" y="290" fill="#F8FAFC" font-family="Inter, system-ui, sans-serif" font-size="72" font-weight="600" letter-spacing="-2">Nicholas van Rensburg</text>
-  <text x="80" y="350" fill="#00F7FF" font-family="ui-monospace, SFMono-Regular, monospace" font-size="32" font-weight="500">Fullstack JavaScript Developer</text>
-  <text x="80" y="420" fill="#94A3B8" font-family="Inter, system-ui, sans-serif" font-size="30">If it sounds remotely possible, I'll probably build it.</text>
-  <rect x="80" y="452" width="160" height="4" rx="2" fill="#00F7FF"/>
-</svg>

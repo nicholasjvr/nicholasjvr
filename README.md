@@ -1,16 +1,21 @@
-# Nicholas van Rensburg
+# Nicholas Jansen van Rensburg
 
-![Nicholas van Rensburg, Fullstack JavaScript Developer](https://raw.githubusercontent.com/nicholasjvr/nicholasjvr/main/.github/assets/readme/banner.svg)
+A minimal portfolio about two ongoing projects: **SportsOpp**, a multi-sport athlete-discovery platform, and **WakaTime**, an NFC alarm app. Each project has its own case study and dated timeline.
 
-**Fullstack JavaScript Developer**
+## Run locally
 
-Everything on the portfolio projects, stack, how I work, and how to reach me.
+```sh
+npm install
+npm run dev
+```
 
-## Portfolio & More
+Astro serves the site at `http://localhost:4321`. Build the static site with `npm run build`.
 
-**→ [nicholasjvr.github.io/nicholasjvr](https://nicholasjvr.github.io/nicholasjvr)**
+## Project histories
 
-## Connect
+The case-study content lives in [src/data/projects.ts](src/data/projects.ts). Before changing a project's timeline, check its project changelog and context notes in the corresponding project knowledge folder. Keep the site timeline as a concise, dated summary; the project folders remain the source of truth.
+
+## Contact
 
 - [Email](mailto:nicholas241cut@gmail.com)
 - [GitHub](https://github.com/nicholasjvr)
