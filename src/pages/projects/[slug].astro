@@ -36,6 +36,45 @@ if (!project) {
       </aside>
     </section>
 
+    <section class="architecture-section" aria-labelledby="arch-title">
+      <div class="timeline-heading">
+        <h2 id="arch-title" class="section-label">System architecture &amp; flow</h2>
+        <span class="section-label">{project.slug === "wakatime" ? "NFC + Hardware + Cloud" : "Media + CRM + Discovery"}</span>
+      </div>
+      <div class="architecture-frame">
+        <img
+          src={`/projects/${project.slug}/flow.svg`}
+          alt={`${project.name} architecture and flow diagram`}
+          loading="eager"
+        />
+      </div>
+
+      {project.slug === "wakatime" && (
+        <div class="capsule-viewer-card">
+          <div class="capsule-viewer-header">
+            <span class="timeline-category">3D HARDWARE MODEL · WAKATAG CAPSULE (.GLB)</span>
+            <span class="section-label">Drag to rotate · Scroll to zoom</span>
+          </div>
+          <model-viewer
+            class="capsule-model-viewer"
+            src="/projects/wakatime/waka_time_capsule.glb"
+            alt="3D CAD model of the physical WakaTime NFC Capsule"
+            auto-rotate
+            camera-controls
+            rotation-per-second="24deg"
+            camera-orbit="25deg 55deg auto"
+            shadow-intensity="1"
+            exposure="1.05"
+          ></model-viewer>
+          <script
+            is:inline
+            type="module"
+            src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"
+          ></script>
+        </div>
+      )}
+    </section>
+
     <section class="timeline-section" aria-labelledby="timeline-title">
       <div class="timeline-heading">
         <h2 id="timeline-title" class="section-label">The story so far</h2>

@@ -1,0 +1,224 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 340" role="img" aria-label="WakaTime NFC Tap Architecture: iOS AlarmKit to Physical WakaTag Capsule Tap to Regional HTTPS Callable to Alarm Dismissed">
+  <defs>
+    <pattern id="gridWaka" x="0" y="0" width="18" height="18" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="#2B372F" opacity="0.6" />
+    </pattern>
+    <linearGradient id="bgWaka" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#121814" />
+      <stop offset="100%" stop-color="#19221C" />
+    </linearGradient>
+    <linearGradient id="capsuleRim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3E5044" />
+      <stop offset="55%" stop-color="#243028" />
+      <stop offset="100%" stop-color="#151D18" />
+    </linearGradient>
+    <linearGradient id="capsuleTop" x1="15%" y1="10%" x2="85%" y2="90%">
+      <stop offset="0%" stop-color="#4A5E50" />
+      <stop offset="45%" stop-color="#2F3D34" />
+      <stop offset="100%" stop-color="#1E2822" />
+    </linearGradient>
+    <linearGradient id="capsuleBase" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E2721" />
+      <stop offset="100%" stop-color="#0F1411" />
+    </linearGradient>
+    <style>
+      @keyframes ringWave {
+        0% { r: 18px; opacity: 0.9; stroke-width: 2.5px; }
+        100% { r: 74px; opacity: 0; stroke-width: 0.8px; }
+      }
+      @keyframes nfcPulse {
+        0% { transform: translateY(0) scale(0.75); opacity: 0.95; }
+        100% { transform: translateY(-34px) scale(1.35); opacity: 0; }
+      }
+      @keyframes capsuleFloat {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-4px); }
+      }
+      @keyframes podGlow {
+        0%, 100% { fill: #C44F32; opacity: 0.85; }
+        50% { fill: #FF8566; opacity: 1; }
+      }
+      @keyframes dashFlow {
+        to { stroke-dashoffset: -48; }
+      }
+      @keyframes packetMove1 {
+        0% { transform: translateX(0px); opacity: 0; }
+        15% { opacity: 1; }
+        85% { opacity: 1; }
+        100% { transform: translateX(92px); opacity: 0; }
+      }
+      @keyframes checkPulse {
+        0%, 100% { transform: scale(1); opacity: 0.9; }
+        50% { transform: scale(1.08); opacity: 1; }
+      }
+      .nfc-ring-1 { animation: nfcPulse 2.4s ease-out infinite; transform-origin: 455px 168px; }
+      .nfc-ring-2 { animation: nfcPulse 2.4s ease-out 0.8s infinite; transform-origin: 455px 168px; }
+      .nfc-ring-3 { animation: nfcPulse 2.4s ease-out 1.6s infinite; transform-origin: 455px 168px; }
+      .alarm-wave-1 { animation: ringWave 2.1s ease-out infinite; }
+      .alarm-wave-2 { animation: ringWave 2.1s ease-out 0.7s infinite; }
+      .capsule-body { animation: capsuleFloat 3.6s ease-in-out infinite; }
+      .pod-1 { animation: podGlow 1.8s ease-in-out 0.0s infinite; }
+      .pod-2 { animation: podGlow 1.8s ease-in-out 0.2s infinite; }
+      .pod-3 { animation: podGlow 1.8s ease-in-out 0.4s infinite; }
+      .pod-4 { animation: podGlow 1.8s ease-in-out 0.6s infinite; }
+      .pod-5 { animation: podGlow 1.8s ease-in-out 0.8s infinite; }
+      .pod-6 { animation: podGlow 1.8s ease-in-out 1.0s infinite; }
+      .pod-7 { animation: podGlow 1.8s ease-in-out 1.2s infinite; }
+      .pod-8 { animation: podGlow 1.8s ease-in-out 1.4s infinite; }
+      .flow-line { stroke-dasharray: 6 6; animation: dashFlow 1.6s linear infinite; }
+      .packet-dot { animation: packetMove1 2.0s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+      .check-badge { animation: checkPulse 2.6s ease-in-out infinite; transform-origin: 1015px 166px; }
+    </style>
+  </defs>
+
+  <!-- Outer Frame -->
+  <rect width="1160" height="340" rx="14" fill="url(#bgWaka)" />
+  <rect width="1160" height="340" rx="14" fill="url(#gridWaka)" />
+  <rect x="1" y="1" width="1158" height="338" rx="13" fill="none" stroke="#2D3A31" stroke-width="1.5" />
+
+  <!-- Top Header Bar -->
+  <text x="32" y="38" fill="#C44F32" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" font-weight="600" letter-spacing="1.2">
+    WAKATIME ARCHITECTURE · PHYSICAL NFC WAKE-UP VERIFICATION FLOW
+  </text>
+  <text x="1128" y="38" text-anchor="end" fill="#7D8B81" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11">
+    1 ACCOUNT · 1 PHONE · 1 CAPSULE
+  </text>
+  <line x1="32" y1="52" x2="1128" y2="52" stroke="#263129" stroke-width="1" />
+
+  <!-- ========================================================= -->
+  <!-- STAGE 1: iOS ALARMKIT & LOCAL-FIRST MIRROR                -->
+  <!-- ========================================================= -->
+  <g>
+    <rect x="32" y="74" width="215" height="206" rx="12" fill="#17201A" stroke="#2E3B32" stroke-width="1.2" />
+    <text x="50" y="98" fill="#C44F32" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="600">01 · ALARMKIT</text>
+
+    <!-- Animated Sound Waves Behind Phone -->
+    <circle class="alarm-wave-1" cx="140" cy="164" r="24" fill="none" stroke="#C44F32" />
+    <circle class="alarm-wave-2" cx="140" cy="164" r="24" fill="none" stroke="#C44F32" />
+
+    <!-- Phone Body -->
+    <rect x="106" y="114" width="68" height="104" rx="11" fill="#111713" stroke="#526457" stroke-width="2" />
+    <rect x="128" y="119" width="24" height="4" rx="2" fill="#2B372F" />
+    <text x="140" y="154" text-anchor="middle" fill="#F5F5F0" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" font-weight="700">06:00</text>
+    <rect x="116" y="165" width="48" height="16" rx="4" fill="#C44F32" opacity="0.22" stroke="#C44F32" stroke-width="1" />
+    <text x="140" y="176" text-anchor="middle" fill="#FF8B6E" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="8.5" font-weight="600">RINGING</text>
+    <text x="140" y="202" text-anchor="middle" fill="#8FA094" font-family="Inter, system-ui, sans-serif" font-size="8.5">Tap Capsule</text>
+
+    <text x="140" y="246" text-anchor="middle" fill="#E5EAE6" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600">Branded Wake Audio</text>
+    <text x="140" y="264" text-anchor="middle" fill="#829186" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5">iOS AlarmKit · Loop-Safe</text>
+  </g>
+
+  <!-- Connector 1 -> 2 -->
+  <line class="flow-line" x1="247" y1="176" x2="335" y2="176" stroke="#C44F32" stroke-width="2" />
+  <circle class="packet-dot" cx="247" cy="176" r="4" fill="#FF8566" />
+  <text x="291" y="164" text-anchor="middle" fill="#8FA094" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10">WALK UP</text>
+
+  <!-- ========================================================= -->
+  <!-- STAGE 2: 3D WAKATAG CAPSULE (FROM waka_time_capsule.glb)  -->
+  <!-- ========================================================= -->
+  <g>
+    <rect x="335" y="74" width="240" height="206" rx="12" fill="#17201A" stroke="#3B4D40" stroke-width="1.5" />
+    <text x="353" y="98" fill="#C44F32" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="600">02 · WAKATAG CAPSULE</text>
+    <text x="557" y="98" text-anchor="end" fill="#689D7A" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10">13.56 MHz</text>
+
+    <!-- 3D Isometric WakaTag Capsule (Exact 8-Aperture + Center Ring Geometry from GLB) -->
+    <g class="capsule-body">
+      <!-- Soft Drop Shadow -->
+      <path d="M 382 182 C 392 146, 518 146, 528 182 C 538 216, 372 216, 382 182 Z" fill="#090D0B" opacity="0.65" />
+
+      <!-- Lower Capsule Shell & Split Seam (Squircle Isometric Extrusion) -->
+      <path d="M 384 170 C 376 196, 534 196, 526 170 L 526 183 C 534 210, 376 210, 384 183 Z" fill="url(#capsuleBase)" stroke="#334338" stroke-width="1.2" />
+      <!-- Outer Beveled Upper Rim -->
+      <path d="M 392 142 C 414 124, 496 124, 518 142 C 538 158, 536 184, 514 196 C 488 209, 422 209, 396 196 C 374 184, 372 158, 392 142 Z" fill="url(#capsuleRim)" stroke="#526859" stroke-width="1.4" />
+      <!-- Mid Split Seam Line -->
+      <path d="M 380 176 C 405 205, 505 205, 530 176" fill="none" stroke="#111713" stroke-width="1.8" />
+
+      <!-- Top Squircle Face -->
+      <path d="M 400 144 C 420 129, 490 129, 510 144 C 527 157, 525 179, 506 189 C 484 200, 426 200, 404 189 C 385 179, 383 157, 400 144 Z" fill="url(#capsuleTop)" stroke="#44584A" stroke-width="1" />
+
+      <!-- Center Recessed Ring (From GLB Top Face) -->
+      <ellipse cx="455" cy="164" rx="18" ry="11.5" fill="#18201B" stroke="#C44F32" stroke-width="3.2" />
+      <ellipse cx="455" cy="164" rx="11" ry="7" fill="#2E3D33" stroke="#4D6354" stroke-width="0.8" />
+
+      <!-- 8 Radial Circular Apertures (Exact Octagonal Layout from GLB) -->
+      <!-- Top (0 deg) -->
+      <ellipse class="pod-1" cx="455" cy="141" rx="7.2" ry="4.5" stroke="#221512" stroke-width="0.8" />
+      <!-- Top-Right (45 deg) -->
+      <ellipse class="pod-2" cx="481" cy="147" rx="7.2" ry="4.5" stroke="#221512" stroke-width="0.8" />
+      <!-- Right (90 deg) -->
+      <ellipse class="pod-3" cx="492" cy="164" rx="7.2" ry="4.5" stroke="#221512" stroke-width="0.8" />
+      <!-- Bottom-Right (135 deg) -->
+      <ellipse class="pod-4" cx="481" cy="181" rx="7.2" ry="4.5" stroke="#221512" stroke-width="0.8" />
+      <!-- Bottom (180 deg) -->
+      <ellipse class="pod-5" cx="455" cy="187" rx="7.2" ry="4.5" stroke="#221512" stroke-width="0.8" />
+      <!-- Bottom-Left (225 deg) -->
+      <ellipse class="pod-6" cx="429" cy="181" rx="7.2" ry="4.5" stroke="#221512" stroke-width="0.8" />
+      <!-- Left (270 deg) -->
+      <ellipse class="pod-7" cx="418" cy="164" rx="7.2" ry="4.5" stroke="#221512" stroke-width="0.8" />
+      <!-- Top-Left (315 deg) -->
+      <ellipse class="pod-8" cx="429" cy="147" rx="7.2" ry="4.5" stroke="#221512" stroke-width="0.8" />
+    </g>
+
+    <!-- Animated NFC Induction Waves Radiating Upward -->
+    <ellipse class="nfc-ring-1" cx="455" cy="160" rx="28" ry="14" fill="none" stroke="#689D7A" stroke-width="2" />
+    <ellipse class="nfc-ring-2" cx="455" cy="160" rx="28" ry="14" fill="none" stroke="#C44F32" stroke-width="2" />
+    <ellipse class="nfc-ring-3" cx="455" cy="160" rx="28" ry="14" fill="none" stroke="#689D7A" stroke-width="2" />
+
+    <text x="455" y="246" text-anchor="middle" fill="#E5EAE6" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600">Physical NFC Tap</text>
+    <text x="455" y="264" text-anchor="middle" fill="#829186" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5">3D WakaTag Hardware</text>
+  </g>
+
+  <!-- Connector 2 -> 3 -->
+  <line class="flow-line" x1="575" y1="176" x2="663" y2="176" stroke="#689D7A" stroke-width="2" />
+  <circle class="packet-dot" cx="575" cy="176" r="4" fill="#689D7A" />
+  <text x="619" y="164" text-anchor="middle" fill="#8FA094" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10">TAG UID</text>
+
+  <!-- ========================================================= -->
+  <!-- STAGE 3: REGIONAL HTTPS CALLABLE & TAG REGISTRY           -->
+  <!-- ========================================================= -->
+  <g>
+    <rect x="663" y="74" width="215" height="206" rx="12" fill="#17201A" stroke="#2E3B32" stroke-width="1.2" />
+    <text x="681" y="98" fill="#689D7A" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="600">03 · HTTPS CALLABLE</text>
+
+    <!-- Server / Tag Registry Shield Node -->
+    <rect x="716" y="118" width="110" height="32" rx="6" fill="#1F2B23" stroke="#425748" stroke-width="1.2" />
+    <circle cx="732" cy="134" r="4" fill="#689D7A" />
+    <text x="744" y="138" fill="#D5DDD7" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" font-weight="600">verifyTagTap()</text>
+
+    <rect x="716" y="158" width="110" height="32" rx="6" fill="#1F2B23" stroke="#425748" stroke-width="1.2" />
+    <circle cx="732" cy="174" r="4" fill="#C44F32" />
+    <text x="744" y="178" fill="#D5DDD7" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5">Append Binding</text>
+
+    <rect x="716" y="198" width="110" height="22" rx="4" fill="#131A15" stroke="#2C3A30" stroke-width="1" />
+    <text x="771" y="213" text-anchor="middle" fill="#8FA094" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="9.5">No Client Fallback</text>
+
+    <text x="771" y="246" text-anchor="middle" fill="#E5EAE6" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600">Server-Owned Registry</text>
+    <text x="771" y="264" text-anchor="middle" fill="#829186" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5">Firebase Regional Callable</text>
+  </g>
+
+  <!-- Connector 3 -> 4 -->
+  <line class="flow-line" x1="878" y1="176" x2="966" y2="176" stroke="#689D7A" stroke-width="2" />
+  <circle class="packet-dot" cx="878" cy="176" r="4" fill="#689D7A" />
+  <text x="922" y="164" text-anchor="middle" fill="#8FA094" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10">VERIFIED</text>
+
+  <!-- ========================================================= -->
+  <!-- STAGE 4: WAKE-UP CONFIRMED & CLOUD SYNC                   -->
+  <!-- ========================================================= -->
+  <g>
+    <rect x="966" y="74" width="162" height="206" rx="12" fill="#17201A" stroke="#2E3B32" stroke-width="1.2" />
+    <text x="984" y="98" fill="#689D7A" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="600">04 · COMPLETE</text>
+
+    <g class="check-badge">
+      <circle cx="1047" cy="162" r="34" fill="#1E3125" stroke="#689D7A" stroke-width="2" />
+      <path d="M 1033 162 L 1043 172 L 1063 151" fill="none" stroke="#8CE0A6" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+    </g>
+
+    <text x="1047" y="246" text-anchor="middle" fill="#E5EAE6" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600">Alarm Dismissed</text>
+    <text x="1047" y="264" text-anchor="middle" fill="#689D7A" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5">Wake-Up Confirmed ✓</text>
+  </g>
+
+  <!-- Bottom Footer Note -->
+  <text x="32" y="314" fill="#7D8B81" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11">
+    ● Capsule geometry modeled from waka_time_capsule.glb  ·  Server-enforced claim history  ·  Offline-resilient local alarm mirror
+  </text>
+</svg>

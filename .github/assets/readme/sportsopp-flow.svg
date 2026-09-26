@@ -1,0 +1,165 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 340" role="img" aria-label="SportsOpp Architecture: Athlete Upload to Cloud Run FFmpeg Pipeline to Zoho CRM and PayFast Sync to Curated Explore Feed">
+  <defs>
+    <pattern id="gridSports" x="0" y="0" width="18" height="18" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="#2B372F" opacity="0.6" />
+    </pattern>
+    <linearGradient id="bgSports" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#121814" />
+      <stop offset="100%" stop-color="#19221C" />
+    </linearGradient>
+    <style>
+      @keyframes dashMove {
+        to { stroke-dashoffset: -48; }
+      }
+      @keyframes packetSlide {
+        0% { transform: translateX(0px); opacity: 0; }
+        15% { opacity: 1; }
+        85% { opacity: 1; }
+        100% { transform: translateX(86px); opacity: 0; }
+      }
+      @keyframes barPulse1 {
+        0%, 100% { height: 14px; y: 162px; }
+        50% { height: 34px; y: 142px; }
+      }
+      @keyframes barPulse2 {
+        0%, 100% { height: 28px; y: 148px; }
+        50% { height: 12px; y: 164px; }
+      }
+      @keyframes barPulse3 {
+        0%, 100% { height: 18px; y: 158px; }
+        50% { height: 38px; y: 138px; }
+      }
+      @keyframes scanSweep {
+        0%, 100% { transform: translateX(-34px); opacity: 0.4; }
+        50% { transform: translateX(34px); opacity: 1; }
+      }
+      @keyframes cardHighlight {
+        0%, 100% { stroke: #3B4D40; }
+        50% { stroke: #689D7A; }
+      }
+      .flow-line { stroke-dasharray: 6 6; animation: dashMove 1.6s linear infinite; }
+      .packet { animation: packetSlide 2.0s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+      .bar-1 { animation: barPulse1 1.4s ease-in-out infinite; }
+      .bar-2 { animation: barPulse2 1.4s ease-in-out 0.25s infinite; }
+      .bar-3 { animation: barPulse3 1.4s ease-in-out 0.5s infinite; }
+      .bar-4 { animation: barPulse2 1.4s ease-in-out 0.75s infinite; }
+      .bar-5 { animation: barPulse1 1.4s ease-in-out 1.0s infinite; }
+      .scan-line { animation: scanSweep 2.4s ease-in-out infinite; }
+      .live-card { animation: cardHighlight 2.8s ease-in-out infinite; }
+    </style>
+  </defs>
+
+  <!-- Outer Frame -->
+  <rect width="1160" height="340" rx="14" fill="url(#bgSports)" />
+  <rect width="1160" height="340" rx="14" fill="url(#gridSports)" />
+  <rect x="1" y="1" width="1158" height="338" rx="13" fill="none" stroke="#2D3A31" stroke-width="1.5" />
+
+  <!-- Top Header Bar -->
+  <text x="32" y="38" fill="#C44F32" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" font-weight="600" letter-spacing="1.2">
+    SPORTSOPP ARCHITECTURE · MEDIA PIPELINE, TRUST BOUNDARIES &amp; DISCOVERY FUNNEL
+  </text>
+  <text x="1128" y="38" text-anchor="end" fill="#7D8B81" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11">
+    FLUTTER · FIREBASE · CLOUD RUN · ZOHO CRM
+  </text>
+  <line x1="32" y1="52" x2="1128" y2="52" stroke="#263129" stroke-width="1" />
+
+  <!-- ========================================================= -->
+  <!-- STAGE 1: ATHLETE PROFILE & RAW HIGHLIGHT UPLOAD           -->
+  <!-- ========================================================= -->
+  <g>
+    <rect x="32" y="74" width="215" height="206" rx="12" fill="#17201A" stroke="#2E3B32" stroke-width="1.2" />
+    <text x="50" y="98" fill="#C44F32" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="600">01 · CLIENT UPLOAD</text>
+
+    <!-- Upload Card UI -->
+    <rect x="64" y="116" width="150" height="68" rx="8" fill="#121814" stroke="#3B4D40" stroke-width="1.2" />
+    <polygon points="132,138 132,162 152,150" fill="#C44F32" />
+    <rect x="78" y="194" width="122" height="22" rx="4" fill="#1D2720" stroke="#314035" />
+    <text x="139" y="209" text-anchor="middle" fill="#8FA094" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="9.5">Owner-Write Rules</text>
+
+    <text x="140" y="246" text-anchor="middle" fill="#E5EAE6" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600">Raw Highlight Reel</text>
+    <text x="140" y="264" text-anchor="middle" fill="#829186" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5">Flutter Web &amp; Mobile</text>
+  </g>
+
+  <!-- Connector 1 -> 2 -->
+  <line class="flow-line" x1="247" y1="176" x2="335" y2="176" stroke="#C44F32" stroke-width="2" />
+  <circle class="packet" cx="247" cy="176" r="4" fill="#FF8566" />
+  <text x="291" y="164" text-anchor="middle" fill="#8FA094" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10">INGEST</text>
+
+  <!-- ========================================================= -->
+  <!-- STAGE 2: CLOUD RUN + FFMPEG TRANSCODE PIPELINE            -->
+  <!-- ========================================================= -->
+  <g>
+    <rect x="335" y="74" width="240" height="206" rx="12" fill="#17201A" stroke="#3B4D40" stroke-width="1.5" />
+    <text x="353" y="98" fill="#C44F32" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="600">02 · CLOUD RUN + FFMPEG</text>
+
+    <!-- FFmpeg Frame Analyzer Box -->
+    <rect x="375" y="116" width="160" height="74" rx="8" fill="#111713" stroke="#3B4D40" stroke-width="1.2" />
+    <rect class="bar-1" x="405" y="152" width="10" height="24" rx="3" fill="#C44F32" />
+    <rect class="bar-2" x="425" y="148" width="10" height="28" rx="3" fill="#E06D50" />
+    <rect class="bar-3" x="445" y="138" width="10" height="38" rx="3" fill="#689D7A" />
+    <rect class="bar-4" x="465" y="148" width="10" height="28" rx="3" fill="#E06D50" />
+    <rect class="bar-5" x="485" y="152" width="10" height="24" rx="3" fill="#C44F32" />
+    <line class="scan-line" x1="455" y1="122" x2="455" y2="184" stroke="#8CE0A6" stroke-width="1.5" />
+
+    <rect x="375" y="198" width="160" height="22" rx="4" fill="#1D2720" stroke="#314035" />
+    <text x="455" y="213" text-anchor="middle" fill="#8FA094" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="9.5">Tiered Limits &amp; Lifecycle</text>
+
+    <text x="455" y="246" text-anchor="middle" fill="#E5EAE6" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600">Native Video Pipeline</text>
+    <text x="455" y="264" text-anchor="middle" fill="#829186" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5">Server-Owned Processing</text>
+  </g>
+
+  <!-- Connector 2 -> 3 -->
+  <line class="flow-line" x1="575" y1="176" x2="663" y2="176" stroke="#689D7A" stroke-width="2" />
+  <circle class="packet" cx="575" cy="176" r="4" fill="#689D7A" />
+  <text x="619" y="164" text-anchor="middle" fill="#8FA094" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10">WEBHOOK</text>
+
+  <!-- ========================================================= -->
+  <!-- STAGE 3: ZOHO CRM & PAYFAST TRUST BOUNDARY                -->
+  <!-- ========================================================= -->
+  <g>
+    <rect x="663" y="74" width="215" height="206" rx="12" fill="#17201A" stroke="#2E3B32" stroke-width="1.2" />
+    <text x="681" y="98" fill="#689D7A" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="600">03 · OPS &amp; BILLING</text>
+
+    <rect x="706" y="118" width="130" height="32" rx="6" fill="#1F2B23" stroke="#425748" stroke-width="1.2" />
+    <circle cx="722" cy="134" r="4" fill="#689D7A" />
+    <text x="734" y="138" fill="#D5DDD7" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" font-weight="600">Zoho CRM Sync</text>
+
+    <rect x="706" y="158" width="130" height="32" rx="6" fill="#1F2B23" stroke="#425748" stroke-width="1.2" />
+    <circle cx="722" cy="174" r="4" fill="#C44F32" />
+    <text x="734" y="178" fill="#D5DDD7" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5">PayFast Tier Gate</text>
+
+    <rect x="706" y="198" width="130" height="22" rx="4" fill="#131A15" stroke="#2C3A30" stroke-width="1" />
+    <text x="771" y="213" text-anchor="middle" fill="#8FA094" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="9.5">Server-Granted Roles</text>
+
+    <text x="771" y="246" text-anchor="middle" fill="#E5EAE6" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600">CRM &amp; Role Security</text>
+    <text x="771" y="264" text-anchor="middle" fill="#829186" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5">Explicit Trust Boundaries</text>
+  </g>
+
+  <!-- Connector 3 -> 4 -->
+  <line class="flow-line" x1="878" y1="176" x2="966" y2="176" stroke="#689D7A" stroke-width="2" />
+  <circle class="packet" cx="878" cy="176" r="4" fill="#689D7A" />
+  <text x="922" y="164" text-anchor="middle" fill="#8FA094" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10">PUBLISH</text>
+
+  <!-- ========================================================= -->
+  <!-- STAGE 4: CURATED EXPLORE FEED & SCOUT DISCOVERY           -->
+  <!-- ========================================================= -->
+  <g>
+    <rect x="966" y="74" width="162" height="206" rx="12" fill="#17201A" stroke="#2E3B32" stroke-width="1.2" />
+    <text x="984" y="98" fill="#689D7A" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="600">04 · DISCOVERY</text>
+
+    <rect class="live-card" x="988" y="118" width="118" height="96" rx="8" fill="#121814" stroke="#689D7A" stroke-width="1.5" />
+    <circle cx="1012" cy="142" r="11" fill="#26352B" stroke="#689D7A" stroke-width="1.2" />
+    <rect x="1030" y="134" width="60" height="7" rx="3.5" fill="#D5DDD7" />
+    <rect x="1030" y="146" width="42" height="5" rx="2.5" fill="#689D7A" />
+    <rect x="1000" y="166" width="94" height="34" rx="4" fill="#1E2922" />
+    <text x="1047" y="187" text-anchor="middle" fill="#8CE0A6" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="9.5" font-weight="600">FEATURED FEED</text>
+
+    <text x="1047" y="246" text-anchor="middle" fill="#E5EAE6" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600">Explore &amp; Recruit</text>
+    <text x="1047" y="264" text-anchor="middle" fill="#689D7A" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5">5 Launch Sports ✓</text>
+  </g>
+
+  <!-- Bottom Footer Note -->
+  <text x="32" y="314" fill="#7D8B81" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11">
+    ● Multi-sport discovery across schools, clubs &amp; agencies  ·  Automated Zoho CRM funnel  ·  Guest &amp; authenticated Explore feeds
+  </text>
+</svg>
