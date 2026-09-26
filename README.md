@@ -22,12 +22,6 @@
 
 ---
 
-### About Me
-
-I'm a developer based in **South Africa** building full-stack web apps, native mobile experiences, and business automations. Whether it's a multi-sport discovery platform with cloud video pipelines or an alarm clock that only stops when you walk across the room and tap a physical NFC capsule, I care about clear trust boundaries, tactile details, and shipping things people actually use.
-
----
-
 ### Selected Work · `2026 — Now`
 
 <p align="center">
