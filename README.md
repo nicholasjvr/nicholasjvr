@@ -17,8 +17,10 @@ The case-study content lives in [src/data/projects.ts](src/data/projects.ts). Be
 
 ## Contact
 
+- [Portfolio](https://nicholas.cinhaus.co.za/)
+- [Instagram (@nicholasjvr)](https://www.instagram.com/nicholasjvr/)
+- [GitHub (@nicholasjvr)](https://github.com/nicholasjvr)
 - [Email](mailto:nicholas241cut@gmail.com)
-- [GitHub](https://github.com/nicholasjvr)
 
 ---
 
