@@ -22,7 +22,7 @@
 
 ---
 
-### Selected Work · `2026 — Now`
+### Selected Side HOBBY PROJECTS · `2026 — Now`
 
 <p align="center">
   <a href="https://nicholas.cinhaus.co.za/projects/sportsopp/">
