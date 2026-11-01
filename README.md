@@ -7,7 +7,6 @@
 
   <p>
     <a href="https://nicholas.cinhaus.co.za/">
-      <img src="https://img.shields.io/badge/PORTFOLIO-nicholas.cinhaus.co.za-C44F32?style=for-the-badge&labelColor=161D18" alt="Portfolio" />
     </a>
     &nbsp;
     <a href="https://www.instagram.com/nicholasjvr/">
